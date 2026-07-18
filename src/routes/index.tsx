@@ -375,13 +375,8 @@ function PreLaunch() {
   return (
     <section
       id="pre-launch"
-      className="relative overflow-hidden py-24 md:py-32"
-      style={{
-        background:
-          "linear-gradient(135deg, #10294a 0%, #0c2340 60%)",
-      }}
+      className="relative overflow-hidden py-24 md:py-32 bg-secondary/30"
     >
-
       <div className="container-luxe">
         <SectionHeading
           eyebrow="Action · Founder Advantage"
@@ -389,8 +384,8 @@ function PreLaunch() {
           intro={site.preLaunch.subtitle}
         />
 
-        <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-gold/40 bg-card shadow-[0_30px_80px_-40px_rgba(168,157,125,0.6)]">
-          <div className="grid grid-cols-[1.1fr_1fr_1fr] items-center gap-4 border-b border-border bg-secondary/50 px-6 py-4 text-[11px] uppercase tracking-[0.2em] text-foreground/60">
+        <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-gold/30 bg-white shadow-[0_30px_80px_-40px_rgba(45,138,158,0.2)]">
+          <div className="grid grid-cols-[1.1fr_1fr_1fr] items-center gap-4 border-b border-border bg-secondary/60 px-6 py-4 text-[11px] uppercase tracking-[0.2em] text-foreground/60">
             <span>Benefit</span>
             <span>Value</span>
             <span className="hidden sm:block">Note</span>
@@ -401,7 +396,7 @@ function PreLaunch() {
               className="grid grid-cols-[1.1fr_1fr_1fr] items-center gap-4 border-b border-border px-6 py-5 last:border-0"
             >
               <span className="font-medium text-foreground">{row.label}</span>
-              <span className="font-display text-lg text-gold-deep">{row.value}</span>
+              <span className="font-display text-lg text-gold">{row.value}</span>
               <span className="hidden sm:block text-sm text-foreground/60">{row.note}</span>
             </div>
           ))}
