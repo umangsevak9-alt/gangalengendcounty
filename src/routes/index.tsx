@@ -488,7 +488,7 @@ function Connectivity() {
 /* -------------------- FAQ -------------------- */
 function FAQSection() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-24 md:py-32 bg-white">
       <div className="container-luxe max-w-3xl">
         <SectionHeading
           eyebrow="Considered Answers"
@@ -540,17 +540,16 @@ function ContactSection() {
   }
 
   return (
-    <section id="contact" className="bg-charcoal text-ivory py-24 md:py-32">
-      <div className="container-luxe grid gap-12 md:grid-cols-2 md:items-center">
+    <section id="contact" className="bg-secondary/30 py-24 md:py-32">
+      <div className="container-luxe grid gap-12 md:grid-cols-2 md:items-start">
         <div>
           <SectionHeading
             eyebrow="Action · Reserve"
             title={<>Begin your <span className="font-serif-elegant text-gold">Nova One</span> chapter</>}
             intro="Share your details and a senior relationship manager will walk you through pre-launch pricing, floor plans and priority selection."
-            tone="dark"
             align="left"
           />
-          <div className="mt-8 space-y-3 text-ivory/75">
+          <div className="mt-8 space-y-3 text-foreground/75">
             <a href={`tel:${site.brand.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 hover:text-gold">
               <Phone size={16} className="text-gold" /> {site.brand.phone}
             </a>
@@ -570,23 +569,23 @@ function ContactSection() {
 
         <form
           onSubmit={onSubmit}
-          className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 md:p-8 backdrop-blur"
+          className="rounded-2xl border border-border bg-white p-6 md:p-8 shadow-sm"
         >
           <div className="grid gap-4">
             <div>
-              <Label htmlFor="name" className="text-ivory/80">Full name</Label>
+              <Label htmlFor="name" className="text-foreground/80">Full name</Label>
               <Input
                 id="name"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 maxLength={80}
                 placeholder="Your name"
-                className="mt-1.5 border-white/15 bg-white/5 text-ivory placeholder:text-ivory/40"
+                className="mt-1.5 border-border bg-white text-foreground placeholder:text-foreground/40"
               />
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <Label htmlFor="phone" className="text-ivory/80">Phone</Label>
+                <Label htmlFor="phone" className="text-foreground/80">Phone</Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -594,11 +593,11 @@ function ContactSection() {
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   maxLength={20}
                   placeholder="+91 …"
-                  className="mt-1.5 border-white/15 bg-white/5 text-ivory placeholder:text-ivory/40"
+                  className="mt-1.5 border-border bg-white text-foreground placeholder:text-foreground/40"
                 />
               </div>
               <div>
-                <Label htmlFor="email" className="text-ivory/80">Email</Label>
+                <Label htmlFor="email" className="text-foreground/80">Email</Label>
                 <Input
                   id="email"
                   type="email"
@@ -606,14 +605,14 @@ function ContactSection() {
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   maxLength={120}
                   placeholder="you@example.com"
-                  className="mt-1.5 border-white/15 bg-white/5 text-ivory placeholder:text-ivory/40"
+                  className="mt-1.5 border-border bg-white text-foreground placeholder:text-foreground/40"
                 />
               </div>
             </div>
             <div>
-              <Label className="text-ivory/80">Tower of interest</Label>
+              <Label className="text-foreground/80">Tower of interest</Label>
               <Select value={form.tower} onValueChange={(v) => setForm({ ...form, tower: v })}>
-                <SelectTrigger className="mt-1.5 border-white/15 bg-white/5 text-ivory">
+                <SelectTrigger className="mt-1.5 border-border bg-white text-foreground">
                   <SelectValue placeholder="Select a tower" />
                 </SelectTrigger>
                 <SelectContent>
@@ -629,7 +628,7 @@ function ContactSection() {
             <Button type="submit" variant="gold" size="lg" disabled={submitting} className="mt-2">
               {submitting ? "Submitting…" : "Request Pre-Launch Access"}
             </Button>
-            <p className="text-xs text-ivory/50">
+            <p className="text-xs text-foreground/50">
               By submitting, you consent to be contacted about Nova One. We do not share your details.
             </p>
           </div>
