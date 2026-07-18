@@ -238,11 +238,11 @@ function TrustStrip() {
 /* -------------------- Interest — Towers -------------------- */
 function Towers() {
   return (
-    <section id="towers" className="py-24 md:py-32">
+    <section id="towers" className="py-24 md:py-32 bg-white">
       <div className="container-luxe">
         <SectionHeading
           eyebrow="Interest · Four Towers, One Intention"
-          title={<>Philosophies rendered <span className="font-serif-elegant text-gold-deep">in stone & sky</span></>}
+          title={<>Philosophies rendered <span className="font-serif-elegant text-gold">in stone & sky</span></>}
           intro="Each tower is named for a Sanskrit ideal that shapes its architecture, layouts and daily rituals."
         />
 
@@ -250,7 +250,7 @@ function Towers() {
           {site.towers.map((t, i) => (
             <article
               key={t.code}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all hover:border-gold hover:shadow-[0_20px_60px_-30px_rgba(168,157,125,0.5)]"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all hover:border-gold hover:shadow-[0_20px_60px_-30px_rgba(45,138,158,0.25)]"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
@@ -258,9 +258,9 @@ function Towers() {
                   <h3 className="mt-2 font-display text-4xl text-foreground">
                     {t.name}
                   </h3>
-                  <p className="mt-1 font-serif-elegant text-gold-deep">{t.tagline}</p>
+                  <p className="mt-1 font-serif-elegant text-gold">{t.tagline}</p>
                 </div>
-                <span className="shrink-0 rounded-full border border-gold/60 px-3 py-1 text-xs font-medium text-gold-deep">
+                <span className="shrink-0 rounded-full border border-gold/60 px-3 py-1 text-xs font-medium text-gold">
                   {t.code}
                 </span>
               </div>
@@ -280,7 +280,7 @@ function Towers() {
           ))}
         </div>
 
-        <div className="mt-14 overflow-hidden rounded-2xl border border-border">
+        <div className="mt-14 overflow-hidden rounded-2xl border border-border shadow-sm">
           <img
             src={facadeAsset.url}
             alt="Vertical gardens cascading down the Nova One façade"
