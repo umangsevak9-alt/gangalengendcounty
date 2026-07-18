@@ -33,41 +33,41 @@
   --color-forest: var(--forest);
   --color-ivory: var(--ivory);
   --color-charcoal: var(--charcoal);
-  --font-serif: "DM Serif Display", ui-serif, Georgia, serif;
-  --font-sans: "Fira Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "DM Serif Display", ui-serif, Georgia, serif;
+  --font-serif: "Libre Baskerville", ui-serif, Georgia, serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Libre Baskerville", ui-serif, Georgia, serif;
 }
 
 :root {
   --radius: 0.25rem;
 
-  /* Brand palette — White + Navy + Teal */
-  --gold: #2d8a9e;        /* teal accent */
-  --gold-soft: #e0f2f7;   /* light aqua surface */
-  --gold-deep: #0c2340;   /* navy text */
-  --forest: #2d8a9e;      /* teal */
-  --ivory: #ffffff;
-  --charcoal: #0c2340;    /* navy charcoal */
+  /* Brand palette — Warm Sand & White */
+  --gold: #8b7355;        /* warm sand primary */
+  --gold-soft: #c9b99a;   /* soft gold accent */
+  --gold-deep: #6b5a44;   /* deep tobacco */
+  --forest: #5c4d3c;      /* warm brown */
+  --ivory: #faf8f5;       /* warm off-white */
+  --charcoal: #2d2d2d;    /* ink black */
 
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --background: #faf8f5;
+  --foreground: #2d2d2d;
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #2d2d2d;
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  --primary: #0c2340;
+  --popover-foreground: #2d2d2d;
+  --primary: #8b7355;
   --primary-foreground: #ffffff;
-  --secondary: #f8fafc;
-  --secondary-foreground: #0c2340;
-  --muted: #f1f5f9;
-  --muted-foreground: #5b7287;
-  --accent: #2d8a9e;
-  --accent-foreground: #ffffff;
-  --destructive: oklch(0.62 0.22 27);
+  --secondary: #f0ebe3;
+  --secondary-foreground: #6b5a44;
+  --muted: #f0ebe3;
+  --muted-foreground: #8b7355;
+  --accent: #c9b99a;
+  --accent-foreground: #2d2d2d;
+  --destructive: oklch(0.55 0.20 25);
   --destructive-foreground: #ffffff;
-  --border: #dbe5eb;
-  --input: #dbe5eb;
-  --ring: #2d8a9e;
+  --border: #e8e4dd;
+  --input: #e8e4dd;
+  --ring: #8b7355;
 }
 
 
