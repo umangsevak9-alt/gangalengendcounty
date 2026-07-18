@@ -378,9 +378,10 @@ function PreLaunch() {
       className="relative overflow-hidden py-24 md:py-32"
       style={{
         background:
-          "linear-gradient(135deg, oklch(0.94 0.03 85) 0%, oklch(0.985 0.006 85) 60%)",
+          "linear-gradient(135deg, #10294a 0%, #0c2340 60%)",
       }}
     >
+
       <div className="container-luxe">
         <SectionHeading
           eyebrow="Action · Founder Advantage"
