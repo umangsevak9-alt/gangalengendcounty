@@ -150,52 +150,52 @@ function SiteHeader() {
 function Hero() {
   const [line1, line2] = site.hero.title.split("\n");
   return (
-    <section id="top" className="relative isolate overflow-hidden">
+    <section id="top" className="relative isolate overflow-hidden text-white">
       <div className="absolute inset-0 -z-10">
         <img
           src={heroAsset.url}
           alt="Nova One residential tower rising above Pune with a plane crossing the sky"
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/10 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-background/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0c2340]/70 via-[#0c2340]/40 to-[#0c2340]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0c2340]/80 via-[#0c2340]/30 to-transparent" />
       </div>
 
       <div className="container-luxe grid min-h-[92vh] items-end pb-16 pt-28 md:min-h-[100vh] md:items-center md:pt-32">
         <div className="max-w-2xl">
-          <span className="eyebrow inline-flex items-center gap-3">
-            <span className="gold-rule" /> {site.hero.eyebrow}
+          <span className="eyebrow inline-flex items-center gap-3 text-[#5cbdb9]">
+            <span className="gold-rule bg-[#5cbdb9]" /> {site.hero.eyebrow}
           </span>
-          <h1 className="mt-5 font-display text-[2.6rem] leading-[1.02] sm:text-6xl md:text-7xl">
+          <h1 className="mt-5 font-display text-[2.6rem] leading-[1.02] sm:text-6xl md:text-7xl text-white">
             {line1}
             <br />
-            <span className="font-serif-elegant text-gold-deep">{line2}</span>
+            <span className="font-serif-elegant text-[#5cbdb9]">{line2}</span>
           </h1>
-          <p className="mt-6 max-w-xl text-base text-foreground/75 md:text-lg">
+          <p className="mt-6 max-w-xl text-base text-white/80 md:text-lg">
             {site.hero.subtitle}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg" variant="gold">
+            <Button asChild size="lg" className="bg-[#5cbdb9] text-[#0c2340] hover:bg-[#4aa9a5]">
               <a href="#contact" className="inline-flex items-center gap-2">
                 {site.hero.ctaPrimary} <ArrowRight size={16} />
               </a>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10">
               <a href="#contact" className="inline-flex items-center gap-2">
                 <Download size={16} /> {site.hero.ctaSecondary}
               </a>
             </Button>
           </div>
 
-          <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-border/60 pt-6">
+          <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-6">
             {[
               { k: "4", v: "Signature Towers" },
               { k: "3.2 AC", v: "The Ileseum Club" },
               { k: "42/100", v: "Pre-launch slots left" },
             ].map((s) => (
               <div key={s.v}>
-                <dt className="font-display text-2xl text-gold-deep">{s.k}</dt>
-                <dd className="mt-1 text-[11px] uppercase tracking-[0.18em] text-foreground/60">
+                <dt className="font-display text-2xl text-[#5cbdb9]">{s.k}</dt>
+                <dd className="mt-1 text-[11px] uppercase tracking-[0.18em] text-white/60">
                   {s.v}
                 </dd>
               </div>
@@ -204,8 +204,8 @@ function Hero() {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 text-foreground/50 hidden md:flex flex-col items-center gap-2">
-        <span className="eyebrow">Scroll</span>
+      <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 hidden md:flex flex-col items-center gap-2">
+        <span className="eyebrow text-[#5cbdb9]">Scroll</span>
         <ChevronDown size={18} className="animate-bounce" />
       </div>
     </section>
@@ -220,11 +220,11 @@ function TrustStrip() {
     { icon: Leaf, label: "Green Certified Design" },
   ];
   return (
-    <section className="border-y border-border bg-secondary/40">
+    <section className="border-y border-border bg-white">
       <div className="container-luxe grid grid-cols-2 gap-6 py-6 md:grid-cols-4">
         {badges.map((b) => (
           <div key={b.label} className="flex min-w-0 items-center gap-3">
-            <b.icon size={18} className="shrink-0 text-gold-deep" />
+            <b.icon size={18} className="shrink-0 text-gold" />
             <span className="truncate text-xs uppercase tracking-[0.18em] text-foreground/70">
               {b.label}
             </span>
@@ -238,11 +238,11 @@ function TrustStrip() {
 /* -------------------- Interest — Towers -------------------- */
 function Towers() {
   return (
-    <section id="towers" className="py-24 md:py-32">
+    <section id="towers" className="py-24 md:py-32 bg-white">
       <div className="container-luxe">
         <SectionHeading
           eyebrow="Interest · Four Towers, One Intention"
-          title={<>Philosophies rendered <span className="font-serif-elegant text-gold-deep">in stone & sky</span></>}
+          title={<>Philosophies rendered <span className="font-serif-elegant text-gold">in stone & sky</span></>}
           intro="Each tower is named for a Sanskrit ideal that shapes its architecture, layouts and daily rituals."
         />
 
@@ -250,7 +250,7 @@ function Towers() {
           {site.towers.map((t, i) => (
             <article
               key={t.code}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all hover:border-gold hover:shadow-[0_20px_60px_-30px_rgba(168,157,125,0.5)]"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all hover:border-gold hover:shadow-[0_20px_60px_-30px_rgba(45,138,158,0.25)]"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
@@ -258,9 +258,9 @@ function Towers() {
                   <h3 className="mt-2 font-display text-4xl text-foreground">
                     {t.name}
                   </h3>
-                  <p className="mt-1 font-serif-elegant text-gold-deep">{t.tagline}</p>
+                  <p className="mt-1 font-serif-elegant text-gold">{t.tagline}</p>
                 </div>
-                <span className="shrink-0 rounded-full border border-gold/60 px-3 py-1 text-xs font-medium text-gold-deep">
+                <span className="shrink-0 rounded-full border border-gold/60 px-3 py-1 text-xs font-medium text-gold">
                   {t.code}
                 </span>
               </div>
@@ -280,7 +280,7 @@ function Towers() {
           ))}
         </div>
 
-        <div className="mt-14 overflow-hidden rounded-2xl border border-border">
+        <div className="mt-14 overflow-hidden rounded-2xl border border-border shadow-sm">
           <img
             src={facadeAsset.url}
             alt="Vertical gardens cascading down the Nova One façade"
@@ -296,7 +296,7 @@ function Towers() {
 /* -------------------- Desire — Amenities -------------------- */
 function Amenities() {
   return (
-    <section id="amenities" className="bg-charcoal text-ivory py-24 md:py-32">
+    <section id="amenities" className="bg-[#0c2340] text-white py-24 md:py-32">
       <div className="container-luxe">
         <SectionHeading
           eyebrow="Desire · The Ileseum Club"
@@ -304,7 +304,7 @@ function Amenities() {
             <>
               A club within a home,
               <br />
-              <span className="font-serif-elegant text-gold">reserved for the few.</span>
+              <span className="font-serif-elegant text-[#5cbdb9]">reserved for the few.</span>
             </>
           }
           intro={site.amenities.intro}
@@ -315,16 +315,16 @@ function Amenities() {
           {site.amenities.items.map((a, i) => (
             <div
               key={a.title}
-              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-gold/60 hover:bg-white/[0.05]"
+              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.05] p-6 transition-colors hover:border-[#5cbdb9]/60 hover:bg-white/[0.08]"
             >
-              <span className="font-display text-xs text-gold/80">
+              <span className="font-display text-xs text-[#5cbdb9]/80">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-2 font-display text-xl text-ivory">{a.title}</h3>
-              <p className="mt-2 text-sm text-ivory/60">{a.note}</p>
+              <h3 className="mt-2 font-display text-xl text-white">{a.title}</h3>
+              <p className="mt-2 text-sm text-white/60">{a.note}</p>
               <Sparkles
                 size={16}
-                className="absolute right-5 top-5 text-gold/40 transition-transform group-hover:rotate-12"
+                className="absolute right-5 top-5 text-[#5cbdb9]/40 transition-transform group-hover:rotate-12"
               />
             </div>
           ))}
@@ -336,9 +336,9 @@ function Amenities() {
 
 function Sustainability() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-24 md:py-32 bg-white">
       <div className="container-luxe grid gap-12 md:grid-cols-2 md:items-center">
-        <div className="order-2 md:order-1 overflow-hidden rounded-2xl border border-border">
+        <div className="order-2 md:order-1 overflow-hidden rounded-2xl border border-border shadow-sm">
           <img
             src={skylineAsset.url}
             alt="Nova One skyline gardens at sunset"
@@ -349,7 +349,7 @@ function Sustainability() {
         <div className="order-1 md:order-2">
           <SectionHeading
             eyebrow="Green by Design"
-            title={<>Living systems, <span className="font-serif-elegant text-gold-deep">not just buildings.</span></>}
+            title={<>Living systems, <span className="font-serif-elegant text-gold">not just buildings.</span></>}
             intro="Every façade breathes. Every drop counts. Nova One is engineered for a lower footprint and a richer everyday."
             align="left"
           />
@@ -375,13 +375,8 @@ function PreLaunch() {
   return (
     <section
       id="pre-launch"
-      className="relative overflow-hidden py-24 md:py-32"
-      style={{
-        background:
-          "linear-gradient(135deg, #10294a 0%, #0c2340 60%)",
-      }}
+      className="relative overflow-hidden py-24 md:py-32 bg-secondary/30"
     >
-
       <div className="container-luxe">
         <SectionHeading
           eyebrow="Action · Founder Advantage"
@@ -389,8 +384,8 @@ function PreLaunch() {
           intro={site.preLaunch.subtitle}
         />
 
-        <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-gold/40 bg-card shadow-[0_30px_80px_-40px_rgba(168,157,125,0.6)]">
-          <div className="grid grid-cols-[1.1fr_1fr_1fr] items-center gap-4 border-b border-border bg-secondary/50 px-6 py-4 text-[11px] uppercase tracking-[0.2em] text-foreground/60">
+        <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-gold/30 bg-white shadow-[0_30px_80px_-40px_rgba(45,138,158,0.2)]">
+          <div className="grid grid-cols-[1.1fr_1fr_1fr] items-center gap-4 border-b border-border bg-secondary/60 px-6 py-4 text-[11px] uppercase tracking-[0.2em] text-foreground/60">
             <span>Benefit</span>
             <span>Value</span>
             <span className="hidden sm:block">Note</span>
@@ -401,7 +396,7 @@ function PreLaunch() {
               className="grid grid-cols-[1.1fr_1fr_1fr] items-center gap-4 border-b border-border px-6 py-5 last:border-0"
             >
               <span className="font-medium text-foreground">{row.label}</span>
-              <span className="font-display text-lg text-gold-deep">{row.value}</span>
+              <span className="font-display text-lg text-gold">{row.value}</span>
               <span className="hidden sm:block text-sm text-foreground/60">{row.note}</span>
             </div>
           ))}
@@ -423,19 +418,19 @@ function PreLaunch() {
 /* -------------------- Specifications -------------------- */
 function Specifications() {
   return (
-    <section id="specifications" className="py-24 md:py-32">
+    <section id="specifications" className="py-24 md:py-32 bg-white">
       <div className="container-luxe">
         <SectionHeading
           eyebrow="Crafted To The Last Detail"
           title="Specifications"
           intro="Materials, finishes and systems chosen for longevity, comfort and quiet luxury."
         />
-        <div className="mt-12 overflow-hidden rounded-2xl border border-border">
+        <div className="mt-12 overflow-hidden rounded-2xl border border-border shadow-sm">
           {site.specifications.map((s, i) => (
             <div
               key={s.group}
               className={`grid grid-cols-1 gap-2 px-6 py-5 sm:grid-cols-[220px_1fr] sm:gap-8 ${
-                i % 2 === 0 ? "bg-card" : "bg-secondary/40"
+                i % 2 === 0 ? "bg-card" : "bg-secondary/60"
               }`}
             >
               <div className="font-display text-lg text-foreground">{s.group}</div>
@@ -451,16 +446,16 @@ function Specifications() {
 /* -------------------- Location -------------------- */
 function Connectivity() {
   return (
-    <section id="location" className="bg-secondary/40 py-24 md:py-32">
+    <section id="location" className="bg-secondary/30 py-24 md:py-32">
       <div className="container-luxe grid gap-12 md:grid-cols-2">
         <div>
           <SectionHeading
             eyebrow="Location · Pune"
-            title={<>An address that <span className="font-serif-elegant text-gold-deep">already arrived.</span></>}
+            title={<>An address that <span className="font-serif-elegant text-gold">already arrived.</span></>}
             intro="At the intersection of Pune's IT growth corridor, hospitality and heritage — minutes from what matters."
             align="left"
           />
-          <ul className="mt-10 divide-y divide-border rounded-xl border border-border bg-card">
+          <ul className="mt-10 divide-y divide-border rounded-xl border border-border bg-card shadow-sm">
             {site.connectivity.map((c) => (
               <li
                 key={c.place}
@@ -493,7 +488,7 @@ function Connectivity() {
 /* -------------------- FAQ -------------------- */
 function FAQSection() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-24 md:py-32 bg-white">
       <div className="container-luxe max-w-3xl">
         <SectionHeading
           eyebrow="Considered Answers"
@@ -545,17 +540,16 @@ function ContactSection() {
   }
 
   return (
-    <section id="contact" className="bg-charcoal text-ivory py-24 md:py-32">
-      <div className="container-luxe grid gap-12 md:grid-cols-2 md:items-center">
+    <section id="contact" className="bg-secondary/30 py-24 md:py-32">
+      <div className="container-luxe grid gap-12 md:grid-cols-2 md:items-start">
         <div>
           <SectionHeading
             eyebrow="Action · Reserve"
             title={<>Begin your <span className="font-serif-elegant text-gold">Nova One</span> chapter</>}
             intro="Share your details and a senior relationship manager will walk you through pre-launch pricing, floor plans and priority selection."
-            tone="dark"
             align="left"
           />
-          <div className="mt-8 space-y-3 text-ivory/75">
+          <div className="mt-8 space-y-3 text-foreground/75">
             <a href={`tel:${site.brand.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 hover:text-gold">
               <Phone size={16} className="text-gold" /> {site.brand.phone}
             </a>
@@ -575,23 +569,23 @@ function ContactSection() {
 
         <form
           onSubmit={onSubmit}
-          className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 md:p-8 backdrop-blur"
+          className="rounded-2xl border border-border bg-white p-6 md:p-8 shadow-sm"
         >
           <div className="grid gap-4">
             <div>
-              <Label htmlFor="name" className="text-ivory/80">Full name</Label>
+              <Label htmlFor="name" className="text-foreground/80">Full name</Label>
               <Input
                 id="name"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 maxLength={80}
                 placeholder="Your name"
-                className="mt-1.5 border-white/15 bg-white/5 text-ivory placeholder:text-ivory/40"
+                className="mt-1.5 border-border bg-white text-foreground placeholder:text-foreground/40"
               />
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <Label htmlFor="phone" className="text-ivory/80">Phone</Label>
+                <Label htmlFor="phone" className="text-foreground/80">Phone</Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -599,11 +593,11 @@ function ContactSection() {
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   maxLength={20}
                   placeholder="+91 …"
-                  className="mt-1.5 border-white/15 bg-white/5 text-ivory placeholder:text-ivory/40"
+                  className="mt-1.5 border-border bg-white text-foreground placeholder:text-foreground/40"
                 />
               </div>
               <div>
-                <Label htmlFor="email" className="text-ivory/80">Email</Label>
+                <Label htmlFor="email" className="text-foreground/80">Email</Label>
                 <Input
                   id="email"
                   type="email"
@@ -611,14 +605,14 @@ function ContactSection() {
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   maxLength={120}
                   placeholder="you@example.com"
-                  className="mt-1.5 border-white/15 bg-white/5 text-ivory placeholder:text-ivory/40"
+                  className="mt-1.5 border-border bg-white text-foreground placeholder:text-foreground/40"
                 />
               </div>
             </div>
             <div>
-              <Label className="text-ivory/80">Tower of interest</Label>
+              <Label className="text-foreground/80">Tower of interest</Label>
               <Select value={form.tower} onValueChange={(v) => setForm({ ...form, tower: v })}>
-                <SelectTrigger className="mt-1.5 border-white/15 bg-white/5 text-ivory">
+                <SelectTrigger className="mt-1.5 border-border bg-white text-foreground">
                   <SelectValue placeholder="Select a tower" />
                 </SelectTrigger>
                 <SelectContent>
@@ -634,7 +628,7 @@ function ContactSection() {
             <Button type="submit" variant="gold" size="lg" disabled={submitting} className="mt-2">
               {submitting ? "Submitting…" : "Request Pre-Launch Access"}
             </Button>
-            <p className="text-xs text-ivory/50">
+            <p className="text-xs text-foreground/50">
               By submitting, you consent to be contacted about Nova One. We do not share your details.
             </p>
           </div>
