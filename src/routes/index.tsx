@@ -336,9 +336,9 @@ function Amenities() {
 
 function Sustainability() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-24 md:py-32 bg-white">
       <div className="container-luxe grid gap-12 md:grid-cols-2 md:items-center">
-        <div className="order-2 md:order-1 overflow-hidden rounded-2xl border border-border">
+        <div className="order-2 md:order-1 overflow-hidden rounded-2xl border border-border shadow-sm">
           <img
             src={skylineAsset.url}
             alt="Nova One skyline gardens at sunset"
@@ -349,7 +349,7 @@ function Sustainability() {
         <div className="order-1 md:order-2">
           <SectionHeading
             eyebrow="Green by Design"
-            title={<>Living systems, <span className="font-serif-elegant text-gold-deep">not just buildings.</span></>}
+            title={<>Living systems, <span className="font-serif-elegant text-gold">not just buildings.</span></>}
             intro="Every façade breathes. Every drop counts. Nova One is engineered for a lower footprint and a richer everyday."
             align="left"
           />
