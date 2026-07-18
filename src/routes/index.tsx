@@ -220,11 +220,11 @@ function TrustStrip() {
     { icon: Leaf, label: "Green Certified Design" },
   ];
   return (
-    <section className="border-y border-border bg-secondary/40">
+    <section className="border-y border-border bg-white">
       <div className="container-luxe grid grid-cols-2 gap-6 py-6 md:grid-cols-4">
         {badges.map((b) => (
           <div key={b.label} className="flex min-w-0 items-center gap-3">
-            <b.icon size={18} className="shrink-0 text-gold-deep" />
+            <b.icon size={18} className="shrink-0 text-gold" />
             <span className="truncate text-xs uppercase tracking-[0.18em] text-foreground/70">
               {b.label}
             </span>
