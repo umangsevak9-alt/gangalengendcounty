@@ -77,23 +77,35 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Nova One · Ganga Legend County — Design a Life You Aspire To" },
+      {
+        name: "description",
+        content:
+          "Nova One at Ganga Legend County, Pune — four philosophically-inspired luxury towers with The Ileseum Club. Pre-launch pricing now open.",
+      },
+      { name: "author", content: "Goel Ganga Corporation" },
+      { property: "og:title", content: "Nova One · Ganga Legend County" },
+      {
+        property: "og:description",
+        content:
+          "Four premium towers, one intentional life. Pre-launch residences in Pune with The Ileseum Club.",
+      },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Ganga Legend County" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
