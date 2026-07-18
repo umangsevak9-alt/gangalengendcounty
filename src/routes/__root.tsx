@@ -77,22 +77,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nova One · Ganga Legend County — Design a Life You Aspire To" },
+      { title: "Nova One · Ganga Legend County — Pre-Launch, Pune" },
       {
         name: "description",
         content:
-          "Nova One at Ganga Legend County, Pune — four philosophically-inspired luxury towers with The Ileseum Club. Pre-launch pricing now open.",
+          "Four philosophically-inspired luxury towers in Pune. Pre-launch pricing, priority selection and Ileseum Club membership.",
       },
       { name: "author", content: "Goel Ganga Corporation" },
-      { property: "og:title", content: "Nova One · Ganga Legend County" },
+      { property: "og:title", content: "Nova One · Ganga Legend County — Pre-Launch, Pune" },
       {
         property: "og:description",
         content:
-          "Four premium towers, one intentional life. Pre-launch residences in Pune with The Ileseum Club.",
+          "Four philosophically-inspired luxury towers in Pune. Pre-launch pricing, priority selection and Ileseum Club membership.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Ganga Legend County" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Nova One · Ganga Legend County — Pre-Launch, Pune" },
+      { name: "twitter:description", content: "Four philosophically-inspired luxury towers in Pune. Pre-launch pricing, priority selection and Ileseum Club membership." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8af43bc9-7da0-47e4-9fff-01014f113199/id-preview-e7d65b0e--61800a5b-9928-4e39-b11e-f36d5faea19a.lovable.app-1784388675254.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8af43bc9-7da0-47e4-9fff-01014f113199/id-preview-e7d65b0e--61800a5b-9928-4e39-b11e-f36d5faea19a.lovable.app-1784388675254.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
