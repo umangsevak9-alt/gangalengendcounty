@@ -41,33 +41,33 @@
 :root {
   --radius: 0.25rem;
 
-  /* Brand palette — Ocean Deep: navy, teal, aqua */
-  --gold: #5cbdb9;        /* aqua accent */
-  --gold-soft: #123055;   /* deep tinted surface */
-  --gold-deep: #5cbdb9;   /* accent text (aqua) */
-  --forest: #5cbdb9;      /* success/leaf → aqua */
+  /* Brand palette — White + Navy + Teal */
+  --gold: #2d8a9e;        /* teal accent */
+  --gold-soft: #e0f2f7;   /* light aqua surface */
+  --gold-deep: #0c2340;   /* navy text */
+  --forest: #2d8a9e;      /* teal */
   --ivory: #ffffff;
-  --charcoal: #071a30;
+  --charcoal: #0c2340;    /* navy charcoal */
 
-  --background: #0c2340;
-  --foreground: #eaf1f8;
-  --card: #10294a;
-  --card-foreground: #eaf1f8;
-  --popover: #10294a;
-  --popover-foreground: #eaf1f8;
-  --primary: #2d8a9e;
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #0c2340;
   --primary-foreground: #ffffff;
-  --secondary: #123055;
-  --secondary-foreground: #eaf1f8;
-  --muted: #123055;
-  --muted-foreground: #94b0c9;
-  --accent: #5cbdb9;
-  --accent-foreground: #0c2340;
+  --secondary: #e0f2f7;
+  --secondary-foreground: #0c2340;
+  --muted: #f0f6fa;
+  --muted-foreground: #5b7287;
+  --accent: #2d8a9e;
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.62 0.22 27);
   --destructive-foreground: #ffffff;
-  --border: #1a4a6e;
-  --input: #1a4a6e;
-  --ring: #5cbdb9;
+  --border: #dbe5eb;
+  --input: #dbe5eb;
+  --ring: #2d8a9e;
 }
 
 
