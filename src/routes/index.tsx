@@ -296,7 +296,7 @@ function Towers() {
 /* -------------------- Desire — Amenities -------------------- */
 function Amenities() {
   return (
-    <section id="amenities" className="bg-charcoal text-ivory py-24 md:py-32">
+    <section id="amenities" className="bg-[#0c2340] text-white py-24 md:py-32">
       <div className="container-luxe">
         <SectionHeading
           eyebrow="Desire · The Ileseum Club"
@@ -304,7 +304,7 @@ function Amenities() {
             <>
               A club within a home,
               <br />
-              <span className="font-serif-elegant text-gold">reserved for the few.</span>
+              <span className="font-serif-elegant text-[#5cbdb9]">reserved for the few.</span>
             </>
           }
           intro={site.amenities.intro}
@@ -315,16 +315,16 @@ function Amenities() {
           {site.amenities.items.map((a, i) => (
             <div
               key={a.title}
-              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-gold/60 hover:bg-white/[0.05]"
+              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.05] p-6 transition-colors hover:border-[#5cbdb9]/60 hover:bg-white/[0.08]"
             >
-              <span className="font-display text-xs text-gold/80">
+              <span className="font-display text-xs text-[#5cbdb9]/80">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-2 font-display text-xl text-ivory">{a.title}</h3>
-              <p className="mt-2 text-sm text-ivory/60">{a.note}</p>
+              <h3 className="mt-2 font-display text-xl text-white">{a.title}</h3>
+              <p className="mt-2 text-sm text-white/60">{a.note}</p>
               <Sparkles
                 size={16}
-                className="absolute right-5 top-5 text-gold/40 transition-transform group-hover:rotate-12"
+                className="absolute right-5 top-5 text-[#5cbdb9]/40 transition-transform group-hover:rotate-12"
               />
             </div>
           ))}
