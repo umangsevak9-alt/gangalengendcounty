@@ -374,7 +374,7 @@ function PreLaunch() {
   return (
     <section
       id="pre-launch"
-      className="relative overflow-hidden py-24 md:py-32 bg-secondary/30"
+      className="relative overflow-hidden py-24 md:py-32 bg-white"
     >
       <div className="container-luxe">
         <SectionHeading
@@ -383,8 +383,8 @@ function PreLaunch() {
           intro={site.preLaunch.subtitle}
         />
 
-        <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-gold/30 bg-white shadow-[0_30px_80px_-40px_rgba(45,138,158,0.2)]">
-          <div className="grid grid-cols-[1.1fr_1fr_1fr] items-center gap-4 border-b border-border bg-secondary/60 px-6 py-4 text-[11px] uppercase tracking-[0.2em] text-foreground/60">
+        <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-gold/30 bg-[#faf8f5] shadow-[0_30px_80px_-40px_rgba(139,115,85,0.2)]">
+          <div className="grid grid-cols-[1.1fr_1fr_1fr] items-center gap-4 border-b border-border bg-[#f0ebe3] px-6 py-4 text-[11px] uppercase tracking-[0.2em] text-foreground/60">
             <span>Benefit</span>
             <span>Value</span>
             <span className="hidden sm:block">Note</span>
@@ -401,9 +401,9 @@ function PreLaunch() {
           ))}
         </div>
 
-        <div className="mx-auto mt-8 flex max-w-4xl flex-col items-center gap-4 rounded-xl border border-destructive/30 bg-destructive/5 p-5 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div className="mx-auto mt-8 flex max-w-4xl flex-col items-center gap-4 rounded-xl border border-gold/30 bg-gold/5 p-5 text-center sm:flex-row sm:justify-between sm:text-left">
           <p className="text-sm text-foreground/80">
-            <span className="font-medium text-destructive">Limited:</span> {site.preLaunch.urgency}
+            <span className="font-medium text-gold-deep">Limited:</span> {site.preLaunch.urgency}
           </p>
           <Button asChild variant="gold">
             <a href="#contact">Reserve My Slot</a>
