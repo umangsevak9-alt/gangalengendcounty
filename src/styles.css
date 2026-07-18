@@ -41,11 +41,11 @@
 :root {
   --radius: 0.5rem;
 
-  /* Brand palette — Black font, gold, white and red */
-  --gold: #C9A227;
-  --gold-soft: #F5E9C6;
-  --gold-deep: #9A7B1A;
-  --forest: #B91C1C;
+  /* Brand palette — Paranjape Forest Trails inspired: white, deep red, black */
+  --gold: #C8202F;
+  --gold-soft: #FDECEE;
+  --gold-deep: #8E1620;
+  --forest: #C8202F;
   --ivory: #FFFFFF;
   --charcoal: #111111;
 
@@ -55,20 +55,21 @@
   --card-foreground: #111111;
   --popover: #FFFFFF;
   --popover-foreground: #111111;
-  --primary: #C9A227;
-  --primary-foreground: #111111;
-  --secondary: #F5E9C6;
-  --secondary-foreground: #5C4A10;
-  --muted: #F8F4EC;
-  --muted-foreground: #6B6554;
-  --accent: #B91C1C;
+  --primary: #C8202F;
+  --primary-foreground: #FFFFFF;
+  --secondary: #FDECEE;
+  --secondary-foreground: #8E1620;
+  --muted: #F6F6F6;
+  --muted-foreground: #5B5B5B;
+  --accent: #111111;
   --accent-foreground: #FFFFFF;
   --destructive: oklch(0.55 0.22 27);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: #F0E6D2;
-  --input: #E8DCC0;
-  --ring: #C9A227;
+  --border: #ECECEC;
+  --input: #E2E2E2;
+  --ring: #C8202F;
 }
+
 
 @layer base {
   * { border-color: var(--color-border); }
