@@ -418,19 +418,19 @@ function PreLaunch() {
 /* -------------------- Specifications -------------------- */
 function Specifications() {
   return (
-    <section id="specifications" className="py-24 md:py-32">
+    <section id="specifications" className="py-24 md:py-32 bg-white">
       <div className="container-luxe">
         <SectionHeading
           eyebrow="Crafted To The Last Detail"
           title="Specifications"
           intro="Materials, finishes and systems chosen for longevity, comfort and quiet luxury."
         />
-        <div className="mt-12 overflow-hidden rounded-2xl border border-border">
+        <div className="mt-12 overflow-hidden rounded-2xl border border-border shadow-sm">
           {site.specifications.map((s, i) => (
             <div
               key={s.group}
               className={`grid grid-cols-1 gap-2 px-6 py-5 sm:grid-cols-[220px_1fr] sm:gap-8 ${
-                i % 2 === 0 ? "bg-card" : "bg-secondary/40"
+                i % 2 === 0 ? "bg-card" : "bg-secondary/60"
               }`}
             >
               <div className="font-display text-lg text-foreground">{s.group}</div>
@@ -446,16 +446,16 @@ function Specifications() {
 /* -------------------- Location -------------------- */
 function Connectivity() {
   return (
-    <section id="location" className="bg-secondary/40 py-24 md:py-32">
+    <section id="location" className="bg-secondary/30 py-24 md:py-32">
       <div className="container-luxe grid gap-12 md:grid-cols-2">
         <div>
           <SectionHeading
             eyebrow="Location · Pune"
-            title={<>An address that <span className="font-serif-elegant text-gold-deep">already arrived.</span></>}
+            title={<>An address that <span className="font-serif-elegant text-gold">already arrived.</span></>}
             intro="At the intersection of Pune's IT growth corridor, hospitality and heritage — minutes from what matters."
             align="left"
           />
-          <ul className="mt-10 divide-y divide-border rounded-xl border border-border bg-card">
+          <ul className="mt-10 divide-y divide-border rounded-xl border border-border bg-card shadow-sm">
             {site.connectivity.map((c) => (
               <li
                 key={c.place}
