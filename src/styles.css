@@ -41,33 +41,33 @@
 :root {
   --radius: 0.5rem;
 
-  /* Brand palette — Emerald primary, amber accent */
-  --gold: #10B981;          /* emerald-600 (primary) */
-  --gold-soft: #D1FAE5;     /* emerald-100 */
-  --gold-deep: #047857;     /* emerald-800 */
-  --forest: #047857;        /* emerald-800 */
-  --ivory: #F8FAF9;
-  --charcoal: #0F1F1A;
+  /* Brand palette — Gold/Olive luxury */
+  --gold: #A89D7D;
+  --gold-soft: #E8E2D2;
+  --gold-deep: #8A7F5F;
+  --forest: #2F4F3E;
+  --ivory: #FAF8F2;
+  --charcoal: #1A1A1A;
 
-  --background: #F8FAF9;
-  --foreground: #0F1F1A;
+  --background: #FAF8F2;
+  --foreground: #1A1A1A;
   --card: #FFFFFF;
-  --card-foreground: #0F1F1A;
+  --card-foreground: #1A1A1A;
   --popover: #FFFFFF;
-  --popover-foreground: #0F1F1A;
-  --primary: #10B981;
-  --primary-foreground: #FFFFFF;
-  --secondary: #D1FAE5;
-  --secondary-foreground: #047857;
-  --muted: #ECFDF5;
-  --muted-foreground: #4B5F58;
-  --accent: #F59E0B;
-  --accent-foreground: #1F1300;
+  --popover-foreground: #1A1A1A;
+  --primary: #A89D7D;
+  --primary-foreground: #1A1A1A;
+  --secondary: #E8E2D2;
+  --secondary-foreground: #5A533B;
+  --muted: #F0EBE0;
+  --muted-foreground: #6B6554;
+  --accent: #2F4F3E;
+  --accent-foreground: #FAF8F2;
   --destructive: oklch(0.55 0.22 27);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: #D1FAE5;
-  --input: #C7EFDD;
-  --ring: #10B981;
+  --border: #E8E2D2;
+  --input: #DDD7C5;
+  --ring: #A89D7D;
 }
 
 @layer base {
