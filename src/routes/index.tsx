@@ -180,7 +180,7 @@ function Hero() {
                 {site.hero.ctaPrimary} <ArrowRight size={16} />
               </a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10">
+            <Button asChild size="lg" className="bg-[#c9b99a] text-[#2d2d2d] hover:bg-[#b5a487]">
               <a href="#contact" className="inline-flex items-center gap-2">
                 <Download size={16} /> {site.hero.ctaSecondary}
               </a>
