@@ -1,78 +1,58 @@
-This is a large build. I'll split it into two phases so you see progress fast and can course-correct.
+## What you'll get
 
-## Phase 1 — Landing Page Redesign (no backend needed)
+- **Amenities cards** now show a real photo above each title.
+- **Specifications rows** get an optional photo per category (Structure, Flooring, Kitchen, etc.).
+- A new **Video section** on the landing page (title, subtitle, hosted video + poster image).
+- **Admin panel** gets three fully editable sections with drag-free reorder, image upload, and inline edit — no code needed.
 
-Rebuild the current single page in a true Navy + White + Gold + selective Red luxury system, inspired by Elite24's polish but original.
+## Data & storage
 
-**Theme**
-- Palette: `#0B2A5B` navy primary, `#154EA8` royal, `#D4AF37` gold, `#C62828` red (used only for site-visit CTA, "limited units", offer badges), `#F7F8FB` light section, white cards, `#1E293B` text.
-- Typography: serif headings (Libre Baskerville), sans body (IBM Plex Sans) — already loaded.
-- 70% white / 20% navy / 5% gold / 5% red distribution across sections.
-- Rounded-2xl cards, soft shadows, generous whitespace, subtle fade/slide/counter animations.
+Create one public storage bucket `cms-media` for images and videos (max ~50 MB per file), plus three tables:
 
-**Sections (no header, no footer — landing only)**
-1. Hero — full-bleed tower image, navy overlay, huge serif headline "Live the Future. Own the Lifestyle." with gold-highlighted words, sub-copy, stat row (Acres / Families / Amenities / RERA), 4 CTAs (Book Site Visit red, Call Now, WhatsApp, Virtual Tour).
-2. Floating vertical contact rail (WhatsApp green, Call red, Site Visit blue, Directions gold, Callback white) with tooltips + hover lift.
-3. Why Choose Us — 6 luxury cards with premium icons, hover lift.
-4. Amenities — 8-card luxury grid (Ileseum Club items), icon + hover shadow.
-5. Gallery — Pinterest-style masonry with lightbox (zoom, prev/next).
-6. Floor Plans — cards with area/price/CTA, popup with PDF link.
-7. Location — embedded map, directions, nearby (schools/hospitals/airport/metro/mall).
-8. Trust Band — dark navy section, gold icons (RERA, IGBC, awards, delivery record).
-9. Offer Banner — light section with gold divider and single red "Book Now" CTA.
-10. Testimonials — auto-slider cards with photo + 5-star + quote.
-11. Contact Form — glass card on light section (Name, Phone, Email, Property, Message).
-12. Popups — exit-intent, scroll, offer, welcome, thank-you (data-driven so Phase 2 can toggle them).
+- **`amenities`** — `title`, `note`, `image_url`, `sort_order`
+- **`specifications`** — `group_name`, `detail`, `image_url`, `sort_order`
+- **`video_section`** — single-row table: `title`, `subtitle`, `video_url`, `poster_url`, `provider` (upload | youtube | vimeo)
 
-**Deliverables Phase 1**
-- Rewrite `src/styles.css` tokens to the navy/gold system.
-- Rewrite `src/routes/index.tsx` with the sections above.
-- Add small components under `src/components/landing/` (Hero, FloatingRail, Amenities, Gallery, FloorPlans, Testimonials, ContactForm, Popups).
-- Lead form saves to `localStorage` in Phase 1; swaps to DB in Phase 2.
+Row-level security:
+- Anyone (including anonymous visitors) can **read** — the landing page needs to render for the public.
+- Only **admins** and **editors** can insert/update/delete.
+- Storage bucket: public read; authenticated users with a role can upload/delete.
 
-## Phase 2 — Admin CMS (Lovable Cloud)
+Seed the tables with your current amenity list and specifications from `src/content/site.ts` so the site keeps rendering identically until you edit it.
 
-Enable Lovable Cloud (managed Postgres + Auth + Storage). Every landing section reads from DB so admins edit without code.
+## Admin panel (`/admin`)
 
-**Auth**
-- Email + password login at `/admin/login`.
-- Roles: `admin`, `editor` (via `user_roles` table + `has_role()` security-definer).
-- Protected `/admin/*` routes gated by session + role.
+Three new pages, gated by role:
 
-**Database tables** (public schema, RLS on, grants set)
-`hero`, `stats`, `amenities`, `gallery_images`, `videos`, `floor_plans`, `location_settings`, `nearby_places`, `offers`, `testimonials`, `popups`, `leads`, `settings` (logo/favicon/colors/fonts/analytics IDs/SMTP), `seo_meta`, `user_roles`.
+1. `/admin/amenities` — list + add/edit modal (title, note, image upload, sort order), delete confirm.
+2. `/admin/specifications` — same shape, for spec rows.
+3. `/admin/video` — single form for the video section (upload a video file or paste YouTube/Vimeo URL, upload poster, edit title/subtitle).
 
-Public site reads with a publishable-key client + narrow `TO anon` SELECT policies. Writes require authenticated admin/editor.
+Each editor:
+- Drops files into the `cms-media` bucket via signed upload.
+- Shows a live preview of the current image / video.
+- Uses the existing sand/ivory admin styling.
 
-**Storage buckets**
-`site-images` (public), `floor-plan-pdfs` (public), `videos` (public). Uploads with drag-drop, replace, delete, auto-compress client-side.
+The dashboard cards on `/admin` will link to these three pages.
 
-**Admin panel** (`/admin`)
-- Dark left sidebar, white content, luxury cards.
-- Dashboard: total leads, visitors, conversions, recent leads table, monthly chart, activity feed.
-- CMS screens: Hero, Amenities, Gallery, Videos, Floor Plans, Location, Offers, Testimonials, Popups, Contact info, SEO, Settings, Users.
-- Leads: table with search/filter, status (New/Contacted/Site Visit/Closed), assign agent, notes, CSV export, delete.
-- SEO: meta title/description/keywords/OG image/robots/canonical/schema JSON-LD, read by root route `head()`.
+## Landing page rewiring
 
-**Forms**
-- Contact + Book Site Visit + Callback save to `leads` table.
-- Success popup on submit.
-- Optional email notification via managed email domain (offered separately once domain is set up).
+- Amenities and Specifications sections switch from hardcoded arrays in `site.ts` to a public read from the new tables (server function using the publishable-key client with a narrow `TO anon` select policy). Falls back to the seeded copy if the fetch fails so the page never blanks.
+- Add a new `<VideoSection>` component between Amenities and Sustainability, with responsive `<video>` or embedded iframe.
+- Images use `object-cover` with rounded corners consistent with the current aesthetic.
 
-**Responsive & polish**
-- Mobile-first at every step.
-- Lazy-load images, semantic HTML, alt text, Core Web Vitals aware.
+## Technical details (skip if not interested)
 
-## Technical notes (for the record)
-- Stack: TanStack Start (already set up). Server functions for admin writes with `requireSupabaseAuth` middleware; public reads via publishable client in server functions.
-- No Supabase branding shown to you — Lovable Cloud handles it.
-- Google Analytics / Meta Pixel / Search Console: IDs stored in `settings`; script tags injected from `__root.tsx` when present.
-- Google Maps: embed URL editable from admin (no API key required for basic embed).
+- Public reads: TanStack `createServerFn` with a `SUPABASE_PUBLISHABLE_KEY` client, narrow `TO anon` SELECT policies on all three tables.
+- Admin writes: `createServerFn` with `requireSupabaseAuth` middleware; policies check `has_role(auth.uid(), 'admin' OR 'editor')`.
+- Upload: browser client uploads directly to `cms-media` bucket; server function returns signed URL and stores public URL in the table.
+- Video: supports MP4 upload (playable via `<video>` tag) OR YouTube/Vimeo URL (embedded via iframe).
+- Cache: `queryClient.invalidateQueries` after each admin write so the public site updates instantly on refresh.
 
-## What I need from you before starting
+## Out of scope for this round
 
-1. **Go / adjust?** Reply "go" and I'll start Phase 1 immediately. Or tell me what to change.
-2. **Admin email** for the first admin account (used in Phase 2 seed). You can share it when Phase 1 is done.
-3. **Real assets** — brochure PDF, logo, brand phone/WhatsApp number, RERA numbers, Google Maps location — send anytime; I'll use sensible placeholders otherwise.
+- Reordering via drag-and-drop (sort_order is a number input for now).
+- Bulk image import.
+- Multiple video sections.
 
-Phase 1 ships first as a single big update. Phase 2 follows in focused chunks (auth + schema → CMS screens → leads → SEO/settings) so nothing feels half-built.
+Ready to build?
