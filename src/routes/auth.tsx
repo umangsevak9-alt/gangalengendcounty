@@ -20,8 +20,10 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -30,17 +32,31 @@ function AuthPage() {
     });
   }, [navigate]);
 
-  const handleSignIn = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
-    if (error) {
-      toast.error(error.message);
-      return;
+    if (mode === "signin") {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      setLoading(false);
+      if (error) return toast.error(error.message);
+      toast.success("Signed in");
+      navigate({ to: "/admin", replace: true });
+    } else {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth`,
+          data: { full_name: fullName },
+        },
+      });
+      setLoading(false);
+      if (error) return toast.error(error.message);
+      toast.success("Account created — signing you in…");
+      const { error: signInErr } = await supabase.auth.signInWithPassword({ email, password });
+      if (signInErr) return toast.error(signInErr.message);
+      navigate({ to: "/admin", replace: true });
     }
-    toast.success("Signed in");
-    navigate({ to: "/admin", replace: true });
   };
 
   return (
@@ -52,12 +68,29 @@ function AuthPage() {
         <div className="bg-white rounded-lg border border-[#e8e4dd] shadow-sm p-8">
           <div className="mb-6">
             <p className="eyebrow mb-2">Admin Access</p>
-            <h1 className="text-3xl font-serif text-[#2d2d2d]">Sign in</h1>
+            <h1 className="text-3xl font-serif text-[#2d2d2d]">
+              {mode === "signin" ? "Sign in" : "Create account"}
+            </h1>
             <p className="mt-2 text-sm text-[#5c4d3c]">
-              Restricted to authorised administrators and editors.
+              {mode === "signin"
+                ? "Restricted to authorised administrators and editors."
+                : "New accounts have no permissions until an admin assigns a role."}
             </p>
           </div>
-          <form onSubmit={handleSignIn} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {mode === "signup" && (
+              <div>
+                <Label htmlFor="fullName">Full name</Label>
+                <Input
+                  id="fullName"
+                  required
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="mt-1"
+                  placeholder="Priya Sharma"
+                />
+              </div>
+            )}
             <div>
               <Label htmlFor="email">Email</Label>
               <div className="relative mt-1">
@@ -82,11 +115,12 @@ function AuthPage() {
                   id="password"
                   type="password"
                   required
-                  autoComplete="current-password"
+                  minLength={8}
+                  autoComplete={mode === "signin" ? "current-password" : "new-password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-9"
-                  placeholder="••••••••"
+                  placeholder="At least 8 characters"
                 />
               </div>
             </div>
@@ -95,12 +129,18 @@ function AuthPage() {
               disabled={loading}
               className="w-full bg-[#8b7355] hover:bg-[#6b5a44] text-white"
             >
-              {loading ? "Signing in..." : "Sign in"}
+              {loading ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
             </Button>
           </form>
-          <p className="mt-6 text-xs text-[#8b7355] text-center">
-            New accounts must be provisioned by an admin.
-          </p>
+          <button
+            type="button"
+            onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
+            className="mt-6 text-xs text-[#8b7355] hover:text-[#2d2d2d] w-full text-center"
+          >
+            {mode === "signin"
+              ? "First time here? Create an admin account →"
+              : "Already registered? Sign in →"}
+          </button>
         </div>
       </div>
     </div>
