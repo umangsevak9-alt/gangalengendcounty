@@ -22,6 +22,27 @@ const ICONS: Record<string, typeof MapPin> = {
   Leaf, Users, Sparkles,
 };
 
+/**
+ * Convert any Google Maps input into an embeddable iframe URL.
+ * Accepts:
+ *  - a full <iframe ...> HTML snippet (extracts src)
+ *  - an existing embed URL (returned as-is)
+ *  - a share/place URL like https://maps.app.goo.gl/... or google.com/maps/place/...
+ *  - a plain address or "lat,lng"
+ */
+function toMapsEmbed(input?: string | null): string | null {
+  if (!input) return null;
+  const s = input.trim();
+  if (!s) return null;
+  const iframeMatch = s.match(/src=["']([^"']+)["']/i);
+  if (iframeMatch) return iframeMatch[1];
+  if (s.includes("/maps/embed") || /[?&]output=embed\b/.test(s)) return s;
+  if (/^https?:\/\/(www\.)?(google\.[a-z.]+\/maps|maps\.app\.goo\.gl|goo\.gl\/maps)/i.test(s)) {
+    return s.includes("?") ? `${s}&output=embed` : `${s}?output=embed`;
+  }
+  return `https://www.google.com/maps?q=${encodeURIComponent(s)}&output=embed`;
+}
+
 function SectionHead({ eyebrow, title, subtitle, dark = false }: { eyebrow: string; title: string; subtitle?: string; dark?: boolean }) {
   return (
     <div className="mx-auto max-w-2xl text-center">
@@ -265,7 +286,7 @@ export function LocationSection() {
         <div className="mt-14 grid gap-8 lg:grid-cols-5">
           <div className="overflow-hidden rounded-2xl border border-line lg:col-span-3">
             <iframe title="Nova One location"
-              src={s?.map_embed_url || "https://www.google.com/maps?q=Kharadi+Pune&output=embed"}
+              src={toMapsEmbed(s?.map_embed_url) || "https://www.google.com/maps?q=Kharadi+Pune&output=embed"}
               loading="lazy" className="h-[420px] w-full" referrerPolicy="no-referrer-when-downgrade" />
           </div>
           <div className="lg:col-span-2">
