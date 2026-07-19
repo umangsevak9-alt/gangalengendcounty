@@ -106,10 +106,15 @@ function Page() {
         <div><Label>Heading</Label><Input value={settings.heading} onChange={(e) => setSettings({ ...settings, heading: e.target.value })} /></div>
         <div><Label>Subtitle</Label><Textarea rows={2} value={settings.subtitle ?? ""} onChange={(e) => setSettings({ ...settings, subtitle: e.target.value })} /></div>
         <div><Label>Address</Label><Input value={settings.address ?? ""} onChange={(e) => setSettings({ ...settings, address: e.target.value })} /></div>
-        <div><Label>Google Maps embed URL</Label>
-          <Input value={settings.map_embed_url ?? ""} placeholder="https://www.google.com/maps?q=...&output=embed"
+        <div><Label>Google Maps link</Label>
+          <Textarea rows={3} value={settings.map_embed_url ?? ""}
+            placeholder="Paste any Google Maps link, share URL, or full <iframe> embed code"
             onChange={(e) => setSettings({ ...settings, map_embed_url: e.target.value })} />
-          <p className="text-xs text-[#8b7355] mt-1">Google Maps → Share → Embed a map → copy the src URL.</p>
+          <p className="text-xs text-[#8b7355] mt-1">
+            Paste anything — a Google Maps share link (maps.app.goo.gl/...), a place URL,
+            the full &lt;iframe&gt; embed code, or even a plain address. The map on the
+            home page updates automatically.
+          </p>
         </div>
         <div><Label>"Get Directions" link</Label>
           <Input value={settings.directions_url ?? ""} placeholder="https://www.google.com/maps/..."
