@@ -110,24 +110,24 @@ export const site = {
   ],
   faqs: [
     {
-      q: "When does Nova One launch officially?",
-      a: "The public launch is scheduled shortly. Pre-launch patrons lock founder pricing and priority selection before general release.",
+      q: "When is Nova One launching?",
+      a: "The official launch is coming soon. Book now in pre-launch to get the best price and first choice of unit.",
     },
     {
       q: "Is the project RERA approved?",
-      a: "Yes. All four towers are registered under Maharashtra RERA. Numbers are disclosed on the reservation letter.",
+      a: "Yes. All four towers are registered with Maharashtra RERA. Full numbers will be shared in your booking letter.",
     },
     {
-      q: "What unit configurations are available?",
-      a: "2 BHK, 3 BHK and 4 BHK Refined residences, with select sky-suites in Udaan and Jeevanam.",
+      q: "Which flat sizes are available?",
+      a: "2 BHK, 3 BHK and 4 BHK premium flats. Sky-view units are also available in Udaan and Jeevanam towers.",
     },
     {
       q: "What is the payment plan?",
-      a: "A milestone-linked 20:40:40 plan for pre-launch patrons, with construction-linked options at launch.",
+      a: "Simple 20:40:40 payment plan linked to construction stages. Home loans from all major banks are also available.",
     },
     {
-      q: "Can I resell or lease my unit?",
-      a: "Yes. Nova One is designed for both end-use and long-term appreciation, with rental yields historically strong in this micro-market.",
+      q: "Can I resell or give the flat on rent later?",
+      a: "Yes. Nova One is good for both living and investment. Kharadi area has strong rental demand and good price growth.",
     },
   ],
 };
