@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -16,14 +16,15 @@ export function MediaUpload({ value, onChange, accept = "image/*", folder, label
   const [uploading, setUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  // Fetch preview signed url if we have a path
-  useState(() => {
-    if (value && !previewUrl) {
-      supabase.storage.from("cms-media").createSignedUrl(value, 3600).then(({ data }) => {
-        if (data?.signedUrl) setPreviewUrl(data.signedUrl);
-      });
+  useEffect(() => {
+    if (!value) {
+      setPreviewUrl(null);
+      return;
     }
-  });
+    supabase.storage.from("cms-media").createSignedUrl(value, 3600).then(({ data }) => {
+      if (data?.signedUrl) setPreviewUrl(data.signedUrl);
+    });
+  }, [value]);
 
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
