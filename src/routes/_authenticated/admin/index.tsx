@@ -75,18 +75,18 @@ function Dashboard() {
     icon: typeof FileText;
     title: string;
     desc: string;
-    to?: "/admin/amenities" | "/admin/specifications" | "/admin/video" | "/admin/users";
+    to?: "/admin/amenities" | "/admin/specifications" | "/admin/video" | "/admin/users" | "/admin/gallery" | "/admin/floor-plans" | "/admin/location" | "/admin/faqs" | "/admin/leads";
     adminOnly?: boolean;
     live?: boolean;
   }> = [
     { icon: Sparkles, title: "Amenities", desc: "Add photos, edit titles, reorder", to: "/admin/amenities", live: true },
     { icon: FileText, title: "Specifications", desc: "Group name, detail, and photo", to: "/admin/specifications", live: true },
     { icon: Video, title: "Video Section", desc: "Upload video or paste YouTube/Vimeo URL", to: "/admin/video", live: true },
-    { icon: ImageIcon, title: "Gallery", desc: "Coming soon" },
-    { icon: FileText, title: "Towers & Floor Plans", desc: "Coming soon" },
-    { icon: MapPin, title: "Location", desc: "Coming soon" },
-    { icon: HelpCircle, title: "FAQs", desc: "Coming soon" },
-    { icon: Users, title: "Leads", desc: "Coming soon" },
+    { icon: ImageIcon, title: "Gallery", desc: "Upload gallery photos, set aspect and order", to: "/admin/gallery", live: true },
+    { icon: FileText, title: "Floor Plans", desc: "Configurations, price, area, plan images", to: "/admin/floor-plans", live: true },
+    { icon: MapPin, title: "Location", desc: "Map embed, address, landmarks and travel times", to: "/admin/location", live: true },
+    { icon: HelpCircle, title: "FAQs", desc: "Questions and answers", to: "/admin/faqs", live: true },
+    { icon: Users, title: "Leads", desc: "Contact-form submissions with CSV export", to: "/admin/leads", live: true },
     { icon: ShieldCheck, title: "Users & Roles", desc: "Approve access, grant admin or editor", to: "/admin/users", adminOnly: true, live: true },
   ];
 
