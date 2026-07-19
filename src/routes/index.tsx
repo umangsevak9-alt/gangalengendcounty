@@ -685,20 +685,25 @@ function ContactForm() {
   const [form, setForm] = useState({
     name: "", phone: "", email: "", property: "3 BHK Signature", message: "",
   });
+  const send = useServerFn(submitLead);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.phone) return toast.error("Please share your name and phone.");
     if (!/^\+?\d[\d\s-]{7,}$/.test(form.phone)) return toast.error("Please enter a valid phone number.");
     setBusy(true);
-    setTimeout(() => {
-      const leads = JSON.parse(localStorage.getItem("novaone_leads") || "[]");
-      leads.push({ ...form, at: new Date().toISOString() });
-      localStorage.setItem("novaone_leads", JSON.stringify(leads));
-      setBusy(false);
+    try {
+      await send({ data: {
+        name: form.name, phone: form.phone, email: form.email,
+        property_interest: form.property, message: form.message, source: "contact_form",
+      } });
       setShowThanks(true);
       setForm({ name: "", phone: "", email: "", property: "3 BHK Signature", message: "" });
-    }, 700);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not submit. Please try again.");
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
