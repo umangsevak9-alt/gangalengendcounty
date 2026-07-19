@@ -55,7 +55,13 @@ import {
   AmenitiesSection as CmsAmenities,
   SpecificationsSection as CmsSpecifications,
   VideoSection as CmsVideo,
+  GallerySection as CmsGallery,
+  FloorPlansSection as CmsFloorPlans,
+  LocationSection as CmsLocation,
+  FaqsSection as CmsFaqs,
 } from "@/components/landing/CmsSections";
+import { useServerFn } from "@tanstack/react-start";
+import { submitLead } from "@/lib/cms.functions";
 import heroAsset from "@/assets/tower-hero.jpeg.asset.json";
 import facadeAsset from "@/assets/tower-facade.jpeg.asset.json";
 import skylineAsset from "@/assets/tower-skyline.jpeg.asset.json";
