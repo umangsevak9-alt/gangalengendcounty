@@ -27,50 +27,56 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-royal: var(--royal);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
-  --color-gold-deep: var(--gold-deep);
-  --color-forest: var(--forest);
-  --color-ivory: var(--ivory);
-  --color-charcoal: var(--charcoal);
+  --color-red-cta: var(--red-cta);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-mist: var(--mist);
   --font-serif: "Libre Baskerville", ui-serif, Georgia, serif;
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Libre Baskerville", ui-serif, Georgia, serif;
 }
 
 :root {
-  --radius: 0.25rem;
+  --radius: 0.75rem;
 
-  /* Brand palette — Warm Sand & White */
-  --gold: #8b7355;        /* warm sand primary */
-  --gold-soft: #c9b99a;   /* soft gold accent */
-  --gold-deep: #6b5a44;   /* deep tobacco */
-  --forest: #5c4d3c;      /* warm brown */
-  --ivory: #faf8f5;       /* warm off-white */
-  --charcoal: #2d2d2d;    /* ink black */
+  /* Brand palette — Navy + Gold + Red (luxury real estate) */
+  --navy: #0B2A5B;
+  --navy-deep: #071c40;
+  --royal: #154EA8;
+  --gold: #D4AF37;
+  --gold-soft: #EBD48A;
+  --red-cta: #C62828;
+  --ink: #1E293B;
+  --ink-soft: #64748B;
+  --line: #E8ECF3;
+  --mist: #F7F8FB;
 
-  --background: #faf8f5;
-  --foreground: #2d2d2d;
+  --background: #ffffff;
+  --foreground: #1E293B;
   --card: #ffffff;
-  --card-foreground: #2d2d2d;
+  --card-foreground: #1E293B;
   --popover: #ffffff;
-  --popover-foreground: #2d2d2d;
-  --primary: #8b7355;
+  --popover-foreground: #1E293B;
+  --primary: #0B2A5B;
   --primary-foreground: #ffffff;
-  --secondary: #f0ebe3;
-  --secondary-foreground: #6b5a44;
-  --muted: #f0ebe3;
-  --muted-foreground: #8b7355;
-  --accent: #c9b99a;
-  --accent-foreground: #2d2d2d;
-  --destructive: oklch(0.55 0.20 25);
+  --secondary: #F7F8FB;
+  --secondary-foreground: #0B2A5B;
+  --muted: #F7F8FB;
+  --muted-foreground: #64748B;
+  --accent: #D4AF37;
+  --accent-foreground: #0B2A5B;
+  --destructive: #C62828;
   --destructive-foreground: #ffffff;
-  --border: #e8e4dd;
-  --input: #e8e4dd;
-  --ring: #8b7355;
+  --border: #E8ECF3;
+  --input: #E8ECF3;
+  --ring: #D4AF37;
 }
-
-
 
 @layer base {
   * { border-color: var(--color-border); }
@@ -79,7 +85,6 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
@@ -107,6 +112,25 @@
   text-transform: uppercase;
   letter-spacing: 0.32em;
   font-size: 0.72rem;
-  color: var(--gold-deep);
-  font-weight: 500;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+@utility gold-text {
+  color: var(--gold);
+}
+
+@utility hover-lift {
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px rgba(11, 42, 91, 0.25);
+  }
+}
+
+@utility glass-card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.6);
 }
