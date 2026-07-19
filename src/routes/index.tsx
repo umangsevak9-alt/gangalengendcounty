@@ -55,7 +55,13 @@ import {
   AmenitiesSection as CmsAmenities,
   SpecificationsSection as CmsSpecifications,
   VideoSection as CmsVideo,
+  GallerySection as CmsGallery,
+  FloorPlansSection as CmsFloorPlans,
+  LocationSection as CmsLocation,
+  FaqsSection as CmsFaqs,
 } from "@/components/landing/CmsSections";
+import { useServerFn } from "@tanstack/react-start";
+import { submitLead } from "@/lib/cms.functions";
 import heroAsset from "@/assets/tower-hero.jpeg.asset.json";
 import facadeAsset from "@/assets/tower-facade.jpeg.asset.json";
 import skylineAsset from "@/assets/tower-skyline.jpeg.asset.json";
@@ -91,14 +97,22 @@ function Landing() {
       <WhyChooseUs />
       <CmsAmenities />
       <CmsVideo />
-      <Gallery />
-      <FloorPlans />
+      <CmsGallery fallback={[
+        { src: heroAsset.url, alt: "Nova One tower", tall: true },
+        { src: facadeAsset.url, alt: "Vertical garden facade" },
+        { src: skylineAsset.url, alt: "Sky garden at sunset", tall: true },
+        { src: facadeAsset.url, alt: "Facade detail" },
+        { src: heroAsset.url, alt: "Tower view" },
+        { src: skylineAsset.url, alt: "Panoramic view" },
+      ]} />
+      <CmsFloorPlans fallbackImage={facadeAsset.url} />
       <CmsSpecifications />
-      <Location />
+      <CmsLocation />
       <TrustBand />
       <OfferBanner />
       <Testimonials />
       <ContactForm />
+      <CmsFaqs />
       <FloatingRail />
       <Popups />
       <MiniFooter />
@@ -671,20 +685,25 @@ function ContactForm() {
   const [form, setForm] = useState({
     name: "", phone: "", email: "", property: "3 BHK Signature", message: "",
   });
+  const send = useServerFn(submitLead);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.phone) return toast.error("Please share your name and phone.");
     if (!/^\+?\d[\d\s-]{7,}$/.test(form.phone)) return toast.error("Please enter a valid phone number.");
     setBusy(true);
-    setTimeout(() => {
-      const leads = JSON.parse(localStorage.getItem("novaone_leads") || "[]");
-      leads.push({ ...form, at: new Date().toISOString() });
-      localStorage.setItem("novaone_leads", JSON.stringify(leads));
-      setBusy(false);
+    try {
+      await send({ data: {
+        name: form.name, phone: form.phone, email: form.email,
+        property_interest: form.property, message: form.message, source: "contact_form",
+      } });
       setShowThanks(true);
       setForm({ name: "", phone: "", email: "", property: "3 BHK Signature", message: "" });
-    }, 700);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not submit. Please try again.");
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
