@@ -97,14 +97,22 @@ function Landing() {
       <WhyChooseUs />
       <CmsAmenities />
       <CmsVideo />
-      <Gallery />
-      <FloorPlans />
+      <CmsGallery fallback={[
+        { src: heroAsset.url, alt: "Nova One tower", tall: true },
+        { src: facadeAsset.url, alt: "Vertical garden facade" },
+        { src: skylineAsset.url, alt: "Sky garden at sunset", tall: true },
+        { src: facadeAsset.url, alt: "Facade detail" },
+        { src: heroAsset.url, alt: "Tower view" },
+        { src: skylineAsset.url, alt: "Panoramic view" },
+      ]} />
+      <CmsFloorPlans fallbackImage={facadeAsset.url} />
       <CmsSpecifications />
-      <Location />
+      <CmsLocation />
       <TrustBand />
       <OfferBanner />
       <Testimonials />
       <ContactForm />
+      <CmsFaqs />
       <FloatingRail />
       <Popups />
       <MiniFooter />
