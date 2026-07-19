@@ -75,7 +75,7 @@ function Dashboard() {
     icon: typeof FileText;
     title: string;
     desc: string;
-    to?: "/admin/amenities" | "/admin/specifications" | "/admin/video";
+    to?: "/admin/amenities" | "/admin/specifications" | "/admin/video" | "/admin/users";
     adminOnly?: boolean;
     live?: boolean;
   }> = [
@@ -87,7 +87,7 @@ function Dashboard() {
     { icon: MapPin, title: "Location", desc: "Coming soon" },
     { icon: HelpCircle, title: "FAQs", desc: "Coming soon" },
     { icon: Users, title: "Leads", desc: "Coming soon" },
-    { icon: ShieldCheck, title: "Users & Roles", desc: "Coming soon", adminOnly: true },
+    { icon: ShieldCheck, title: "Users & Roles", desc: "Approve access, grant admin or editor", to: "/admin/users", adminOnly: true, live: true },
   ];
 
   return (
