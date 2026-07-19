@@ -76,7 +76,7 @@ export function AmenitiesSection() {
                     <div className="grid h-full place-items-center text-navy/40"><Sparkles className="h-8 w-8" /></div>
                   )}
                 </div>
-                <div className="p-5 text-center bg-[#C62828] text-white">
+                <div className="p-5 text-center bg-navy text-white">
                   <div className="font-serif text-lg text-white">{a.title}</div>
                   {a.note && <div className="mt-1 text-xs text-white/75">{a.note}</div>}
                 </div>
