@@ -44,6 +44,201 @@ export type Database = {
         }
         Relationships: []
       }
+      faqs: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          question: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          id?: string
+          question: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          question?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      floor_plans: {
+        Row: {
+          area: string | null
+          created_at: string
+          id: string
+          image_path: string | null
+          is_limited: boolean
+          name: string
+          price: string | null
+          sort_order: number
+          status: string | null
+          tower: string | null
+          updated_at: string
+        }
+        Insert: {
+          area?: string | null
+          created_at?: string
+          id?: string
+          image_path?: string | null
+          is_limited?: boolean
+          name: string
+          price?: string | null
+          sort_order?: number
+          status?: string | null
+          tower?: string | null
+          updated_at?: string
+        }
+        Update: {
+          area?: string | null
+          created_at?: string
+          id?: string
+          image_path?: string | null
+          is_limited?: boolean
+          name?: string
+          price?: string | null
+          sort_order?: number
+          status?: string | null
+          tower?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gallery_images: {
+        Row: {
+          aspect: string
+          created_at: string
+          id: string
+          image_path: string
+          sort_order: number
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          aspect?: string
+          created_at?: string
+          id?: string
+          image_path: string
+          sort_order?: number
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          aspect?: string
+          created_at?: string
+          id?: string
+          image_path?: string
+          sort_order?: number
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          message: string | null
+          name: string
+          phone: string
+          property_interest: string | null
+          source: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          name: string
+          phone: string
+          property_interest?: string | null
+          source?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string
+          property_interest?: string | null
+          source?: string | null
+        }
+        Relationships: []
+      }
+      location_landmarks: {
+        Row: {
+          created_at: string
+          icon_key: string
+          id: string
+          label: string
+          sort_order: number
+          travel_time: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          icon_key?: string
+          id?: string
+          label: string
+          sort_order?: number
+          travel_time?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          icon_key?: string
+          id?: string
+          label?: string
+          sort_order?: number
+          travel_time?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      location_settings: {
+        Row: {
+          address: string | null
+          directions_url: string | null
+          heading: string
+          id: string
+          is_active: boolean
+          map_embed_url: string | null
+          subtitle: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          directions_url?: string | null
+          heading?: string
+          id?: string
+          is_active?: boolean
+          map_embed_url?: string | null
+          subtitle?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          directions_url?: string | null
+          heading?: string
+          id?: string
+          is_active?: boolean
+          map_embed_url?: string | null
+          subtitle?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
