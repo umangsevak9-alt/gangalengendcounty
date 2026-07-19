@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminVideoRouteImport } from './routes/_authenticated/admin/video'
+import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin/users'
 import { Route as AuthenticatedAdminSpecificationsRouteImport } from './routes/_authenticated/admin/specifications'
 import { Route as AuthenticatedAdminAmenitiesRouteImport } from './routes/_authenticated/admin/amenities'
 
@@ -41,6 +42,11 @@ const AuthenticatedAdminVideoRoute = AuthenticatedAdminVideoRouteImport.update({
   path: '/admin/video',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminUsersRoute = AuthenticatedAdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAdminSpecificationsRoute =
   AuthenticatedAdminSpecificationsRouteImport.update({
     id: '/admin/specifications',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/admin/amenities': typeof AuthenticatedAdminAmenitiesRoute
   '/admin/specifications': typeof AuthenticatedAdminSpecificationsRoute
+  '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/video': typeof AuthenticatedAdminVideoRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/admin/amenities': typeof AuthenticatedAdminAmenitiesRoute
   '/admin/specifications': typeof AuthenticatedAdminSpecificationsRoute
+  '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/video': typeof AuthenticatedAdminVideoRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/admin/amenities': typeof AuthenticatedAdminAmenitiesRoute
   '/_authenticated/admin/specifications': typeof AuthenticatedAdminSpecificationsRoute
+  '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
   '/_authenticated/admin/video': typeof AuthenticatedAdminVideoRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/admin/amenities'
     | '/admin/specifications'
+    | '/admin/users'
     | '/admin/video'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/admin/amenities'
     | '/admin/specifications'
+    | '/admin/users'
     | '/admin/video'
     | '/admin'
   id:
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/admin/amenities'
     | '/_authenticated/admin/specifications'
+    | '/_authenticated/admin/users'
     | '/_authenticated/admin/video'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
@@ -151,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminVideoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/users': {
+      id: '/_authenticated/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AuthenticatedAdminUsersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/specifications': {
       id: '/_authenticated/admin/specifications'
       path: '/admin/specifications'
@@ -171,6 +190,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminAmenitiesRoute: typeof AuthenticatedAdminAmenitiesRoute
   AuthenticatedAdminSpecificationsRoute: typeof AuthenticatedAdminSpecificationsRoute
+  AuthenticatedAdminUsersRoute: typeof AuthenticatedAdminUsersRoute
   AuthenticatedAdminVideoRoute: typeof AuthenticatedAdminVideoRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
@@ -178,6 +198,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminAmenitiesRoute: AuthenticatedAdminAmenitiesRoute,
   AuthenticatedAdminSpecificationsRoute: AuthenticatedAdminSpecificationsRoute,
+  AuthenticatedAdminUsersRoute: AuthenticatedAdminUsersRoute,
   AuthenticatedAdminVideoRoute: AuthenticatedAdminVideoRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
