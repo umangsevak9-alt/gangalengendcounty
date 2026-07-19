@@ -60,7 +60,7 @@ export const site = {
   amenities: {
     club: "The Ileseum Club",
     intro:
-      "An exclusive members' club spanning wellness, sport, culture and community — reserved for residents of Nova One.",
+      "A private members' club with wellness, sports, culture and community — only for Nova One residents.",
     items: [
       { title: "Michael Phelps Signature Pool", note: "Olympic-grade lap & leisure water" },
       { title: "Meditation Pavilion", note: "Silence rooms & sound therapy" },
