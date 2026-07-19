@@ -13,10 +13,10 @@ export const site = {
   },
   hero: {
     eyebrow: "Pre-Launch · Pune",
-    title: "Design a Life\nYou Aspire To",
+    title: "Your Dream Home\nAwaits in Pune",
     subtitle:
-      "Four philosophically-inspired towers rising in green harmony — a rare address where architecture, wellness and intention converge.",
-    ctaPrimary: "Book Pre-Launch",
+      "Four premium towers with green gardens, world-class club and modern homes — made for Indian families.",
+    ctaPrimary: "Book Site Visit",
     ctaSecondary: "Download Brochure",
   },
   towers: [
