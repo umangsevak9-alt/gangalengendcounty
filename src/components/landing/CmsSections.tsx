@@ -265,7 +265,7 @@ export function LocationSection() {
         <div className="mt-14 grid gap-8 lg:grid-cols-5">
           <div className="overflow-hidden rounded-2xl border border-line lg:col-span-3">
             <iframe title="Nova One location"
-              src={s?.map_embed_url || "https://www.google.com/maps?q=Kharadi+Pune&output=embed"}
+              src={toMapsEmbed(s?.map_embed_url) || "https://www.google.com/maps?q=Kharadi+Pune&output=embed"}
               loading="lazy" className="h-[420px] w-full" referrerPolicy="no-referrer-when-downgrade" />
           </div>
           <div className="lg:col-span-2">
