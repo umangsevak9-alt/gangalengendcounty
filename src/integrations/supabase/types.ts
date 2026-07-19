@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      amenities: {
+        Row: {
+          created_at: string
+          id: string
+          image_path: string | null
+          note: string | null
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          image_path?: string | null
+          note?: string | null
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          image_path?: string | null
+          note?: string | null
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -38,6 +68,36 @@ export type Database = {
         }
         Relationships: []
       }
+      specifications: {
+        Row: {
+          created_at: string
+          detail: string
+          group_name: string
+          id: string
+          image_path: string | null
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          detail: string
+          group_name: string
+          id?: string
+          image_path?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          detail?: string
+          group_name?: string
+          id?: string
+          image_path?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -56,6 +116,45 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      video_section: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          poster_path: string | null
+          provider: string
+          subtitle: string | null
+          title: string
+          updated_at: string
+          video_path: string | null
+          video_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          poster_path?: string | null
+          provider?: string
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+          video_path?: string | null
+          video_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          poster_path?: string | null
+          provider?: string
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+          video_path?: string | null
+          video_url?: string | null
         }
         Relationships: []
       }
