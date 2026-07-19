@@ -12,7 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminVideoRouteImport } from './routes/_authenticated/admin/video'
+import { Route as AuthenticatedAdminSpecificationsRouteImport } from './routes/_authenticated/admin/specifications'
+import { Route as AuthenticatedAdminAmenitiesRouteImport } from './routes/_authenticated/admin/amenities'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -28,35 +31,81 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminVideoRoute = AuthenticatedAdminVideoRouteImport.update({
+  id: '/admin/video',
+  path: '/admin/video',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminSpecificationsRoute =
+  AuthenticatedAdminSpecificationsRouteImport.update({
+    id: '/admin/specifications',
+    path: '/admin/specifications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminAmenitiesRoute =
+  AuthenticatedAdminAmenitiesRouteImport.update({
+    id: '/admin/amenities',
+    path: '/admin/amenities',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/admin': typeof AuthenticatedAdminRoute
+  '/admin/amenities': typeof AuthenticatedAdminAmenitiesRoute
+  '/admin/specifications': typeof AuthenticatedAdminSpecificationsRoute
+  '/admin/video': typeof AuthenticatedAdminVideoRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/admin': typeof AuthenticatedAdminRoute
+  '/admin/amenities': typeof AuthenticatedAdminAmenitiesRoute
+  '/admin/specifications': typeof AuthenticatedAdminSpecificationsRoute
+  '/admin/video': typeof AuthenticatedAdminVideoRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/admin/amenities': typeof AuthenticatedAdminAmenitiesRoute
+  '/_authenticated/admin/specifications': typeof AuthenticatedAdminSpecificationsRoute
+  '/_authenticated/admin/video': typeof AuthenticatedAdminVideoRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/admin'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/admin/amenities'
+    | '/admin/specifications'
+    | '/admin/video'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/admin'
-  id: '__root__' | '/' | '/_authenticated' | '/auth' | '/_authenticated/admin'
+  to:
+    | '/'
+    | '/auth'
+    | '/admin/amenities'
+    | '/admin/specifications'
+    | '/admin/video'
+    | '/admin'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/admin/amenities'
+    | '/_authenticated/admin/specifications'
+    | '/_authenticated/admin/video'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -88,22 +137,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/admin': {
-      id: '/_authenticated/admin'
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
       path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/video': {
+      id: '/_authenticated/admin/video'
+      path: '/admin/video'
+      fullPath: '/admin/video'
+      preLoaderRoute: typeof AuthenticatedAdminVideoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/specifications': {
+      id: '/_authenticated/admin/specifications'
+      path: '/admin/specifications'
+      fullPath: '/admin/specifications'
+      preLoaderRoute: typeof AuthenticatedAdminSpecificationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/amenities': {
+      id: '/_authenticated/admin/amenities'
+      path: '/admin/amenities'
+      fullPath: '/admin/amenities'
+      preLoaderRoute: typeof AuthenticatedAdminAmenitiesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAdminAmenitiesRoute: typeof AuthenticatedAdminAmenitiesRoute
+  AuthenticatedAdminSpecificationsRoute: typeof AuthenticatedAdminSpecificationsRoute
+  AuthenticatedAdminVideoRoute: typeof AuthenticatedAdminVideoRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAdminAmenitiesRoute: AuthenticatedAdminAmenitiesRoute,
+  AuthenticatedAdminSpecificationsRoute: AuthenticatedAdminSpecificationsRoute,
+  AuthenticatedAdminVideoRoute: AuthenticatedAdminVideoRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

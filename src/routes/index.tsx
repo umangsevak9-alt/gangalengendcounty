@@ -51,6 +51,11 @@ import {
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { site } from "@/content/site";
+import {
+  AmenitiesSection as CmsAmenities,
+  SpecificationsSection as CmsSpecifications,
+  VideoSection as CmsVideo,
+} from "@/components/landing/CmsSections";
 import heroAsset from "@/assets/tower-hero.jpeg.asset.json";
 import facadeAsset from "@/assets/tower-facade.jpeg.asset.json";
 import skylineAsset from "@/assets/tower-skyline.jpeg.asset.json";
@@ -84,9 +89,11 @@ function Landing() {
       <Toaster position="top-center" richColors />
       <Hero />
       <WhyChooseUs />
-      <Amenities />
+      <CmsAmenities />
+      <CmsVideo />
       <Gallery />
       <FloorPlans />
+      <CmsSpecifications />
       <Location />
       <TrustBand />
       <OfferBanner />
