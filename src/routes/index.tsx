@@ -153,24 +153,6 @@ function Hero() {
                 <Calendar className="mr-2 h-5 w-5" /> Book Free Site Visit
               </Button>
             </a>
-            <div className="grid grid-cols-2 gap-3">
-              <a href={CALL_URL} className="w-full">
-                <Button
-                  size="lg"
-                  className="h-14 w-full rounded-full bg-green-600 text-base font-semibold text-white hover:bg-green-700 shadow-[0_10px_30px_-10px_rgba(22,163,74,0.6)]"
-                >
-                  <PhoneCall className="mr-2 h-5 w-5" /> Call
-                </Button>
-              </a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="w-full">
-                <Button
-                  size="lg"
-                  className="h-14 w-full rounded-full bg-[#25D366] text-base font-semibold text-white hover:bg-[#1faa52] shadow-[0_10px_30px_-10px_rgba(37,211,102,0.6)]"
-                >
-                  <WhatsAppIcon className="mr-2 h-5 w-5" /> WhatsApp
-                </Button>
-              </a>
-            </div>
           </div>
 
           <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-2 text-[10px] uppercase tracking-[0.2em] text-white/70 sm:mt-8 sm:flex sm:flex-wrap sm:gap-x-6 sm:text-xs sm:tracking-[0.24em]">
