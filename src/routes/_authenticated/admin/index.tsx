@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
   ShieldCheck, PencilLine, LogOut, Home, FileText, Users, Image as ImageIcon,
-  MapPin, HelpCircle, Video, Sparkles,
+  MapPin, HelpCircle, Video, Sparkles, Settings as SettingsIcon,
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin/")({
@@ -75,11 +75,13 @@ function Dashboard() {
     icon: typeof FileText;
     title: string;
     desc: string;
-    to?: "/admin/amenities" | "/admin/specifications" | "/admin/video" | "/admin/users" | "/admin/gallery" | "/admin/floor-plans" | "/admin/location" | "/admin/faqs" | "/admin/leads";
+    to?: "/admin/amenities" | "/admin/specifications" | "/admin/video" | "/admin/users" | "/admin/gallery" | "/admin/floor-plans" | "/admin/location" | "/admin/faqs" | "/admin/leads" | "/admin/site-settings";
     adminOnly?: boolean;
     live?: boolean;
   }> = [
+    { icon: SettingsIcon, title: "Site Settings", desc: "Website name, call number, WhatsApp, email and more", to: "/admin/site-settings", live: true },
     { icon: Sparkles, title: "Amenities", desc: "Add photos, edit titles, reorder", to: "/admin/amenities", live: true },
+
     { icon: FileText, title: "Specifications", desc: "Group name, detail, and photo", to: "/admin/specifications", live: true },
     { icon: Video, title: "Video Section", desc: "Upload video or paste YouTube/Vimeo URL", to: "/admin/video", live: true },
     { icon: ImageIcon, title: "Gallery", desc: "Upload gallery photos, set aspect and order", to: "/admin/gallery", live: true },
