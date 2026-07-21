@@ -83,6 +83,7 @@ function Landing() {
       <ContactForm />
       <CmsFaqs />
       <FloatingRail />
+      <MobileActionBar />
       <Popups />
       <MiniFooter />
     </div>
@@ -92,7 +93,7 @@ function Landing() {
 /* -------------------- HERO -------------------- */
 function Hero() {
   return (
-    <section className="relative isolate min-h-[80svh] w-full overflow-hidden">
+    <section className="relative isolate min-h-[92svh] w-full overflow-hidden sm:min-h-[80svh]">
       <img
         src={heroAsset.url}
         alt="Nova One premium towers in Pune"
@@ -103,76 +104,85 @@ function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_20%,rgba(212,175,55,0.18),transparent_70%)]" />
 
       <div className="relative z-10">
-        <div className="container-luxe flex items-center justify-between py-6 text-white">
-          <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-full border border-gold/70 text-gold font-serif text-lg">
+        <div className="container-luxe flex items-center justify-between py-4 text-white sm:py-6">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-gold/70 text-gold font-serif text-base sm:h-10 sm:w-10 sm:text-lg">
               N
             </div>
-            <div className="leading-tight">
-              <div className="eyebrow text-gold">{site.brand.code}</div>
-              <div className="text-sm font-medium">{site.brand.name}</div>
+            <div className="min-w-0 leading-tight">
+              <div className="eyebrow text-gold truncate">{site.brand.code}</div>
+              <div className="truncate text-xs font-medium sm:text-sm">{site.brand.name}</div>
             </div>
           </div>
-          <div className="hidden items-center gap-3 md:flex">
-            <span className="rounded-full border border-white/25 px-3 py-1 text-[11px] uppercase tracking-widest">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <span className="hidden rounded-full border border-white/25 px-3 py-1 text-[11px] uppercase tracking-widest md:inline">
               {site.brand.rera}
             </span>
             <a
               href={CALL_URL}
-              className="rounded-full border border-gold/60 px-4 py-2 text-sm text-gold hover:bg-gold hover:text-navy transition"
+              className="hidden rounded-full border border-gold/60 px-4 py-2 text-sm text-gold hover:bg-gold hover:text-navy transition md:inline-block"
             >
               {site.brand.phone}
+            </a>
+            <a
+              href={CALL_URL}
+              aria-label="Call now"
+              className="grid h-10 w-10 place-items-center rounded-full border border-gold/60 text-gold md:hidden"
+            >
+              <PhoneCall className="h-4 w-4" />
             </a>
           </div>
         </div>
       </div>
 
-      <div className="container-luxe relative z-10 flex min-h-[calc(80svh-96px)] flex-col justify-center py-8 text-white">
+      <div className="container-luxe relative z-10 flex min-h-[calc(92svh-72px)] flex-col justify-center py-8 text-white sm:min-h-[calc(80svh-96px)]">
         <div className="max-w-3xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/5 px-4 py-1.5 backdrop-blur">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/5 px-3 py-1.5 backdrop-blur sm:px-4">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
-            <span className="text-[11px] uppercase tracking-[0.3em] text-gold">
+            <span className="text-[10px] uppercase tracking-[0.28em] text-gold sm:text-[11px] sm:tracking-[0.3em]">
               Pre-Launch · Pune
             </span>
           </div>
 
-          <h1 className="font-serif text-4xl leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="font-serif text-[2rem] leading-[1.08] sm:text-5xl md:text-6xl lg:text-7xl">
             Your Dream <span className="text-gold italic">Home</span>
             <br />
             Awaits in <span className="text-gold italic">Pune.</span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/85 sm:mt-6 sm:text-base md:text-lg">
             Four premium towers with green gardens, world-class club, and
             modern homes — made for Indian families who want the best.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href="#contact">
+          <div className="mt-7 grid grid-cols-1 gap-3 sm:mt-8 sm:flex sm:flex-wrap sm:items-center">
+            <a href="#contact" className="w-full sm:w-auto">
               <Button
                 size="lg"
-                className="rounded-full bg-[var(--red-cta)] px-7 text-white hover:bg-[#a91f1f] shadow-[0_10px_30px_-10px_rgba(198,40,40,0.6)]"
+                className="w-full rounded-full bg-[var(--red-cta)] px-7 text-white hover:bg-[#a91f1f] shadow-[0_10px_30px_-10px_rgba(198,40,40,0.6)] sm:w-auto"
               >
                 Book Free Site Visit
               </Button>
             </a>
-            <a href={CALL_URL}>
-              <Button
-                size="lg"
-                className="rounded-full bg-green-600 px-7 text-white hover:bg-green-700 shadow-[0_10px_30px_-10px_rgba(22,163,74,0.6)]"
-              >
-                <PhoneCall className="mr-2 h-4 w-4" /> Call Now
-              </Button>
-            </a>
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-              <Button
-                size="lg"
-                className="rounded-full bg-[#25D366] px-7 text-white hover:bg-[#1faa52] shadow-[0_10px_30px_-10px_rgba(37,211,102,0.6)]"
-              >
-                WhatsApp
-              </Button>
-            </a>
-            <a href="#gallery">
+            <div className="grid grid-cols-2 gap-3 sm:contents">
+              <a href={CALL_URL}>
+                <Button
+                  size="lg"
+                  className="w-full rounded-full bg-green-600 px-5 text-white hover:bg-green-700 shadow-[0_10px_30px_-10px_rgba(22,163,74,0.6)] sm:w-auto sm:px-7"
+                >
+                  <PhoneCall className="mr-2 h-4 w-4" /> Call
+                </Button>
+              </a>
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+                <Button
+                  size="lg"
+                  className="w-full rounded-full bg-[#25D366] px-5 text-white hover:bg-[#1faa52] shadow-[0_10px_30px_-10px_rgba(37,211,102,0.6)] sm:w-auto sm:px-7"
+                >
+                  WhatsApp
+                </Button>
+              </a>
+            </div>
+            <a href="#gallery" className="hidden sm:inline-block">
               <Button
                 size="lg"
                 variant="ghost"
@@ -183,7 +193,7 @@ function Hero() {
             </a>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs uppercase tracking-[0.24em] text-white/70">
+          <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-2 text-[10px] uppercase tracking-[0.2em] text-white/70 sm:mt-8 sm:flex sm:flex-wrap sm:gap-x-6 sm:text-xs sm:tracking-[0.24em]">
             <span><span className="text-gold font-serif text-base normal-case tracking-normal">25+</span> Acres</span>
             <span><span className="text-gold font-serif text-base normal-case tracking-normal">1,200</span> Families</span>
             <span><span className="text-gold font-serif text-base normal-case tracking-normal">40+</span> Amenities</span>
@@ -262,7 +272,7 @@ function ContactForm() {
 
           <form
             onSubmit={submit}
-            className="glass-card relative rounded-3xl p-8 shadow-[0_30px_80px_-40px_rgba(11,42,91,0.4)] md:p-10"
+            className="glass-card relative rounded-3xl p-6 shadow-[0_30px_80px_-40px_rgba(11,42,91,0.4)] sm:p-8 md:p-10"
           >
             <div className="absolute -top-4 left-8 rounded-full bg-[var(--red-cta)] px-4 py-1 text-[10px] font-semibold uppercase tracking-widest text-white">
               Priority Reply
@@ -346,6 +356,31 @@ function FloatingRail() {
         </a>
       ))}
     </div>
+  );
+}
+
+/* -------------------- MOBILE STICKY ACTION BAR -------------------- */
+function MobileActionBar() {
+  return (
+    <>
+      <div className="h-16 md:hidden" aria-hidden />
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 backdrop-blur md:hidden">
+        <div className="grid grid-cols-3 gap-2 px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+          <a href={CALL_URL} className="flex flex-col items-center justify-center rounded-xl bg-green-600 py-2 text-white shadow-sm active:scale-[0.98]">
+            <PhoneCall className="h-4 w-4" />
+            <span className="mt-0.5 text-[11px] font-medium">Call</span>
+          </a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center rounded-xl bg-[#25D366] py-2 text-white shadow-sm active:scale-[0.98]">
+            <span className="text-sm font-serif leading-none">W</span>
+            <span className="mt-0.5 text-[11px] font-medium">WhatsApp</span>
+          </a>
+          <a href="#contact" className="flex flex-col items-center justify-center rounded-xl bg-[var(--red-cta)] py-2 text-white shadow-sm active:scale-[0.98]">
+            <Calendar className="h-4 w-4" />
+            <span className="mt-0.5 text-[11px] font-medium">Visit</span>
+          </a>
+        </div>
+      </div>
+    </>
   );
 }
 
