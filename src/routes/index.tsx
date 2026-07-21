@@ -83,6 +83,7 @@ function Landing() {
       <ContactForm />
       <CmsFaqs />
       <FloatingRail />
+      <MobileActionBar />
       <Popups />
       <MiniFooter />
     </div>
