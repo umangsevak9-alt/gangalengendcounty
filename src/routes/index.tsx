@@ -481,7 +481,9 @@ function WelcomePopup({ onClose }: { onClose: () => void }) {
 }
 
 function ExitPopup({ onClose }: { onClose: () => void }) {
+  const { whatsappUrl } = useBrand();
   return (
+
     <PopupShell onClose={onClose}>
       <div className="bg-navy p-8 text-center text-white">
         <span className="eyebrow text-gold">Wait — one minute</span>
