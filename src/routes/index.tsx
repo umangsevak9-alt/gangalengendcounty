@@ -517,7 +517,9 @@ function ThanksPopup({ onClose }: { onClose: () => void }) {
 }
 
 function MiniFooter() {
+  const { brand } = useBrand();
   return (
+
     <div className="border-t border-line bg-white py-6 text-center text-xs text-ink-soft">
       © {new Date().getFullYear()} {brand.developer} × {brand.partner} · {brand.rera}
     </div>
