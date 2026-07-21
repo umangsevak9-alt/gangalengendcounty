@@ -37,9 +37,9 @@
   --color-ink-soft: var(--ink-soft);
   --color-line: var(--line);
   --color-mist: var(--mist);
-  --font-serif: "Libre Baskerville", ui-serif, Georgia, serif;
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Libre Baskerville", ui-serif, Georgia, serif;
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Montserrat", ui-sans-serif, Georgia, serif;
 }
 
 :root {
