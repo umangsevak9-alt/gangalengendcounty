@@ -67,13 +67,13 @@ function useBrand() {
     staleTime: 5 * 60 * 1000,
   });
   const brand = {
-    name: data?.brand_name || site.brand.name,
-    code: data?.brand_code || site.brand.code,
-    developer: data?.developer || site.brand.developer,
-    partner: data?.partner || site.brand.partner,
-    location: data?.location || site.brand.location,
-    rera: data?.rera || site.brand.rera,
-    phone: data?.phone || site.brand.phone,
+    name: data?.brand_name || brand.name,
+    code: data?.brand_code || brand.code,
+    developer: data?.developer || brand.developer,
+    partner: data?.partner || brand.partner,
+    location: data?.location || brand.location,
+    rera: data?.rera || brand.rera,
+    phone: data?.phone || brand.phone,
     whatsapp: data?.whatsapp || site.brand.whatsapp,
     email: data?.email || site.brand.email,
     whatsappMessage:
@@ -136,20 +136,20 @@ function Hero() {
               N
             </div>
             <div className="min-w-0 leading-tight">
-              <div className="eyebrow text-gold truncate">{site.brand.code}</div>
-              <div className="truncate text-xs font-medium sm:text-sm">{site.brand.name}</div>
+              <div className="eyebrow text-gold truncate">{brand.code}</div>
+              <div className="truncate text-xs font-medium sm:text-sm">{brand.name}</div>
             </div>
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <a
-              href={CALL_URL}
+              href={callUrl}
               aria-label="Call now"
               className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur transition hover:scale-105 hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] md:h-11 md:w-11"
             >
               <PhoneCall className="h-4 w-4 md:h-5 md:w-5" />
             </a>
             <a
-              href={WHATSAPP_URL}
+              href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
               aria-label="WhatsApp"
@@ -252,8 +252,8 @@ function ContactForm() {
             </p>
             <div className="mt-8 space-y-4">
               {[
-                { icon: PhoneCall, label: site.brand.phone, sub: "Talk to our sales team" },
-                { icon: MapPin, label: site.brand.location, sub: "Site office — Kharadi, Pune" },
+                { icon: PhoneCall, label: brand.phone, sub: "Talk to our sales team" },
+                { icon: MapPin, label: brand.location, sub: "Site office — Kharadi, Pune" },
                 { icon: Calendar, label: "10 AM to 7 PM · All days", sub: "Site visit timings" },
               ].map((c) => (
                 <div key={c.label} className="flex items-center gap-4">
@@ -365,11 +365,11 @@ function MobileActionBar() {
       <div className="h-16 md:hidden" aria-hidden />
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 backdrop-blur md:hidden">
         <div className="grid grid-cols-3 gap-2 px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
-          <a href={CALL_URL} className="flex flex-col items-center justify-center rounded-xl bg-green-600 py-2 text-white shadow-sm active:scale-[0.98]">
+          <a href={callUrl} className="flex flex-col items-center justify-center rounded-xl bg-green-600 py-2 text-white shadow-sm active:scale-[0.98]">
             <PhoneCall className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">Call</span>
           </a>
-          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center rounded-xl bg-[#25D366] py-2 text-white shadow-sm active:scale-[0.98]">
+          <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center rounded-xl bg-[#25D366] py-2 text-white shadow-sm active:scale-[0.98]">
             <WhatsAppIcon className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">WhatsApp</span>
           </a>
@@ -480,7 +480,7 @@ function ExitPopup({ onClose }: { onClose: () => void }) {
         <span className="eyebrow text-gold">Wait — one minute</span>
         <h3 className="mt-3 font-serif text-2xl">Take our brochure with you.</h3>
         <p className="mt-2 text-sm text-white/70">Get full price list, floor plans and photos on WhatsApp in 30 seconds.</p>
-        <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+        <a href={whatsappUrl} target="_blank" rel="noreferrer">
           <Button onClick={onClose} className="mt-6 w-full rounded-full bg-gold text-white hover:bg-[#b91c1c]">
             Get Brochure on WhatsApp
           </Button>
@@ -510,7 +510,7 @@ function ThanksPopup({ onClose }: { onClose: () => void }) {
 function MiniFooter() {
   return (
     <div className="border-t border-line bg-white py-6 text-center text-xs text-ink-soft">
-      © {new Date().getFullYear()} {site.brand.developer} × {site.brand.partner} · {site.brand.rera}
+      © {new Date().getFullYear()} {brand.developer} × {brand.partner} · {brand.rera}
     </div>
   );
 }
