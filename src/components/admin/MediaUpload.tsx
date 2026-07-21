@@ -61,7 +61,7 @@ export function MediaUpload({ value, onChange, accept = "image/*", folder, label
   return (
     <div className="space-y-2">
       {previewUrl ? (
-        <div className="relative rounded-lg border border-[#e8e4dd] overflow-hidden bg-[#f0ebe3]">
+        <div className="relative rounded-lg border border-[#e5e5e5] overflow-hidden bg-[#f0f0f0]">
           {isVideo ? (
             <video src={previewUrl} className="w-full max-h-64 object-cover" controls />
           ) : (
@@ -77,7 +77,7 @@ export function MediaUpload({ value, onChange, accept = "image/*", folder, label
           </button>
         </div>
       ) : (
-        <div className="rounded-lg border-2 border-dashed border-[#e8e4dd] bg-[#faf8f5] p-6 text-center text-sm text-[#8b7355]">
+        <div className="rounded-lg border-2 border-dashed border-[#e5e5e5] bg-[#f5f5f5] p-6 text-center text-sm text-[#737373]">
           No file selected
         </div>
       )}

@@ -16,8 +16,8 @@ import { ArrowLeft, Plus, Pencil, Trash2, Loader2 } from "lucide-react";
 export const Route = createFileRoute("/_authenticated/admin/gallery")({
   head: () => ({ meta: [{ title: "Gallery · Admin" }, { name: "robots", content: "noindex,nofollow" }] }),
   component: () => (
-    <div className="min-h-screen bg-[#faf8f5]">
-      <Suspense fallback={<div className="p-8 text-[#5c4d3c]">Loading…</div>}><Page /></Suspense>
+    <div className="min-h-screen bg-[#f5f5f5]">
+      <Suspense fallback={<div className="p-8 text-[#525252]">Loading…</div>}><Page /></Suspense>
     </div>
   ),
 });
@@ -62,17 +62,17 @@ function Page() {
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-6">
-      <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-[#5c4d3c] hover:text-[#2d2d2d] mb-6">
+      <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-[#525252] hover:text-[#0a0a0a] mb-6">
         <ArrowLeft className="h-4 w-4" /> Back to admin
       </Link>
       <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
         <div>
           <p className="eyebrow mb-2">Content</p>
-          <h1 className="text-3xl font-serif text-[#2d2d2d]">Gallery</h1>
-          <p className="text-sm text-[#5c4d3c] mt-1">{data.length} images</p>
+          <h1 className="text-3xl font-serif text-[#0a0a0a]">Gallery</h1>
+          <p className="text-sm text-[#525252] mt-1">{data.length} images</p>
         </div>
         <Button onClick={() => setEditing({ sort_order: (data.at(-1)?.sort_order ?? 0) + 10, aspect: "wide" })}
-          className="bg-[#8b7355] hover:bg-[#6b5a44] text-white">
+          className="bg-[#DC2626] hover:bg-[#B91C1C] text-white">
           <Plus className="h-4 w-4 mr-2" /> Add image
         </Button>
       </div>
@@ -84,7 +84,7 @@ function Page() {
             onDelete={() => { if (confirm("Delete this image?")) delMut.mutate(row); }} />
         ))}
         {data.length === 0 && (
-          <div className="col-span-full rounded-lg border border-dashed border-[#e8e4dd] p-10 text-center text-[#8b7355]">
+          <div className="col-span-full rounded-lg border border-dashed border-[#e5e5e5] p-10 text-center text-[#737373]">
             No gallery images yet.
           </div>
         )}
@@ -129,7 +129,7 @@ function Page() {
             <Button variant="outline" onClick={() => setEditing(null)}>Cancel</Button>
             <Button onClick={() => editing && saveMut.mutate(editing)}
               disabled={!editing?.image_path || saveMut.isPending}
-              className="bg-[#8b7355] hover:bg-[#6b5a44] text-white">
+              className="bg-[#DC2626] hover:bg-[#B91C1C] text-white">
               {saveMut.isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : null} Save
             </Button>
           </DialogFooter>
@@ -147,14 +147,14 @@ function Card({ row, onEdit, onDelete }: { row: Row; onEdit: () => void; onDelet
     });
   }, [row.image_path]);
   return (
-    <div className="bg-white rounded-lg border border-[#e8e4dd] overflow-hidden">
-      <div className="aspect-[4/3] bg-[#f0ebe3] overflow-hidden">
+    <div className="bg-white rounded-lg border border-[#e5e5e5] overflow-hidden">
+      <div className="aspect-[4/3] bg-[#f0f0f0] overflow-hidden">
         {thumb ? <img src={thumb} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full" />}
       </div>
       <div className="p-3 flex items-center justify-between gap-2">
         <div className="min-w-0">
-          <div className="text-sm font-medium text-[#2d2d2d] truncate">{row.title || "Untitled"}</div>
-          <div className="text-xs text-[#8b7355]">#{row.sort_order} · {row.aspect}</div>
+          <div className="text-sm font-medium text-[#0a0a0a] truncate">{row.title || "Untitled"}</div>
+          <div className="text-xs text-[#737373]">#{row.sort_order} · {row.aspect}</div>
         </div>
         <div className="flex gap-1 shrink-0">
           <Button variant="outline" size="sm" onClick={onEdit}><Pencil className="h-3.5 w-3.5" /></Button>

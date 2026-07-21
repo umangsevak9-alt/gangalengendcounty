@@ -100,8 +100,8 @@ function Hero() {
         className="absolute inset-0 h-full w-full object-cover"
         loading="eager"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0B2A5B]/85 via-[#0B2A5B]/70 to-[#071c40]/95" />
-      <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_20%,rgba(212,175,55,0.18),transparent_70%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-black/95" />
+      <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_20%,rgba(220,38,38,0.18),transparent_70%)]" />
 
       <div className="relative z-10">
         <div className="container-luxe flex items-center justify-between py-4 text-white sm:py-6">
@@ -159,7 +159,7 @@ function Hero() {
             <a href="#contact" className="w-full sm:w-auto">
               <Button
                 size="lg"
-                className="w-full rounded-full bg-[var(--red-cta)] px-7 text-white hover:bg-[#a91f1f] shadow-[0_10px_30px_-10px_rgba(198,40,40,0.6)] sm:w-auto"
+                className="w-full rounded-full bg-[var(--red-cta)] px-7 text-white hover:bg-[#b91c1c] shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)] sm:w-auto"
               >
                 Book Free Site Visit
               </Button>
@@ -238,7 +238,7 @@ function ContactForm() {
 
   return (
     <section id="contact" className="relative overflow-hidden bg-[var(--mist)] py-12 md:py-16">
-      <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_100%,rgba(11,42,91,0.06),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_100%,rgba(220,38,38,0.06),transparent_60%)]" />
       <div className="container-luxe relative">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div>
@@ -272,7 +272,7 @@ function ContactForm() {
 
           <form
             onSubmit={submit}
-            className="glass-card relative rounded-3xl p-6 shadow-[0_30px_80px_-40px_rgba(11,42,91,0.4)] sm:p-8 md:p-10"
+            className="glass-card relative rounded-3xl p-6 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.25)] sm:p-8 md:p-10"
           >
             <div className="absolute -top-4 left-8 rounded-full bg-[var(--red-cta)] px-4 py-1 text-[10px] font-semibold uppercase tracking-widest text-white">
               Priority Reply
@@ -309,7 +309,7 @@ function ContactForm() {
                 <Label htmlFor="msg">Message (optional)</Label>
                 <Textarea id="msg" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Any question?" className="mt-2 min-h-[90px] rounded-xl" />
               </div>
-              <Button type="submit" disabled={busy} className="h-12 w-full rounded-full bg-[var(--red-cta)] text-white hover:bg-[#a91f1f]">
+              <Button type="submit" disabled={busy} className="h-12 w-full rounded-full bg-[var(--red-cta)] text-white hover:bg-[#b91c1c]">
                 {busy ? "Sending…" : "Book Free Site Visit"}
               </Button>
               <p className="text-center text-[11px] text-ink-soft">
@@ -330,8 +330,8 @@ function FloatingRail() {
   const btns = [
     { href: WHATSAPP_URL, label: "WhatsApp", bg: "#25D366", icon: "W" as const },
     { href: CALL_URL, label: "Call", bg: "#16A34A", icon: <Phone className="h-5 w-5" /> },
-    { href: "#contact", label: "Site Visit", bg: "#154EA8", icon: <Calendar className="h-5 w-5" /> },
-    { href: MAPS_URL, label: "Directions", bg: "#D4AF37", icon: <Navigation className="h-5 w-5" /> },
+    { href: "#contact", label: "Site Visit", bg: "#DC2626", icon: <Calendar className="h-5 w-5" /> },
+    { href: MAPS_URL, label: "Directions", bg: "#0a0a0a", icon: <Navigation className="h-5 w-5" /> },
   ];
   return (
     <div className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 md:flex">
@@ -441,14 +441,14 @@ function WelcomePopup({ onClose }: { onClose: () => void }) {
   return (
     <PopupShell onClose={onClose}>
       <div className="h-40 w-full bg-cover bg-center" style={{ backgroundImage: `url(${heroAsset.url})` }}>
-        <div className="h-full w-full bg-gradient-to-b from-navy/30 to-navy/80 p-6 text-white">
+        <div className="h-full w-full bg-gradient-to-b from-black/30 to-black/80 p-6 text-white">
           <span className="eyebrow text-gold">Welcome to Nova One</span>
         </div>
       </div>
       <div className="p-8 text-center">
         <h3 className="font-serif text-2xl text-navy">Save ₹5+ Lakhs today</h3>
         <p className="mt-2 text-sm text-ink-soft">Special pre-launch price. Only for first 100 bookings. Hurry!</p>
-        <a href="#contact"><Button onClick={onClose} className="mt-6 w-full rounded-full bg-[var(--red-cta)] text-white hover:bg-[#a91f1f]">Book Site Visit</Button></a>
+        <a href="#contact"><Button onClick={onClose} className="mt-6 w-full rounded-full bg-[var(--red-cta)] text-white hover:bg-[#b91c1c]">Book Site Visit</Button></a>
       </div>
     </PopupShell>
   );
@@ -462,7 +462,7 @@ function ExitPopup({ onClose }: { onClose: () => void }) {
         <h3 className="mt-3 font-serif text-2xl">Take our brochure with you.</h3>
         <p className="mt-2 text-sm text-white/70">Get full price list, floor plans and photos on WhatsApp in 30 seconds.</p>
         <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-          <Button onClick={onClose} className="mt-6 w-full rounded-full bg-gold text-navy hover:bg-gold-soft">
+          <Button onClick={onClose} className="mt-6 w-full rounded-full bg-gold text-white hover:bg-[#b91c1c]">
             Get Brochure on WhatsApp
           </Button>
         </a>

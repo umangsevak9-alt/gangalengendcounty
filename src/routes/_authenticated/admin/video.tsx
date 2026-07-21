@@ -18,8 +18,8 @@ import { ArrowLeft, Loader2, Save } from "lucide-react";
 export const Route = createFileRoute("/_authenticated/admin/video")({
   head: () => ({ meta: [{ title: "Video Section · Admin" }, { name: "robots", content: "noindex,nofollow" }] }),
   component: () => (
-    <div className="min-h-screen bg-[#faf8f5]">
-      <Suspense fallback={<div className="p-8 text-[#5c4d3c]">Loading…</div>}>
+    <div className="min-h-screen bg-[#f5f5f5]">
+      <Suspense fallback={<div className="p-8 text-[#525252]">Loading…</div>}>
         <Page />
       </Suspense>
     </div>
@@ -90,16 +90,16 @@ function Page() {
 
   return (
     <div className="max-w-2xl mx-auto py-8 px-6">
-      <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-[#5c4d3c] hover:text-[#2d2d2d] mb-6">
+      <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-[#525252] hover:text-[#0a0a0a] mb-6">
         <ArrowLeft className="h-4 w-4" /> Back to admin
       </Link>
       <div className="mb-8">
         <p className="eyebrow mb-2">Content</p>
-        <h1 className="text-3xl font-serif text-[#2d2d2d]">Video Section</h1>
-        <p className="text-sm text-[#5c4d3c] mt-1">A single video showcased on the landing page.</p>
+        <h1 className="text-3xl font-serif text-[#0a0a0a]">Video Section</h1>
+        <p className="text-sm text-[#525252] mt-1">A single video showcased on the landing page.</p>
       </div>
 
-      <div className="bg-white rounded-lg border border-[#e8e4dd] p-6 space-y-5">
+      <div className="bg-white rounded-lg border border-[#e5e5e5] p-6 space-y-5">
         <div>
           <Label>Title</Label>
           <Input value={row.title} onChange={(e) => setRow({ ...row, title: e.target.value })} />
@@ -138,7 +138,7 @@ function Page() {
               value={row.video_url ?? ""}
               onChange={(e) => setRow({ ...row, video_url: e.target.value, video_path: null })}
             />
-            <p className="text-xs text-[#8b7355] mt-1">
+            <p className="text-xs text-[#737373] mt-1">
               Use the embed URL (e.g. paste a YouTube link like <code>youtube.com/watch?v=ID</code> and change it to <code>youtube.com/embed/ID</code>).
             </p>
           </div>
@@ -160,7 +160,7 @@ function Page() {
           <Button
             onClick={() => saveMut.mutate()}
             disabled={saveMut.isPending || !row.title.trim()}
-            className="bg-[#8b7355] hover:bg-[#6b5a44] text-white"
+            className="bg-[#DC2626] hover:bg-[#B91C1C] text-white"
           >
             {saveMut.isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Save className="h-4 w-4 mr-2" />}
             Save changes

@@ -11,8 +11,8 @@ import { ArrowLeft, Download, Trash2 } from "lucide-react";
 export const Route = createFileRoute("/_authenticated/admin/leads")({
   head: () => ({ meta: [{ title: "Leads · Admin" }, { name: "robots", content: "noindex,nofollow" }] }),
   component: () => (
-    <div className="min-h-screen bg-[#faf8f5]">
-      <Suspense fallback={<div className="p-8 text-[#5c4d3c]">Loading…</div>}><Page /></Suspense>
+    <div className="min-h-screen bg-[#f5f5f5]">
+      <Suspense fallback={<div className="p-8 text-[#525252]">Loading…</div>}><Page /></Suspense>
     </div>
   ),
 });
@@ -64,30 +64,30 @@ function Page() {
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-6">
-      <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-[#5c4d3c] hover:text-[#2d2d2d] mb-6">
+      <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-[#525252] hover:text-[#0a0a0a] mb-6">
         <ArrowLeft className="h-4 w-4" /> Back to admin
       </Link>
       <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
         <div>
           <p className="eyebrow mb-2">Contacts</p>
-          <h1 className="text-3xl font-serif text-[#2d2d2d]">Leads</h1>
-          <p className="text-sm text-[#5c4d3c] mt-1">{data.length} submissions</p>
+          <h1 className="text-3xl font-serif text-[#0a0a0a]">Leads</h1>
+          <p className="text-sm text-[#525252] mt-1">{data.length} submissions</p>
         </div>
         <Button onClick={() => downloadCsv(data)} disabled={data.length === 0}
-          className="bg-[#8b7355] hover:bg-[#6b5a44] text-white">
+          className="bg-[#DC2626] hover:bg-[#B91C1C] text-white">
           <Download className="h-4 w-4 mr-2" /> Export CSV
         </Button>
       </div>
 
       {data.length === 0 ? (
-        <div className="rounded-lg border border-dashed border-[#e8e4dd] p-10 text-center text-[#8b7355]">
+        <div className="rounded-lg border border-dashed border-[#e5e5e5] p-10 text-center text-[#737373]">
           No leads yet — submissions from the contact form will show up here.
         </div>
       ) : (
-        <div className="overflow-hidden rounded-lg border border-[#e8e4dd] bg-white">
+        <div className="overflow-hidden rounded-lg border border-[#e5e5e5] bg-white">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-[#f0ebe3] text-[#5c4d3c] text-left">
+              <thead className="bg-[#f0f0f0] text-[#525252] text-left">
                 <tr>
                   <th className="p-3">Date</th>
                   <th className="p-3">Name</th>
@@ -100,13 +100,13 @@ function Page() {
               </thead>
               <tbody>
                 {data.map((l) => (
-                  <tr key={l.id} className="border-t border-[#e8e4dd] align-top">
-                    <td className="p-3 whitespace-nowrap text-[#5c4d3c]">{new Date(l.created_at).toLocaleString()}</td>
-                    <td className="p-3 font-medium text-[#2d2d2d]">{l.name}</td>
-                    <td className="p-3"><a href={`tel:${l.phone}`} className="text-[#8b7355] hover:underline">{l.phone}</a></td>
-                    <td className="p-3">{l.email ? <a href={`mailto:${l.email}`} className="text-[#8b7355] hover:underline">{l.email}</a> : <span className="text-[#8b7355]">—</span>}</td>
+                  <tr key={l.id} className="border-t border-[#e5e5e5] align-top">
+                    <td className="p-3 whitespace-nowrap text-[#525252]">{new Date(l.created_at).toLocaleString()}</td>
+                    <td className="p-3 font-medium text-[#0a0a0a]">{l.name}</td>
+                    <td className="p-3"><a href={`tel:${l.phone}`} className="text-[#737373] hover:underline">{l.phone}</a></td>
+                    <td className="p-3">{l.email ? <a href={`mailto:${l.email}`} className="text-[#737373] hover:underline">{l.email}</a> : <span className="text-[#737373]">—</span>}</td>
                     <td className="p-3">{l.property_interest ?? "—"}</td>
-                    <td className="p-3 max-w-xs">{l.message ?? <span className="text-[#8b7355]">—</span>}</td>
+                    <td className="p-3 max-w-xs">{l.message ?? <span className="text-[#737373]">—</span>}</td>
                     {me.isAdmin && (
                       <td className="p-3">
                         <Button variant="outline" size="sm" onClick={() => { if (confirm("Delete this lead?")) delMut.mutate(l.id); }}
