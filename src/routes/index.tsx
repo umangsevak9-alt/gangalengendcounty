@@ -34,7 +34,8 @@ import {
   FaqsSection as CmsFaqs,
 } from "@/components/landing/CmsSections";
 import { useServerFn } from "@tanstack/react-start";
-import { submitLead } from "@/lib/cms.functions";
+import { useQuery } from "@tanstack/react-query";
+import { submitLead, getPublicSiteSettings } from "@/lib/cms.functions";
 import heroAsset from "@/assets/tower-hero.jpeg.asset.json";
 import facadeAsset from "@/assets/tower-facade.jpeg.asset.json";
 import skylineAsset from "@/assets/tower-skyline.jpeg.asset.json";
@@ -56,11 +57,34 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const WHATSAPP_URL = `https://wa.me/${site.brand.whatsapp}?text=${encodeURIComponent(
-  "Hi, I am interested in Nova One at Ganga Legend County. Please share details.",
-)}`;
-const CALL_URL = `tel:${site.brand.phone.replace(/\s+/g, "")}`;
 const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Ganga+Legend+County+Pune";
+
+function useBrand() {
+  const fetchSettings = useServerFn(getPublicSiteSettings);
+  const { data } = useQuery({
+    queryKey: ["public", "site-settings"],
+    queryFn: () => fetchSettings(),
+    staleTime: 5 * 60 * 1000,
+  });
+  const brand = {
+    name: data?.brand_name || site.brand.name,
+    code: data?.brand_code || site.brand.code,
+    developer: data?.developer || site.brand.developer,
+    partner: data?.partner || site.brand.partner,
+    location: data?.location || site.brand.location,
+    rera: data?.rera || site.brand.rera,
+    phone: data?.phone || site.brand.phone,
+    whatsapp: data?.whatsapp || site.brand.whatsapp,
+    email: data?.email || site.brand.email,
+    whatsappMessage:
+      data?.whatsapp_message ||
+      "Hi, I am interested in Nova One at Ganga Legend County. Please share details.",
+  };
+  const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(brand.whatsappMessage)}`;
+  const callUrl = `tel:${brand.phone.replace(/\s+/g, "")}`;
+  return { brand, whatsappUrl, callUrl };
+}
+
 
 function Landing() {
   return (
