@@ -66,9 +66,9 @@ export function AmenitiesSection() {
         {items.length === 0 ? (
           <div className="mt-14 text-center text-ink-soft text-sm">Amenities coming soon.</div>
         ) : (
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
             {items.map((a) => (
-              <div key={a.id} className="hover-lift group overflow-hidden rounded-2xl bg-white shadow-[0_2px_20px_-10px_rgba(11,42,91,0.15)]">
+              <div key={a.id} className="hover-lift group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_2px_20px_-10px_rgba(11,42,91,0.15)]">
                 <div className="aspect-[4/3] w-full overflow-hidden bg-[#f0ebe3]">
                   {a.image_url ? (
                     <img src={a.image_url} alt={a.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -76,8 +76,8 @@ export function AmenitiesSection() {
                     <div className="grid h-full place-items-center text-navy/40"><Sparkles className="h-8 w-8" /></div>
                   )}
                 </div>
-                <div className="p-5 text-center bg-navy text-white">
-                  <div className="font-serif text-lg text-white">{a.title}</div>
+                <div className="flex flex-1 flex-col items-center justify-center p-5 text-center bg-navy text-white min-h-[110px]">
+                  <div className="font-serif text-lg text-white leading-snug">{a.title}</div>
                   {a.note && <div className="mt-1 text-xs text-white/75">{a.note}</div>}
                 </div>
               </div>
