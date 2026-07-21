@@ -16,6 +16,7 @@ import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminVideoRouteImport } from './routes/_authenticated/admin/video'
 import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin/users'
 import { Route as AuthenticatedAdminSpecificationsRouteImport } from './routes/_authenticated/admin/specifications'
+import { Route as AuthenticatedAdminSiteSettingsRouteImport } from './routes/_authenticated/admin/site-settings'
 import { Route as AuthenticatedAdminLocationRouteImport } from './routes/_authenticated/admin/location'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin/leads'
 import { Route as AuthenticatedAdminGalleryRouteImport } from './routes/_authenticated/admin/gallery'
@@ -56,6 +57,12 @@ const AuthenticatedAdminSpecificationsRoute =
   AuthenticatedAdminSpecificationsRouteImport.update({
     id: '/admin/specifications',
     path: '/admin/specifications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminSiteSettingsRoute =
+  AuthenticatedAdminSiteSettingsRouteImport.update({
+    id: '/admin/site-settings',
+    path: '/admin/site-settings',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAdminLocationRoute =
@@ -102,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/admin/gallery': typeof AuthenticatedAdminGalleryRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/location': typeof AuthenticatedAdminLocationRoute
+  '/admin/site-settings': typeof AuthenticatedAdminSiteSettingsRoute
   '/admin/specifications': typeof AuthenticatedAdminSpecificationsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/video': typeof AuthenticatedAdminVideoRoute
@@ -116,6 +124,7 @@ export interface FileRoutesByTo {
   '/admin/gallery': typeof AuthenticatedAdminGalleryRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/location': typeof AuthenticatedAdminLocationRoute
+  '/admin/site-settings': typeof AuthenticatedAdminSiteSettingsRoute
   '/admin/specifications': typeof AuthenticatedAdminSpecificationsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/video': typeof AuthenticatedAdminVideoRoute
@@ -132,6 +141,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/gallery': typeof AuthenticatedAdminGalleryRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/_authenticated/admin/location': typeof AuthenticatedAdminLocationRoute
+  '/_authenticated/admin/site-settings': typeof AuthenticatedAdminSiteSettingsRoute
   '/_authenticated/admin/specifications': typeof AuthenticatedAdminSpecificationsRoute
   '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
   '/_authenticated/admin/video': typeof AuthenticatedAdminVideoRoute
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/admin/gallery'
     | '/admin/leads'
     | '/admin/location'
+    | '/admin/site-settings'
     | '/admin/specifications'
     | '/admin/users'
     | '/admin/video'
@@ -162,6 +173,7 @@ export interface FileRouteTypes {
     | '/admin/gallery'
     | '/admin/leads'
     | '/admin/location'
+    | '/admin/site-settings'
     | '/admin/specifications'
     | '/admin/users'
     | '/admin/video'
@@ -177,6 +189,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/gallery'
     | '/_authenticated/admin/leads'
     | '/_authenticated/admin/location'
+    | '/_authenticated/admin/site-settings'
     | '/_authenticated/admin/specifications'
     | '/_authenticated/admin/users'
     | '/_authenticated/admin/video'
@@ -240,6 +253,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminSpecificationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/site-settings': {
+      id: '/_authenticated/admin/site-settings'
+      path: '/admin/site-settings'
+      fullPath: '/admin/site-settings'
+      preLoaderRoute: typeof AuthenticatedAdminSiteSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/location': {
       id: '/_authenticated/admin/location'
       path: '/admin/location'
@@ -292,6 +312,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminGalleryRoute: typeof AuthenticatedAdminGalleryRoute
   AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
   AuthenticatedAdminLocationRoute: typeof AuthenticatedAdminLocationRoute
+  AuthenticatedAdminSiteSettingsRoute: typeof AuthenticatedAdminSiteSettingsRoute
   AuthenticatedAdminSpecificationsRoute: typeof AuthenticatedAdminSpecificationsRoute
   AuthenticatedAdminUsersRoute: typeof AuthenticatedAdminUsersRoute
   AuthenticatedAdminVideoRoute: typeof AuthenticatedAdminVideoRoute
@@ -305,6 +326,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminGalleryRoute: AuthenticatedAdminGalleryRoute,
   AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
   AuthenticatedAdminLocationRoute: AuthenticatedAdminLocationRoute,
+  AuthenticatedAdminSiteSettingsRoute: AuthenticatedAdminSiteSettingsRoute,
   AuthenticatedAdminSpecificationsRoute: AuthenticatedAdminSpecificationsRoute,
   AuthenticatedAdminUsersRoute: AuthenticatedAdminUsersRoute,
   AuthenticatedAdminVideoRoute: AuthenticatedAdminVideoRoute,

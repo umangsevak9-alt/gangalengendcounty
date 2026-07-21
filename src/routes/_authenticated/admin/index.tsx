@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
   ShieldCheck, PencilLine, LogOut, Home, FileText, Users, Image as ImageIcon,
-  MapPin, HelpCircle, Video, Sparkles,
+  MapPin, HelpCircle, Video, Sparkles, Settings as SettingsIcon,
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin/")({
