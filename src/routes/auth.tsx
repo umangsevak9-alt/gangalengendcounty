@@ -60,18 +60,18 @@ function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#faf8f5] px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center bg-[#f5f5f5] px-4 py-12">
       <div className="w-full max-w-md">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm text-[#5c4d3c] hover:text-[#2d2d2d] mb-8">
+        <Link to="/" className="inline-flex items-center gap-2 text-sm text-[#525252] hover:text-[#0a0a0a] mb-8">
           <ArrowLeft className="h-4 w-4" /> Back to site
         </Link>
-        <div className="bg-white rounded-lg border border-[#e8e4dd] shadow-sm p-8">
+        <div className="bg-white rounded-lg border border-[#e5e5e5] shadow-sm p-8">
           <div className="mb-6">
             <p className="eyebrow mb-2">Admin Access</p>
-            <h1 className="text-3xl font-serif text-[#2d2d2d]">
+            <h1 className="text-3xl font-serif text-[#0a0a0a]">
               {mode === "signin" ? "Sign in" : "Create account"}
             </h1>
-            <p className="mt-2 text-sm text-[#5c4d3c]">
+            <p className="mt-2 text-sm text-[#525252]">
               {mode === "signin"
                 ? "Restricted to authorised administrators and editors."
                 : "New accounts have no permissions until an admin assigns a role."}
@@ -94,7 +94,7 @@ function AuthPage() {
             <div>
               <Label htmlFor="email">Email</Label>
               <div className="relative mt-1">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8b7355]" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#737373]" />
                 <Input
                   id="email"
                   type="email"
@@ -110,7 +110,7 @@ function AuthPage() {
             <div>
               <Label htmlFor="password">Password</Label>
               <div className="relative mt-1">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8b7355]" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#737373]" />
                 <Input
                   id="password"
                   type="password"
@@ -127,7 +127,7 @@ function AuthPage() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#8b7355] hover:bg-[#6b5a44] text-white"
+              className="w-full bg-[#DC2626] hover:bg-[#B91C1C] text-white"
             >
               {loading ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
             </Button>
@@ -135,7 +135,7 @@ function AuthPage() {
           <button
             type="button"
             onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-            className="mt-6 text-xs text-[#8b7355] hover:text-[#2d2d2d] w-full text-center"
+            className="mt-6 text-xs text-[#737373] hover:text-[#0a0a0a] w-full text-center"
           >
             {mode === "signin"
               ? "First time here? Create an admin account →"

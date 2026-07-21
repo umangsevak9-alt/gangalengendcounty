@@ -22,8 +22,8 @@ import { ArrowLeft, Plus, Pencil, Trash2, Loader2 } from "lucide-react";
 export const Route = createFileRoute("/_authenticated/admin/specifications")({
   head: () => ({ meta: [{ title: "Specifications · Admin" }, { name: "robots", content: "noindex,nofollow" }] }),
   component: () => (
-    <div className="min-h-screen bg-[#faf8f5]">
-      <Suspense fallback={<div className="p-8 text-[#5c4d3c]">Loading…</div>}>
+    <div className="min-h-screen bg-[#f5f5f5]">
+      <Suspense fallback={<div className="p-8 text-[#525252]">Loading…</div>}>
         <Page />
       </Suspense>
     </div>
@@ -81,16 +81,16 @@ function Page() {
 
   return (
     <div className="max-w-5xl mx-auto py-8 px-6">
-      <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-[#5c4d3c] hover:text-[#2d2d2d] mb-6">
+      <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-[#525252] hover:text-[#0a0a0a] mb-6">
         <ArrowLeft className="h-4 w-4" /> Back to admin
       </Link>
       <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
         <div>
           <p className="eyebrow mb-2">Content</p>
-          <h1 className="text-3xl font-serif text-[#2d2d2d]">Specifications</h1>
-          <p className="text-sm text-[#5c4d3c] mt-1">{data.length} items</p>
+          <h1 className="text-3xl font-serif text-[#0a0a0a]">Specifications</h1>
+          <p className="text-sm text-[#525252] mt-1">{data.length} items</p>
         </div>
-        <Button onClick={() => setEditing({ sort_order: (data.at(-1)?.sort_order ?? 0) + 10 })} className="bg-[#8b7355] hover:bg-[#6b5a44] text-white">
+        <Button onClick={() => setEditing({ sort_order: (data.at(-1)?.sort_order ?? 0) + 10 })} className="bg-[#DC2626] hover:bg-[#B91C1C] text-white">
           <Plus className="h-4 w-4 mr-2" /> Add specification
         </Button>
       </div>
@@ -105,7 +105,7 @@ function Page() {
           />
         ))}
         {data.length === 0 && (
-          <div className="rounded-lg border border-dashed border-[#e8e4dd] p-10 text-center text-[#8b7355]">
+          <div className="rounded-lg border border-dashed border-[#e5e5e5] p-10 text-center text-[#737373]">
             No specifications yet.
           </div>
         )}
@@ -146,7 +146,7 @@ function Page() {
             <Button
               onClick={() => editing && saveMut.mutate(editing)}
               disabled={!editing?.group_name || !editing?.detail || saveMut.isPending}
-              className="bg-[#8b7355] hover:bg-[#6b5a44] text-white"
+              className="bg-[#DC2626] hover:bg-[#B91C1C] text-white"
             >
               {saveMut.isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : null}
               Save
@@ -167,16 +167,16 @@ function SpecCard({ row, onEdit, onDelete }: { row: Spec; onEdit: () => void; on
     });
   }, [row.image_path]);
   return (
-    <div className="bg-white rounded-lg border border-[#e8e4dd] p-4 flex items-start gap-4">
-      <div className="h-16 w-24 rounded bg-[#f0ebe3] grid place-items-center overflow-hidden shrink-0">
-        {thumb ? <img src={thumb} alt="" className="h-full w-full object-cover" /> : <span className="text-xs text-[#8b7355]">No image</span>}
+    <div className="bg-white rounded-lg border border-[#e5e5e5] p-4 flex items-start gap-4">
+      <div className="h-16 w-24 rounded bg-[#f0f0f0] grid place-items-center overflow-hidden shrink-0">
+        {thumb ? <img src={thumb} alt="" className="h-full w-full object-cover" /> : <span className="text-xs text-[#737373]">No image</span>}
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <h3 className="font-serif text-[#2d2d2d]">{row.group_name}</h3>
-          <span className="text-xs px-1.5 py-0.5 rounded bg-[#f0ebe3] text-[#5c4d3c]">#{row.sort_order}</span>
+          <h3 className="font-serif text-[#0a0a0a]">{row.group_name}</h3>
+          <span className="text-xs px-1.5 py-0.5 rounded bg-[#f0f0f0] text-[#525252]">#{row.sort_order}</span>
         </div>
-        <p className="text-sm text-[#5c4d3c] mt-1">{row.detail}</p>
+        <p className="text-sm text-[#525252] mt-1">{row.detail}</p>
       </div>
       <div className="flex gap-2 shrink-0">
         <Button variant="outline" size="sm" onClick={onEdit}><Pencil className="h-4 w-4" /></Button>

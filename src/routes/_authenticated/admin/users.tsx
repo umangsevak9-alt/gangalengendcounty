@@ -20,8 +20,8 @@ export const Route = createFileRoute("/_authenticated/admin/users")({
 
 function UsersPage() {
   return (
-    <div className="min-h-screen bg-[#faf8f5]">
-      <Suspense fallback={<div className="p-8 text-[#5c4d3c]">Loading…</div>}>
+    <div className="min-h-screen bg-[#f5f5f5]">
+      <Suspense fallback={<div className="p-8 text-[#525252]">Loading…</div>}>
         <UsersInner />
       </Suspense>
     </div>
@@ -41,9 +41,9 @@ function UsersInner() {
   if (!me.isAdmin) {
     return (
       <div className="max-w-2xl mx-auto py-16 px-6">
-        <div className="bg-white border border-[#e8e4dd] rounded-lg p-8 text-center">
-          <h1 className="text-2xl font-serif text-[#2d2d2d]">Admin only</h1>
-          <p className="mt-2 text-sm text-[#5c4d3c]">This page is restricted to administrators.</p>
+        <div className="bg-white border border-[#e5e5e5] rounded-lg p-8 text-center">
+          <h1 className="text-2xl font-serif text-[#0a0a0a]">Admin only</h1>
+          <p className="mt-2 text-sm text-[#525252]">This page is restricted to administrators.</p>
           <Button asChild variant="outline" className="mt-6">
             <Link to="/admin"><ArrowLeft className="h-4 w-4 mr-2" /> Back</Link>
           </Button>
@@ -71,8 +71,8 @@ function UsersInner() {
       <header className="mb-8 flex items-center justify-between gap-4 flex-wrap">
         <div>
           <p className="eyebrow mb-2">Access Control</p>
-          <h1 className="text-3xl md:text-4xl font-serif text-[#2d2d2d]">Users & Roles</h1>
-          <p className="mt-2 text-sm text-[#5c4d3c]">
+          <h1 className="text-3xl md:text-4xl font-serif text-[#0a0a0a]">Users & Roles</h1>
+          <p className="mt-2 text-sm text-[#525252]">
             Grant or revoke admin and editor access. New sign-ups have no role until you approve them here.
           </p>
         </div>
@@ -81,10 +81,10 @@ function UsersInner() {
         </Button>
       </header>
 
-      <div className="bg-white border border-[#e8e4dd] rounded-lg overflow-hidden">
+      <div className="bg-white border border-[#e5e5e5] rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-[#f0ebe3] text-[#5c4d3c]">
+            <thead className="bg-[#f0f0f0] text-[#525252]">
               <tr>
                 <th className="text-left px-4 py-3 font-medium">Email</th>
                 <th className="text-left px-4 py-3 font-medium">Roles</th>
@@ -98,10 +98,10 @@ function UsersInner() {
                 const isEditor = u.roles.includes("editor");
                 const isSelf = u.id === me.userId;
                 return (
-                  <tr key={u.id} className="border-t border-[#e8e4dd]">
+                  <tr key={u.id} className="border-t border-[#e5e5e5]">
                     <td className="px-4 py-3">
-                      <div className="font-medium text-[#2d2d2d]">{u.email ?? "—"}</div>
-                      {isSelf && <div className="text-xs text-[#8b7355]">You</div>}
+                      <div className="font-medium text-[#0a0a0a]">{u.email ?? "—"}</div>
+                      {isSelf && <div className="text-xs text-[#737373]">You</div>}
                       {!u.email_confirmed_at && (
                         <div className="text-xs text-amber-700">Email not confirmed</div>
                       )}
@@ -109,21 +109,21 @@ function UsersInner() {
                     <td className="px-4 py-3">
                       <div className="flex gap-1.5 flex-wrap">
                         {isAdmin && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#2d2d2d] text-white text-xs">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#0a0a0a] text-white text-xs">
                             <ShieldCheck className="h-3 w-3" /> Admin
                           </span>
                         )}
                         {isEditor && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#c9b99a] text-[#2d2d2d] text-xs">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#a3a3a3] text-[#0a0a0a] text-xs">
                             <PencilLine className="h-3 w-3" /> Editor
                           </span>
                         )}
                         {!isAdmin && !isEditor && (
-                          <span className="text-xs text-[#8b7355]">No access</span>
+                          <span className="text-xs text-[#737373]">No access</span>
                         )}
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-[#5c4d3c] whitespace-nowrap">
+                    <td className="px-4 py-3 text-[#525252] whitespace-nowrap">
                       {u.last_sign_in_at ? new Date(u.last_sign_in_at).toLocaleString() : "—"}
                     </td>
                     <td className="px-4 py-3">
@@ -149,7 +149,7 @@ function UsersInner() {
               })}
               {users.length === 0 && (
                 <tr>
-                  <td colSpan={4} className="px-4 py-8 text-center text-[#5c4d3c]">
+                  <td colSpan={4} className="px-4 py-8 text-center text-[#525252]">
                     No users yet.
                   </td>
                 </tr>
@@ -159,7 +159,7 @@ function UsersInner() {
         </div>
       </div>
 
-      <p className="mt-4 text-xs text-[#8b7355]">
+      <p className="mt-4 text-xs text-[#737373]">
         Admins can manage all content and access. Editors can manage content but cannot grant roles.
       </p>
     </div>
@@ -177,7 +177,7 @@ function RoleBtn({
       variant={active ? "default" : "outline"}
       disabled={disabled}
       onClick={onClick}
-      className={active ? "bg-[#2d2d2d] hover:bg-[#1a1a1a] text-white" : ""}
+      className={active ? "bg-[#0a0a0a] hover:bg-[#1a1a1a] text-white" : ""}
     >
       {loading && <Loader2 className="h-3 w-3 mr-1 animate-spin" />}
       {active ? `Revoke ${label}` : `Grant ${label}`}

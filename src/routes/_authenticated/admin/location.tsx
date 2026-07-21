@@ -19,8 +19,8 @@ const ICON_KEYS = ["MapPin", "Navigation", "Building2", "ShoppingBag", "Hospital
 export const Route = createFileRoute("/_authenticated/admin/location")({
   head: () => ({ meta: [{ title: "Location · Admin" }, { name: "robots", content: "noindex,nofollow" }] }),
   component: () => (
-    <div className="min-h-screen bg-[#faf8f5]">
-      <Suspense fallback={<div className="p-8 text-[#5c4d3c]">Loading…</div>}><Page /></Suspense>
+    <div className="min-h-screen bg-[#f5f5f5]">
+      <Suspense fallback={<div className="p-8 text-[#525252]">Loading…</div>}><Page /></Suspense>
     </div>
   ),
 });
@@ -93,16 +93,16 @@ function Page() {
 
   return (
     <div className="max-w-4xl mx-auto py-8 px-6">
-      <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-[#5c4d3c] hover:text-[#2d2d2d] mb-6">
+      <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-[#525252] hover:text-[#0a0a0a] mb-6">
         <ArrowLeft className="h-4 w-4" /> Back to admin
       </Link>
       <div className="mb-8">
         <p className="eyebrow mb-2">Content</p>
-        <h1 className="text-3xl font-serif text-[#2d2d2d]">Location</h1>
+        <h1 className="text-3xl font-serif text-[#0a0a0a]">Location</h1>
       </div>
 
-      <section className="bg-white rounded-lg border border-[#e8e4dd] p-6 space-y-4">
-        <h2 className="font-serif text-xl text-[#2d2d2d]">Section content</h2>
+      <section className="bg-white rounded-lg border border-[#e5e5e5] p-6 space-y-4">
+        <h2 className="font-serif text-xl text-[#0a0a0a]">Section content</h2>
         <div><Label>Heading</Label><Input value={settings.heading} onChange={(e) => setSettings({ ...settings, heading: e.target.value })} /></div>
         <div><Label>Subtitle</Label><Textarea rows={2} value={settings.subtitle ?? ""} onChange={(e) => setSettings({ ...settings, subtitle: e.target.value })} /></div>
         <div><Label>Address</Label><Input value={settings.address ?? ""} onChange={(e) => setSettings({ ...settings, address: e.target.value })} /></div>
@@ -110,7 +110,7 @@ function Page() {
           <Textarea rows={3} value={settings.map_embed_url ?? ""}
             placeholder="Paste any Google Maps link, share URL, or full <iframe> embed code"
             onChange={(e) => setSettings({ ...settings, map_embed_url: e.target.value })} />
-          <p className="text-xs text-[#8b7355] mt-1">
+          <p className="text-xs text-[#737373] mt-1">
             Paste anything — a Google Maps share link (maps.app.goo.gl/...), a place URL,
             the full &lt;iframe&gt; embed code, or even a plain address. The map on the
             home page updates automatically.
@@ -120,29 +120,29 @@ function Page() {
           <Input value={settings.directions_url ?? ""} placeholder="https://www.google.com/maps/..."
             onChange={(e) => setSettings({ ...settings, directions_url: e.target.value })} /></div>
         <Button onClick={() => saveSettingsMut.mutate()} disabled={saveSettingsMut.isPending}
-          className="bg-[#8b7355] hover:bg-[#6b5a44] text-white">
+          className="bg-[#DC2626] hover:bg-[#B91C1C] text-white">
           {saveSettingsMut.isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Save className="h-4 w-4 mr-2" />} Save location
         </Button>
       </section>
 
       <section className="mt-8">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-serif text-xl text-[#2d2d2d]">Nearby landmarks</h2>
+          <h2 className="font-serif text-xl text-[#0a0a0a]">Nearby landmarks</h2>
           <Button onClick={() => setEditing({ sort_order: (data.landmarks.at(-1)?.sort_order ?? 0) + 10, icon_key: "MapPin" })}
-            className="bg-[#8b7355] hover:bg-[#6b5a44] text-white">
+            className="bg-[#DC2626] hover:bg-[#B91C1C] text-white">
             <Plus className="h-4 w-4 mr-2" /> Add landmark
           </Button>
         </div>
         <div className="grid gap-3">
           {data.landmarks.map((row) => (
-            <div key={row.id} className="bg-white rounded-lg border border-[#e8e4dd] p-4 flex items-center gap-4">
+            <div key={row.id} className="bg-white rounded-lg border border-[#e5e5e5] p-4 flex items-center gap-4">
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-medium text-[#2d2d2d]">{row.label}</h3>
-                  {row.travel_time && <span className="text-xs px-1.5 py-0.5 rounded bg-[#f0ebe3] text-[#5c4d3c]">{row.travel_time}</span>}
-                  <span className="text-xs text-[#8b7355]">#{row.sort_order}</span>
+                  <h3 className="font-medium text-[#0a0a0a]">{row.label}</h3>
+                  {row.travel_time && <span className="text-xs px-1.5 py-0.5 rounded bg-[#f0f0f0] text-[#525252]">{row.travel_time}</span>}
+                  <span className="text-xs text-[#737373]">#{row.sort_order}</span>
                 </div>
-                <div className="text-xs text-[#8b7355] mt-1">Icon: {row.icon_key}</div>
+                <div className="text-xs text-[#737373] mt-1">Icon: {row.icon_key}</div>
               </div>
               <div className="flex gap-2 shrink-0">
                 <Button variant="outline" size="sm" onClick={() => setEditing(row)}><Pencil className="h-4 w-4" /></Button>
@@ -151,7 +151,7 @@ function Page() {
             </div>
           ))}
           {data.landmarks.length === 0 && (
-            <div className="rounded-lg border border-dashed border-[#e8e4dd] p-10 text-center text-[#8b7355]">No landmarks yet.</div>
+            <div className="rounded-lg border border-dashed border-[#e5e5e5] p-10 text-center text-[#737373]">No landmarks yet.</div>
           )}
         </div>
       </section>
@@ -177,7 +177,7 @@ function Page() {
             <Button variant="outline" onClick={() => setEditing(null)}>Cancel</Button>
             <Button onClick={() => editing && saveMut.mutate(editing)}
               disabled={!editing?.label || saveMut.isPending}
-              className="bg-[#8b7355] hover:bg-[#6b5a44] text-white">
+              className="bg-[#DC2626] hover:bg-[#B91C1C] text-white">
               {saveMut.isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : null} Save
             </Button>
           </DialogFooter>

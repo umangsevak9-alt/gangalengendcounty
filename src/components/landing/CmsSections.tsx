@@ -68,8 +68,8 @@ export function AmenitiesSection() {
         ) : (
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
             {items.map((a) => (
-              <div key={a.id} className="hover-lift group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_2px_20px_-10px_rgba(11,42,91,0.15)]">
-                <div className="aspect-[4/3] w-full overflow-hidden bg-[#f0ebe3]">
+              <div key={a.id} className="hover-lift group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_2px_20px_-10px_rgba(0,0,0,0.12)]">
+                <div className="aspect-[4/3] w-full overflow-hidden bg-[#f0f0f0]">
                   {a.image_url ? (
                     <img src={a.image_url} alt={a.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   ) : (
@@ -108,9 +108,9 @@ export function SpecificationsSection() {
         ) : (
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {items.map((s) => (
-              <div key={s.id} className="hover-lift group overflow-hidden rounded-2xl border border-[#e8e4dd] bg-white">
+              <div key={s.id} className="hover-lift group overflow-hidden rounded-2xl border border-line bg-white">
                 {s.image_url && (
-                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#f0ebe3]">
+                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#f0f0f0]">
                     <img src={s.image_url} alt={s.group_name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   </div>
                 )}
@@ -149,7 +149,7 @@ export function VideoSection() {
   if (!data) return null;
 
   return (
-    <section id="video" className="bg-[#0B2A5B] py-14 md:py-20 text-white">
+    <section id="video" className="bg-navy py-14 md:py-20 text-white">
       <div className="container-luxe">
         <SectionHead eyebrow="Film" title={data.title} subtitle={data.subtitle ?? undefined} dark />
         <div className="mt-12 mx-auto max-w-5xl overflow-hidden rounded-2xl bg-black shadow-2xl ring-1 ring-white/10">
@@ -230,7 +230,7 @@ export function FloorPlansSection({ fallbackImage }: { fallbackImage: string }) 
         ) : (
           <div className="mt-14 grid gap-6 md:grid-cols-3">
             {plans.map((p) => (
-              <div key={p.id} className="hover-lift group overflow-hidden rounded-2xl bg-white shadow-[0_10px_40px_-25px_rgba(11,42,91,0.25)]">
+              <div key={p.id} className="hover-lift group overflow-hidden rounded-2xl bg-white shadow-[0_10px_40px_-25px_rgba(0,0,0,0.2)]">
                 <div className="relative aspect-[4/3] overflow-hidden bg-navy">
                   <img src={p.image_url ?? fallbackImage} alt={p.name} className="h-full w-full object-cover opacity-70 transition group-hover:scale-105" />
                   {p.is_limited && p.status && (
@@ -279,7 +279,7 @@ export function LocationSection() {
     <section id="location" className="relative overflow-hidden bg-mist py-14 md:py-20">
       {/* decorative background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.05]"
-        style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0B2A5B 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+        style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0a0a0a 1px, transparent 0)", backgroundSize: "28px 28px" }} />
       <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gold/20 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-navy/10 blur-3xl" />
 
