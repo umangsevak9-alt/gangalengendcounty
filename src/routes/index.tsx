@@ -421,6 +421,7 @@ function WelcomePopup({ onClose }: { onClose: () => void }) {
       <div className="p-8 text-center">
         <h3 className="font-serif text-2xl text-navy">Save ₹5+ Lakhs today</h3>
         <p className="mt-2 text-sm text-ink-soft">Special pre-launch price. Only for first 100 bookings. Hurry!</p>
+        <p className="mt-2 text-[11px] text-ink-soft/80">*Terms and Conditions Apply</p>
         <a href="#contact"><Button onClick={onClose} className="mt-6 w-full rounded-full bg-[var(--red-cta)] text-white hover:bg-[#b91c1c]">Book Site Visit</Button></a>
       </div>
     </PopupShell>
