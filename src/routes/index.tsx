@@ -316,7 +316,7 @@ function ContactForm() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-[var(--mist)] py-16 md:py-24">
+    <section id="contact" className="relative overflow-hidden bg-[var(--mist)] py-12 md:py-16">
       <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_100%,rgba(11,42,91,0.06),transparent_60%)]" />
       <div className="container-luxe relative">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
