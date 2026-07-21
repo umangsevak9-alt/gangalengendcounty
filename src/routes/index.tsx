@@ -363,6 +363,7 @@ const EXIT_AFTER_WELCOME_MS = 5000; // show second popup 5 seconds after first c
 
 function Popups() {
   const [welcome, setWelcome] = useState(false);
+  const [welcomeClosed, setWelcomeClosed] = useState(false);
   const [exit, setExit] = useState(false);
   const [shownExit, setShownExit] = useState(false);
 
@@ -376,14 +377,14 @@ function Popups() {
   }, []);
 
   useEffect(() => {
-    if (!welcome || shownExit || sessionStorage.getItem("novaone_exit")) return;
+    if (!welcomeClosed || shownExit || sessionStorage.getItem("novaone_exit")) return;
     const t = setTimeout(() => {
       setExit(true);
       setShownExit(true);
       sessionStorage.setItem("novaone_exit", "1");
     }, EXIT_AFTER_WELCOME_MS);
     return () => clearTimeout(t);
-  }, [welcome, shownExit]);
+  }, [welcomeClosed, shownExit]);
 
   useEffect(() => {
     const onLeave = (e: MouseEvent) => {
@@ -399,7 +400,14 @@ function Popups() {
 
   return (
     <>
-      {welcome && <WelcomePopup onClose={() => setWelcome(false)} />}
+      {welcome && (
+        <WelcomePopup
+          onClose={() => {
+            setWelcome(false);
+            setWelcomeClosed(true);
+          }}
+        />
+      )}
       {exit && <ExitPopup onClose={() => setExit(false)} />}
     </>
   );
