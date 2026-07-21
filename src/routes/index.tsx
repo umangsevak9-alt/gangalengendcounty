@@ -183,20 +183,11 @@ function Hero() {
             </a>
           </div>
 
-          <div className="mt-12 grid max-w-2xl grid-cols-2 gap-6 border-t border-white/15 pt-8 sm:grid-cols-4">
-            {[
-              { n: "25+", l: "Acres" },
-              { n: "1,200", l: "Families" },
-              { n: "40+", l: "Amenities" },
-              { n: "RERA", l: "Approved" },
-            ].map((s) => (
-              <div key={s.l}>
-                <div className="font-serif text-3xl text-gold md:text-4xl">{s.n}</div>
-                <div className="mt-1 text-[11px] uppercase tracking-[0.24em] text-white/70">
-                  {s.l}
-                </div>
-              </div>
-            ))}
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs uppercase tracking-[0.24em] text-white/70">
+            <span><span className="text-gold font-serif text-base normal-case tracking-normal">25+</span> Acres</span>
+            <span><span className="text-gold font-serif text-base normal-case tracking-normal">1,200</span> Families</span>
+            <span><span className="text-gold font-serif text-base normal-case tracking-normal">40+</span> Amenities</span>
+            <span className="text-gold">RERA Approved</span>
           </div>
         </div>
       </div>
