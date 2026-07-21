@@ -329,12 +329,14 @@ function ContactForm() {
 
 /* -------------------- FLOATING RAIL -------------------- */
 function FloatingRail() {
+  const { whatsappUrl, callUrl } = useBrand();
   const btns = [
-    { href: WHATSAPP_URL, label: "WhatsApp", bg: "#25D366", icon: "W" as const },
-    { href: CALL_URL, label: "Call", bg: "#16A34A", icon: <Phone className="h-5 w-5" /> },
+    { href: whatsappUrl, label: "WhatsApp", bg: "#25D366", icon: "W" as const },
+    { href: callUrl, label: "Call", bg: "#16A34A", icon: <Phone className="h-5 w-5" /> },
     { href: "#contact", label: "Site Visit", bg: "#DC2626", icon: <Calendar className="h-5 w-5" /> },
     { href: MAPS_URL, label: "Directions", bg: "#0a0a0a", icon: <Navigation className="h-5 w-5" /> },
   ];
+
   return (
     <div className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 md:flex">
       {btns.map((b) => (
