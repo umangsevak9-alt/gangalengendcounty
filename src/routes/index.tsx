@@ -325,8 +325,8 @@ function FloatingRail() {
           style={{ backgroundColor: b.bg }}
           aria-label={b.label}
         >
-          {typeof b.icon === "string" ? (
-            <span className="font-serif text-lg">W</span>
+          {b.label === "WhatsApp" ? (
+            <WhatsAppIcon className="h-5 w-5" />
           ) : (
             b.icon
           )}
@@ -351,7 +351,7 @@ function MobileActionBar() {
             <span className="mt-0.5 text-[11px] font-medium">Call</span>
           </a>
           <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center rounded-xl bg-[#25D366] py-2 text-white shadow-sm active:scale-[0.98]">
-            <span className="text-sm font-serif leading-none">W</span>
+            <WhatsAppIcon className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">WhatsApp</span>
           </a>
           <a href="#contact" className="flex flex-col items-center justify-center rounded-xl bg-[var(--red-cta)] py-2 text-white shadow-sm active:scale-[0.98]">
