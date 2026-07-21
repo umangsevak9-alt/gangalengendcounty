@@ -160,8 +160,7 @@ function Hero() {
             <a href={CALL_URL}>
               <Button
                 size="lg"
-                variant="outline"
-                className="rounded-full border-white/40 bg-white/5 px-7 text-white hover:bg-white hover:text-navy"
+                className="rounded-full bg-green-600 px-7 text-white hover:bg-green-700 shadow-[0_10px_30px_-10px_rgba(22,163,74,0.6)]"
               >
                 <PhoneCall className="mr-2 h-4 w-4" /> Call Now
               </Button>
@@ -169,8 +168,7 @@ function Hero() {
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
               <Button
                 size="lg"
-                variant="outline"
-                className="rounded-full border-white/40 bg-white/5 px-7 text-white hover:bg-white hover:text-navy"
+                className="rounded-full bg-[#25D366] px-7 text-white hover:bg-[#1faa52] shadow-[0_10px_30px_-10px_rgba(37,211,102,0.6)]"
               >
                 WhatsApp
               </Button>
@@ -236,7 +234,7 @@ function OfferBanner() {
                   </Button>
                 </a>
                 <a href={CALL_URL}>
-                  <Button size="lg" variant="outline" className="rounded-full border-navy text-navy hover:bg-navy hover:text-white">
+                  <Button size="lg" className="rounded-full bg-green-600 px-7 text-white hover:bg-green-700">
                     <Phone className="mr-2 h-4 w-4" /> {site.brand.phone}
                   </Button>
                 </a>
@@ -420,7 +418,7 @@ function ContactForm() {
 function FloatingRail() {
   const btns = [
     { href: WHATSAPP_URL, label: "WhatsApp", bg: "#25D366", icon: "W" as const },
-    { href: CALL_URL, label: "Call", bg: "#C62828", icon: <Phone className="h-5 w-5" /> },
+    { href: CALL_URL, label: "Call", bg: "#16A34A", icon: <Phone className="h-5 w-5" /> },
     { href: "#contact", label: "Site Visit", bg: "#154EA8", icon: <Calendar className="h-5 w-5" /> },
     { href: MAPS_URL, label: "Directions", bg: "#D4AF37", icon: <Navigation className="h-5 w-5" /> },
   ];
