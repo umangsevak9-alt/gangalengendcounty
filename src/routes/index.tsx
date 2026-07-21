@@ -114,13 +114,24 @@ function Hero() {
               <div className="truncate text-xs font-medium sm:text-sm">{site.brand.name}</div>
             </div>
           </div>
-          <a
-            href={CALL_URL}
-            aria-label="Call now"
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur transition hover:scale-105 hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] md:h-11 md:w-11"
-          >
-            <PhoneCall className="h-4 w-4 md:h-5 md:w-5" />
-          </a>
+          <div className="flex shrink-0 items-center gap-2">
+            <a
+              href={CALL_URL}
+              aria-label="Call now"
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur transition hover:scale-105 hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] md:h-11 md:w-11"
+            >
+              <PhoneCall className="h-4 w-4 md:h-5 md:w-5" />
+            </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="WhatsApp"
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/30 bg-[#25D366] text-white backdrop-blur transition hover:scale-105 md:h-11 md:w-11"
+            >
+              <WhatsAppIcon className="h-4 w-4 md:h-5 md:w-5" />
+            </a>
+          </div>
         </div>
       </div>
 
@@ -153,24 +164,6 @@ function Hero() {
                 <Calendar className="mr-2 h-5 w-5" /> Book Free Site Visit
               </Button>
             </a>
-            <div className="grid grid-cols-2 gap-3">
-              <a href={CALL_URL} className="w-full">
-                <Button
-                  size="lg"
-                  className="h-14 w-full rounded-full bg-green-600 text-base font-semibold text-white hover:bg-green-700 shadow-[0_10px_30px_-10px_rgba(22,163,74,0.6)]"
-                >
-                  <PhoneCall className="mr-2 h-5 w-5" /> Call
-                </Button>
-              </a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="w-full">
-                <Button
-                  size="lg"
-                  className="h-14 w-full rounded-full bg-[#25D366] text-base font-semibold text-white hover:bg-[#1faa52] shadow-[0_10px_30px_-10px_rgba(37,211,102,0.6)]"
-                >
-                  <WhatsAppIcon className="mr-2 h-5 w-5" /> WhatsApp
-                </Button>
-              </a>
-            </div>
           </div>
 
           <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-2 text-[10px] uppercase tracking-[0.2em] text-white/70 sm:mt-8 sm:flex sm:flex-wrap sm:gap-x-6 sm:text-xs sm:tracking-[0.24em]">
