@@ -67,19 +67,20 @@ function useBrand() {
     staleTime: 5 * 60 * 1000,
   });
   const brand = {
-    name: data?.brand_name || brand.name,
-    code: data?.brand_code || brand.code,
-    developer: data?.developer || brand.developer,
-    partner: data?.partner || brand.partner,
-    location: data?.location || brand.location,
-    rera: data?.rera || brand.rera,
-    phone: data?.phone || brand.phone,
+    name: data?.brand_name || site.brand.name,
+    code: data?.brand_code || site.brand.code,
+    developer: data?.developer || site.brand.developer,
+    partner: data?.partner || site.brand.partner,
+    location: data?.location || site.brand.location,
+    rera: data?.rera || site.brand.rera,
+    phone: data?.phone || site.brand.phone,
     whatsapp: data?.whatsapp || site.brand.whatsapp,
     email: data?.email || site.brand.email,
     whatsappMessage:
       data?.whatsapp_message ||
       "Hi, I am interested in Nova One at Ganga Legend County. Please share details.",
   };
+
   const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(brand.whatsappMessage)}`;
   const callUrl = `tel:${brand.phone.replace(/\s+/g, "")}`;
   return { brand, whatsappUrl, callUrl };
