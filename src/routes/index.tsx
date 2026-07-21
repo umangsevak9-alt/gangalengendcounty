@@ -358,7 +358,8 @@ function MobileActionBar() {
 }
 
 /* -------------------- POPUPS -------------------- */
-const WELCOME_DELAY_MS = 15000; // show welcome popup after 15 seconds
+const WELCOME_DELAY_MS = 5000; // show welcome popup after 5 seconds
+const EXIT_AFTER_WELCOME_MS = 5000; // show second popup 5 seconds after first closes
 
 function Popups() {
   const [welcome, setWelcome] = useState(false);
@@ -373,6 +374,16 @@ function Popups() {
     }, WELCOME_DELAY_MS);
     return () => clearTimeout(t);
   }, []);
+
+  useEffect(() => {
+    if (!welcome || shownExit || sessionStorage.getItem("novaone_exit")) return;
+    const t = setTimeout(() => {
+      setExit(true);
+      setShownExit(true);
+      sessionStorage.setItem("novaone_exit", "1");
+    }, EXIT_AFTER_WELCOME_MS);
+    return () => clearTimeout(t);
+  }, [welcome, shownExit]);
 
   useEffect(() => {
     const onLeave = (e: MouseEvent) => {
