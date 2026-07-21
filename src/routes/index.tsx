@@ -114,24 +114,13 @@ function Hero() {
               <div className="truncate text-xs font-medium sm:text-sm">{site.brand.name}</div>
             </div>
           </div>
-          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-            <span className="hidden rounded-full border border-white/25 px-3 py-1 text-[11px] uppercase tracking-widest md:inline">
-              {site.brand.rera}
-            </span>
-            <a
-              href={CALL_URL}
-              className="hidden rounded-full border border-gold/60 px-4 py-2 text-sm text-gold hover:bg-gold hover:text-navy transition md:inline-block"
-            >
-              {site.brand.phone}
-            </a>
-            <a
-              href={CALL_URL}
-              aria-label="Call now"
-              className="grid h-10 w-10 place-items-center rounded-full border border-gold/60 text-gold md:hidden"
-            >
-              <PhoneCall className="h-4 w-4" />
-            </a>
-          </div>
+          <a
+            href={CALL_URL}
+            aria-label="Call now"
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur transition hover:scale-105 hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] md:h-11 md:w-11"
+          >
+            <PhoneCall className="h-4 w-4 md:h-5 md:w-5" />
+          </a>
         </div>
       </div>
 
