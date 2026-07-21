@@ -80,7 +80,6 @@ function Landing() {
       <CmsFloorPlans fallbackImage={facadeAsset.url} />
       <CmsSpecifications />
       <CmsLocation />
-      <OfferBanner />
       <ContactForm />
       <CmsFaqs />
       <FloatingRail />
