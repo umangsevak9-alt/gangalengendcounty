@@ -127,7 +127,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="container-luxe relative z-10 flex min-h-[calc(92svh-96px)] flex-col justify-center py-10 text-white">
+      <div className="container-luxe relative z-10 flex min-h-[calc(80svh-96px)] flex-col justify-center py-8 text-white">
         <div className="max-w-3xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/5 px-4 py-1.5 backdrop-blur">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
