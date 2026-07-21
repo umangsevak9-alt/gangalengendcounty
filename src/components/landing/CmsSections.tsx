@@ -267,7 +267,7 @@ export function FloorPlansSection({ fallbackImage }: { fallbackImage: string }) 
   );
 }
 
-/* -------------------- LOCATION -------------------- */
+/* -------------------- LOCATION (landmarks-only, no map) -------------------- */
 export function LocationSection() {
   const fetchFn = useServerFn(getPublicLocation);
   const { data } = useQuery({ queryKey: ["public", "location"], queryFn: () => fetchFn(), staleTime: 60_000 });
@@ -276,45 +276,63 @@ export function LocationSection() {
   const directionsUrl = s?.directions_url || "https://www.google.com/maps/search/?api=1&query=Ganga+Legend+County+Pune";
 
   return (
-    <section id="location" className="bg-white py-20 md:py-28">
-      <div className="container-luxe">
+    <section id="location" className="relative overflow-hidden bg-mist py-20 md:py-28">
+      {/* decorative background */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0B2A5B 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+      <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gold/20 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-navy/10 blur-3xl" />
+
+      <div className="container-luxe relative">
         <SectionHead
           eyebrow="Location"
           title={s?.heading || "Pune's most connected luxury address."}
           subtitle={s?.subtitle || "Everything that matters — 20 minutes or less."}
         />
-        <div className="mt-14 grid gap-8 lg:grid-cols-5">
-          <div className="overflow-hidden rounded-2xl border border-line lg:col-span-3">
-            <iframe title="Nova One location"
-              src={toMapsEmbed(s?.map_embed_url) || "https://www.google.com/maps?q=Kharadi+Pune&output=embed"}
-              loading="lazy" className="h-[420px] w-full" referrerPolicy="no-referrer-when-downgrade" />
+
+        {s?.address && (
+          <div className="mx-auto mt-8 flex max-w-2xl items-center justify-center gap-2 rounded-full border border-line bg-white/80 px-5 py-2.5 text-sm text-ink shadow-sm backdrop-blur">
+            <MapPin className="h-4 w-4 text-gold" />
+            <span className="truncate">{s.address}</span>
           </div>
-          <div className="lg:col-span-2">
-            <div className="rounded-2xl border border-line bg-mist p-6">
-              <h3 className="font-serif text-2xl text-navy">Nearby Landmarks</h3>
-              {s?.address && <p className="mt-1 text-xs text-ink-soft">{s.address}</p>}
-              <div className="mt-6 space-y-4">
-                {landmarks.map((n) => {
-                  const Icon = ICONS[n.icon_key] ?? MapPin;
-                  return (
-                    <div key={n.id} className="flex items-center justify-between border-b border-line/70 pb-3 last:border-0">
-                      <div className="flex items-center gap-3">
-                        <div className="grid h-9 w-9 place-items-center rounded-full bg-navy text-gold"><Icon className="h-4 w-4" /></div>
-                        <span className="text-sm text-ink">{n.label}</span>
-                      </div>
-                      {n.travel_time && <span className="text-sm font-semibold text-navy">{n.travel_time}</span>}
+        )}
+
+        {landmarks.length > 0 ? (
+          <div className="mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {landmarks.map((n) => {
+              const Icon = ICONS[n.icon_key] ?? MapPin;
+              return (
+                <div key={n.id}
+                  className="group relative overflow-hidden rounded-2xl border border-line bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-gold hover:shadow-xl">
+                  <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gold/10 blur-2xl transition-opacity group-hover:opacity-100 opacity-0" />
+                  <div className="flex items-start justify-between">
+                    <div className="grid h-11 w-11 place-items-center rounded-xl bg-navy text-gold shadow-md transition-transform group-hover:scale-110">
+                      <Icon className="h-5 w-5" />
                     </div>
-                  );
-                })}
-                {landmarks.length === 0 && <div className="text-sm text-ink-soft">Landmarks coming soon.</div>}
-              </div>
-              <a href={directionsUrl} target="_blank" rel="noreferrer">
-                <Button className="mt-6 w-full rounded-full bg-gold text-navy hover:bg-gold-soft">
-                  <Navigation className="mr-2 h-4 w-4" /> Get Directions
-                </Button>
-              </a>
-            </div>
+                    {n.travel_time && (
+                      <span className="rounded-full bg-gold/15 px-2.5 py-1 text-xs font-semibold tracking-wide text-navy">
+                        {n.travel_time}
+                      </span>
+                    )}
+                  </div>
+                  <h4 className="mt-4 font-serif text-lg leading-snug text-navy">{n.label}</h4>
+                  <div className="mt-3 h-px w-8 bg-gold transition-all group-hover:w-16" />
+                </div>
+              );
+            })}
           </div>
+        ) : (
+          <div className="mx-auto mt-12 max-w-xl rounded-2xl border border-dashed border-line bg-white p-10 text-center text-ink-soft">
+            Landmarks coming soon.
+          </div>
+        )}
+
+        <div className="mt-12 flex justify-center">
+          <a href={directionsUrl} target="_blank" rel="noreferrer">
+            <Button className="rounded-full bg-navy px-8 py-6 text-white shadow-lg hover:bg-navy/90">
+              <Navigation className="mr-2 h-4 w-4" /> Get Directions
+            </Button>
+          </a>
         </div>
       </div>
     </section>
