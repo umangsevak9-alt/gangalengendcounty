@@ -391,3 +391,49 @@ export const deleteLead = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+/* ---------- Site Settings ---------- */
+const siteSettingsSchema = z.object({
+  id: z.string().uuid().optional(),
+  brand_name: z.string().min(1).max(200),
+  brand_code: z.string().max(100).default(""),
+  developer: z.string().max(200).default(""),
+  partner: z.string().max(200).default(""),
+  location: z.string().max(200).default(""),
+  rera: z.string().max(200).default(""),
+  phone: z.string().max(50).default(""),
+  whatsapp: z.string().max(50).default(""),
+  email: z.string().max(200).default(""),
+  whatsapp_message: z.string().max(500).default(""),
+});
+
+export const getSiteSettingsAdmin = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertEditor(context);
+    const { data, error } = await context.supabase
+      .from("site_settings").select("*").order("updated_at", { ascending: false }).limit(1).maybeSingle();
+    if (error) throw new Error(error.message);
+    return data ?? null;
+  });
+
+export const upsertSiteSettings = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => siteSettingsSchema.parse(d))
+  .handler(async ({ data, context }) => {
+    await assertEditor(context);
+    const row = {
+      brand_name: data.brand_name, brand_code: data.brand_code, developer: data.developer,
+      partner: data.partner, location: data.location, rera: data.rera,
+      phone: data.phone, whatsapp: data.whatsapp, email: data.email,
+      whatsapp_message: data.whatsapp_message,
+    };
+    if (data.id) {
+      const { error } = await context.supabase.from("site_settings").update(row).eq("id", data.id);
+      if (error) throw new Error(error.message);
+      return { id: data.id };
+    }
+    const { data: inserted, error } = await context.supabase.from("site_settings").insert(row).select("id").single();
+    if (error) throw new Error(error.message);
+    return inserted;
+  });
