@@ -92,7 +92,7 @@ function Landing() {
 /* -------------------- HERO -------------------- */
 function Hero() {
   return (
-    <section className="relative isolate min-h-[92svh] w-full overflow-hidden">
+    <section className="relative isolate min-h-[80svh] w-full overflow-hidden">
       <img
         src={heroAsset.url}
         alt="Nova One premium towers in Pune"
