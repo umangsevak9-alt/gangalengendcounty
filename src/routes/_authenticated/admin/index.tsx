@@ -79,7 +79,9 @@ function Dashboard() {
     adminOnly?: boolean;
     live?: boolean;
   }> = [
+    { icon: SettingsIcon, title: "Site Settings", desc: "Website name, call number, WhatsApp, email and more", to: "/admin/site-settings", live: true },
     { icon: Sparkles, title: "Amenities", desc: "Add photos, edit titles, reorder", to: "/admin/amenities", live: true },
+
     { icon: FileText, title: "Specifications", desc: "Group name, detail, and photo", to: "/admin/specifications", live: true },
     { icon: Video, title: "Video Section", desc: "Upload video or paste YouTube/Vimeo URL", to: "/admin/video", live: true },
     { icon: ImageIcon, title: "Gallery", desc: "Upload gallery photos, set aspect and order", to: "/admin/gallery", live: true },
