@@ -116,8 +116,10 @@ function Landing() {
 
 /* -------------------- HERO -------------------- */
 function Hero() {
+  const { brand, whatsappUrl, callUrl } = useBrand();
   return (
     <section className="relative isolate min-h-[92svh] w-full overflow-hidden sm:min-h-[80svh]">
+
       <img
         src={heroAsset.url}
         alt="Nova One premium towers in Pune"
