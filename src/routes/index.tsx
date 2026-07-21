@@ -144,42 +144,33 @@ function Hero() {
             modern homes — made for Indian families who want the best.
           </p>
 
-          <div className="mt-7 grid grid-cols-1 gap-3 sm:mt-8 sm:flex sm:flex-wrap sm:items-center">
-            <a href="#contact" className="w-full sm:w-auto">
+          <div className="mt-7 grid grid-cols-1 gap-3 sm:mt-8">
+            <a href="#contact" className="w-full">
               <Button
                 size="lg"
-                className="w-full rounded-full bg-[var(--red-cta)] px-7 text-white hover:bg-[#b91c1c] shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)] sm:w-auto"
+                className="h-14 w-full rounded-full bg-[var(--red-cta)] text-base font-semibold text-white hover:bg-[#b91c1c] shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)]"
               >
-                Book Free Site Visit
+                <Calendar className="mr-2 h-5 w-5" /> Book Free Site Visit
               </Button>
             </a>
-            <div className="grid grid-cols-2 gap-3 sm:contents">
-              <a href={CALL_URL}>
+            <div className="grid grid-cols-2 gap-3">
+              <a href={CALL_URL} className="w-full">
                 <Button
                   size="lg"
-                  className="w-full rounded-full bg-green-600 px-5 text-white hover:bg-green-700 shadow-[0_10px_30px_-10px_rgba(22,163,74,0.6)] sm:w-auto sm:px-7"
+                  className="h-14 w-full rounded-full bg-green-600 text-base font-semibold text-white hover:bg-green-700 shadow-[0_10px_30px_-10px_rgba(22,163,74,0.6)]"
                 >
-                  <PhoneCall className="mr-2 h-4 w-4" /> Call
+                  <PhoneCall className="mr-2 h-5 w-5" /> Call
                 </Button>
               </a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="w-full">
                 <Button
                   size="lg"
-                  className="w-full rounded-full bg-[#25D366] px-5 text-white hover:bg-[#1faa52] shadow-[0_10px_30px_-10px_rgba(37,211,102,0.6)] sm:w-auto sm:px-7"
+                  className="h-14 w-full rounded-full bg-[#25D366] text-base font-semibold text-white hover:bg-[#1faa52] shadow-[0_10px_30px_-10px_rgba(37,211,102,0.6)]"
                 >
-                  WhatsApp
+                  <WhatsAppIcon className="mr-2 h-5 w-5" /> WhatsApp
                 </Button>
               </a>
             </div>
-            <a href="#gallery" className="hidden sm:inline-block">
-              <Button
-                size="lg"
-                variant="ghost"
-                className="rounded-full px-6 text-gold hover:bg-gold/10 hover:text-gold"
-              >
-                <Play className="mr-2 h-4 w-4" /> See Photos
-              </Button>
-            </a>
           </div>
 
           <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-2 text-[10px] uppercase tracking-[0.2em] text-white/70 sm:mt-8 sm:flex sm:flex-wrap sm:gap-x-6 sm:text-xs sm:tracking-[0.24em]">
