@@ -60,7 +60,7 @@ export function AmenitiesSection() {
   const items = data?.items ?? [];
 
   return (
-    <section id="amenities" className="bg-[var(--mist)] py-20 md:py-28">
+    <section id="amenities" className="bg-[var(--mist)] py-14 md:py-20">
       <div className="container-luxe">
         <SectionHead eyebrow="The Ileseum Club" title="Amenities of a private members' resort." subtitle={site.amenities.intro} />
         {items.length === 0 ? (
@@ -96,7 +96,7 @@ export function SpecificationsSection() {
   const items = data?.items ?? [];
 
   return (
-    <section id="specifications" className="bg-white py-20 md:py-28">
+    <section id="specifications" className="bg-white py-14 md:py-20">
       <div className="container-luxe">
         <SectionHead
           eyebrow="Craftsmanship"
@@ -149,7 +149,7 @@ export function VideoSection() {
   if (!data) return null;
 
   return (
-    <section id="video" className="bg-[#0B2A5B] py-20 md:py-28 text-white">
+    <section id="video" className="bg-[#0B2A5B] py-14 md:py-20 text-white">
       <div className="container-luxe">
         <SectionHead eyebrow="Film" title={data.title} subtitle={data.subtitle ?? undefined} dark />
         <div className="mt-12 mx-auto max-w-5xl overflow-hidden rounded-2xl bg-black shadow-2xl ring-1 ring-white/10">
@@ -185,7 +185,7 @@ export function GallerySection({ fallback }: { fallback: Array<{ src: string; al
   const next = () => setActive((i) => (i === null ? null : (i + 1) % images.length));
 
   return (
-    <section id="gallery" className="bg-white py-20 md:py-28">
+    <section id="gallery" className="bg-white py-14 md:py-20">
       <div className="container-luxe">
         <SectionHead eyebrow="Gallery" title="A visual walk-through of Nova One."
           subtitle="Renderings, façades and sky gardens — the details that define the address." />
@@ -221,7 +221,7 @@ export function FloorPlansSection({ fallbackImage }: { fallbackImage: string }) 
   const plans = data?.items ?? [];
 
   return (
-    <section id="floor-plans" className="bg-[var(--mist)] py-20 md:py-28">
+    <section id="floor-plans" className="bg-[var(--mist)] py-14 md:py-20">
       <div className="container-luxe">
         <SectionHead eyebrow="Floor Plans" title="Designed for the way you actually live."
           subtitle="Curated configurations — each intelligently spaced, cross-ventilated and sun-oriented." />
@@ -276,7 +276,7 @@ export function LocationSection() {
   const directionsUrl = s?.directions_url || "https://www.google.com/maps/search/?api=1&query=Ganga+Legend+County+Pune";
 
   return (
-    <section id="location" className="relative overflow-hidden bg-mist py-20 md:py-28">
+    <section id="location" className="relative overflow-hidden bg-mist py-14 md:py-20">
       {/* decorative background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.05]"
         style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0B2A5B 1px, transparent 0)", backgroundSize: "28px 28px" }} />
@@ -347,7 +347,7 @@ export function FaqsSection() {
   if (items.length === 0) return null;
 
   return (
-    <section id="faq" className="bg-[var(--mist)] py-20 md:py-28">
+    <section id="faq" className="bg-[var(--mist)] py-14 md:py-20">
       <div className="container-luxe">
         <SectionHead eyebrow="Questions" title="Everything you're wondering, answered." />
         <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-line bg-white p-4 md:p-6">
