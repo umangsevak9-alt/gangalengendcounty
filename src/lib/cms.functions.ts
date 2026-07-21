@@ -183,3 +183,14 @@ export const submitLead = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+export const getPublicSiteSettings = createServerFn({ method: "GET" }).handler(async () => {
+  const supabase = serverPublicClient();
+  const { data } = await supabase
+    .from("site_settings")
+    .select("brand_name, brand_code, developer, partner, location, rera, phone, whatsapp, email, whatsapp_message")
+    .order("updated_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  return data ?? null;
+});
