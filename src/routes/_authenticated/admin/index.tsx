@@ -75,7 +75,7 @@ function Dashboard() {
     icon: typeof FileText;
     title: string;
     desc: string;
-    to?: "/admin/amenities" | "/admin/specifications" | "/admin/video" | "/admin/users" | "/admin/gallery" | "/admin/floor-plans" | "/admin/location" | "/admin/faqs" | "/admin/leads";
+    to?: "/admin/amenities" | "/admin/specifications" | "/admin/video" | "/admin/users" | "/admin/gallery" | "/admin/floor-plans" | "/admin/location" | "/admin/faqs" | "/admin/leads" | "/admin/site-settings";
     adminOnly?: boolean;
     live?: boolean;
   }> = [
