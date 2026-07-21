@@ -210,7 +210,9 @@ function Hero() {
 
 /* -------------------- CONTACT FORM -------------------- */
 function ContactForm() {
+  const { brand } = useBrand();
   const [busy, setBusy] = useState(false);
+
   const [showThanks, setShowThanks] = useState(false);
   const [form, setForm] = useState({
     name: "", phone: "", email: "", property: "3 BHK", message: "",
