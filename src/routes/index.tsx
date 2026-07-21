@@ -80,7 +80,6 @@ function Landing() {
       <CmsFloorPlans fallbackImage={facadeAsset.url} />
       <CmsSpecifications />
       <CmsLocation />
-      <OfferBanner />
       <ContactForm />
       <CmsFaqs />
       <FloatingRail />
@@ -93,7 +92,7 @@ function Landing() {
 /* -------------------- HERO -------------------- */
 function Hero() {
   return (
-    <section className="relative isolate min-h-[92svh] w-full overflow-hidden">
+    <section className="relative isolate min-h-[80svh] w-full overflow-hidden">
       <img
         src={heroAsset.url}
         alt="Nova One premium towers in Pune"
@@ -128,7 +127,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="container-luxe relative z-10 flex min-h-[calc(92svh-96px)] flex-col justify-center py-10 text-white">
+      <div className="container-luxe relative z-10 flex min-h-[calc(80svh-96px)] flex-col justify-center py-8 text-white">
         <div className="max-w-3xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/5 px-4 py-1.5 backdrop-blur">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
@@ -184,20 +183,11 @@ function Hero() {
             </a>
           </div>
 
-          <div className="mt-12 grid max-w-2xl grid-cols-2 gap-6 border-t border-white/15 pt-8 sm:grid-cols-4">
-            {[
-              { n: "25+", l: "Acres" },
-              { n: "1,200", l: "Families" },
-              { n: "40+", l: "Amenities" },
-              { n: "RERA", l: "Approved" },
-            ].map((s) => (
-              <div key={s.l}>
-                <div className="font-serif text-3xl text-gold md:text-4xl">{s.n}</div>
-                <div className="mt-1 text-[11px] uppercase tracking-[0.24em] text-white/70">
-                  {s.l}
-                </div>
-              </div>
-            ))}
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs uppercase tracking-[0.24em] text-white/70">
+            <span><span className="text-gold font-serif text-base normal-case tracking-normal">25+</span> Acres</span>
+            <span><span className="text-gold font-serif text-base normal-case tracking-normal">1,200</span> Families</span>
+            <span><span className="text-gold font-serif text-base normal-case tracking-normal">40+</span> Amenities</span>
+            <span className="text-gold">RERA Approved</span>
           </div>
         </div>
       </div>
@@ -205,97 +195,8 @@ function Hero() {
   );
 }
 
-/* -------------------- OFFER BANNER -------------------- */
-function OfferBanner() {
-  return (
-    <section className="bg-[var(--mist)] py-16 md:py-20">
-      <div className="container-luxe">
-        <div className="relative overflow-hidden rounded-3xl bg-white p-8 shadow-[0_20px_60px_-30px_rgba(11,42,91,0.35)] md:p-12">
-          <div className="absolute inset-0 bg-[radial-gradient(50%_60%_at_100%_0%,rgba(212,175,55,0.12),transparent_60%)]" />
-          <div className="relative grid gap-8 md:grid-cols-[1.5fr_1fr] md:items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-[var(--red-cta)]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-[var(--red-cta)]">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--red-cta)]" />
-                Limited Pre-Launch Offer
-              </span>
-              <h2 className="mt-4 font-serif text-3xl leading-tight text-navy md:text-5xl">
-                Save <span className="text-gold">₹5+ Lakhs</span> and get
-                free covered parking.
-              </h2>
-              <div className="my-6 h-px w-16 bg-gold" />
-              <p className="max-w-xl text-ink-soft">
-                Only for the first 100 bookings. Get best price, first choice
-                of unit, and Ileseum Club founding membership.
-              </p>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <a href="#contact">
-                  <Button size="lg" className="rounded-full bg-[var(--red-cta)] px-8 text-white hover:bg-[#a91f1f]">
-                    Book Site Visit
-                  </Button>
-                </a>
-                <a href={CALL_URL}>
-                  <Button size="lg" className="rounded-full bg-green-600 px-7 text-white hover:bg-green-700">
-                    <Phone className="mr-2 h-4 w-4" /> {site.brand.phone}
-                  </Button>
-                </a>
-              </div>
-            </div>
-            <div className="rounded-2xl bg-navy p-8 text-white">
-              <div className="eyebrow text-gold">Offer ends in</div>
-              <Countdown />
-              <div className="mt-6 space-y-3 text-sm">
-                {[
-                  "Save ₹5+ Lakhs on launch price",
-                  "Free covered car parking",
-                  "Easy 20:40:40 payment plan",
-                  "Ileseum Club founding membership",
-                ].map((b) => (
-                  <div key={b} className="flex items-center gap-3">
-                    <span className="grid h-5 w-5 place-items-center rounded-full bg-gold text-navy">
-                      <Star className="h-3 w-3 fill-current" />
-                    </span>
-                    <span className="text-white/90">{b}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
-function Countdown() {
-  const [t, setT] = useState({ d: 12, h: 8, m: 42, s: 30 });
-  useEffect(() => {
-    const id = setInterval(() => {
-      setT((p) => {
-        let s = p.s - 1;
-        let m = p.m;
-        let h = p.h;
-        let d = p.d;
-        if (s < 0) { s = 59; m--; }
-        if (m < 0) { m = 59; h--; }
-        if (h < 0) { h = 23; d--; }
-        if (d < 0) return p;
-        return { d, h, m, s };
-      });
-    }, 1000);
-    return () => clearInterval(id);
-  }, []);
-  const cell = (n: number, l: string) => (
-    <div className="flex-1 rounded-lg bg-white/10 p-3 text-center">
-      <div className="font-serif text-2xl text-gold">{String(n).padStart(2, "0")}</div>
-      <div className="text-[10px] uppercase tracking-widest text-white/70">{l}</div>
-    </div>
-  );
-  return (
-    <div className="mt-3 flex gap-2">
-      {cell(t.d, "Days")}{cell(t.h, "Hrs")}{cell(t.m, "Min")}{cell(t.s, "Sec")}
-    </div>
-  );
-}
+
 
 /* -------------------- CONTACT FORM -------------------- */
 function ContactForm() {
@@ -326,7 +227,7 @@ function ContactForm() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-[var(--mist)] py-16 md:py-24">
+    <section id="contact" className="relative overflow-hidden bg-[var(--mist)] py-12 md:py-16">
       <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_100%,rgba(11,42,91,0.06),transparent_60%)]" />
       <div className="container-luxe relative">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
