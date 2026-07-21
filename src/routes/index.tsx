@@ -271,7 +271,7 @@ function ContactForm() {
 
           <form
             onSubmit={submit}
-            className="glass-card relative rounded-3xl p-8 shadow-[0_30px_80px_-40px_rgba(11,42,91,0.4)] md:p-10"
+            className="glass-card relative rounded-3xl p-6 shadow-[0_30px_80px_-40px_rgba(11,42,91,0.4)] sm:p-8 md:p-10"
           >
             <div className="absolute -top-4 left-8 rounded-full bg-[var(--red-cta)] px-4 py-1 text-[10px] font-semibold uppercase tracking-widest text-white">
               Priority Reply
