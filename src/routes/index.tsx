@@ -359,6 +359,31 @@ function FloatingRail() {
   );
 }
 
+/* -------------------- MOBILE STICKY ACTION BAR -------------------- */
+function MobileActionBar() {
+  return (
+    <>
+      <div className="h-16 md:hidden" aria-hidden />
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 backdrop-blur md:hidden">
+        <div className="grid grid-cols-3 gap-2 px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+          <a href={CALL_URL} className="flex flex-col items-center justify-center rounded-xl bg-green-600 py-2 text-white shadow-sm active:scale-[0.98]">
+            <PhoneCall className="h-4 w-4" />
+            <span className="mt-0.5 text-[11px] font-medium">Call</span>
+          </a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center rounded-xl bg-[#25D366] py-2 text-white shadow-sm active:scale-[0.98]">
+            <span className="text-sm font-serif leading-none">W</span>
+            <span className="mt-0.5 text-[11px] font-medium">WhatsApp</span>
+          </a>
+          <a href="#contact" className="flex flex-col items-center justify-center rounded-xl bg-[var(--red-cta)] py-2 text-white shadow-sm active:scale-[0.98]">
+            <Calendar className="h-4 w-4" />
+            <span className="mt-0.5 text-[11px] font-medium">Visit</span>
+          </a>
+        </div>
+      </div>
+    </>
+  );
+}
+
 /* -------------------- POPUPS -------------------- */
 const WELCOME_DELAY_MS = 15000; // show welcome popup after 15 seconds
 
