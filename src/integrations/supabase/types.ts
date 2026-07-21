@@ -263,6 +263,54 @@ export type Database = {
         }
         Relationships: []
       }
+      site_settings: {
+        Row: {
+          brand_code: string
+          brand_name: string
+          created_at: string
+          developer: string
+          email: string
+          id: string
+          location: string
+          partner: string
+          phone: string
+          rera: string
+          updated_at: string
+          whatsapp: string
+          whatsapp_message: string
+        }
+        Insert: {
+          brand_code?: string
+          brand_name?: string
+          created_at?: string
+          developer?: string
+          email?: string
+          id?: string
+          location?: string
+          partner?: string
+          phone?: string
+          rera?: string
+          updated_at?: string
+          whatsapp?: string
+          whatsapp_message?: string
+        }
+        Update: {
+          brand_code?: string
+          brand_name?: string
+          created_at?: string
+          developer?: string
+          email?: string
+          id?: string
+          location?: string
+          partner?: string
+          phone?: string
+          rera?: string
+          updated_at?: string
+          whatsapp?: string
+          whatsapp_message?: string
+        }
+        Relationships: []
+      }
       specifications: {
         Row: {
           created_at: string
