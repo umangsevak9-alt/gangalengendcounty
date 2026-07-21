@@ -365,7 +365,9 @@ function FloatingRail() {
 
 /* -------------------- MOBILE STICKY ACTION BAR -------------------- */
 function MobileActionBar() {
+  const { whatsappUrl, callUrl } = useBrand();
   return (
+
     <>
       <div className="h-16 md:hidden" aria-hidden />
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 backdrop-blur md:hidden">
