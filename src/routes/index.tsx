@@ -128,7 +128,6 @@ function Hero() {
         loading="eager"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-black/95" />
-      <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_20%,rgba(220,38,38,0.18),transparent_70%)]" />
 
       <div className="relative z-10">
         <div className="container-luxe flex items-center justify-between py-4 text-white sm:py-6">
