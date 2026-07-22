@@ -33,6 +33,8 @@ import {
   LocationSection as CmsLocation,
   FaqsSection as CmsFaqs,
 } from "@/components/landing/CmsSections";
+import { TestimonialsSection } from "@/components/landing/Testimonials";
+
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { submitLead, getPublicSiteSettings } from "@/lib/cms.functions";
@@ -135,7 +137,9 @@ function Landing() {
       <CmsFloorPlans fallbackImage={facadeAsset.url} />
       <CmsSpecifications />
       <CmsLocation />
+      <TestimonialsSection />
       <ContactForm />
+
       <CmsFaqs />
       <FloatingRail onBook={openBooking} />
       <MobileActionBar onBook={openBooking} />
@@ -161,25 +165,26 @@ function Hero({ onBook }: { onBook: () => void }) {
       <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-black/95" />
 
       <div className="relative z-10">
-        <div className="container-luxe flex items-center justify-between py-4 text-white sm:py-6">
-          <div className="flex min-w-0 items-center gap-3">
-            <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-gold/70 text-gold font-serif text-base sm:h-10 sm:w-10 sm:text-lg">
+        <div className="container-luxe flex items-center justify-between gap-3 py-4 text-white sm:py-6">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+            <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-gold/70 text-gold font-serif text-sm sm:h-10 sm:w-10 sm:text-lg">
               N
             </div>
             <div className="min-w-0 leading-tight">
-              <div className="eyebrow text-gold truncate">{brand.code}</div>
-              <div className="truncate text-xs font-medium sm:text-sm">{brand.name}</div>
+              <div className="eyebrow text-gold truncate text-[9px] sm:text-[11px]">{brand.code}</div>
+              <div className="truncate text-[11px] font-medium sm:text-sm">{brand.name}</div>
             </div>
           </div>
           <a
             href={callUrl}
             aria-label={`Call ${brand.phone}`}
-            className="inline-flex shrink-0 items-center gap-2 rounded-full border border-gold/60 bg-white/10 px-3 py-2 text-xs font-semibold text-white backdrop-blur transition hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] sm:px-4 sm:text-sm"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gold/60 bg-white/10 px-2.5 py-1.5 text-[11px] font-semibold text-white backdrop-blur transition hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] sm:gap-2 sm:px-4 sm:py-2 sm:text-sm"
           >
-            <PhoneCall className="h-4 w-4 text-gold" />
+            <PhoneCall className="h-3.5 w-3.5 text-gold sm:h-4 sm:w-4" />
             <span className="whitespace-nowrap">{brand.phone}</span>
           </a>
         </div>
+
       </div>
 
       <div className="container-luxe relative z-10 flex min-h-[calc(92svh-72px)] flex-col justify-center py-8 text-white sm:min-h-[calc(80svh-96px)]">
@@ -202,15 +207,16 @@ function Hero({ onBook }: { onBook: () => void }) {
             modern homes — made for Indian families who want the best.
           </p>
 
-          <div className="mt-7 grid grid-cols-1 gap-3 sm:mt-8">
+          <div className="mt-7 flex sm:mt-8">
             <Button
               size="lg"
               onClick={onBook}
-              className="h-14 w-full rounded-full bg-[var(--red-cta)] text-base font-semibold text-white hover:bg-[#b91c1c] shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)]"
+              className="h-14 w-full rounded-full bg-[var(--red-cta)] text-base font-semibold text-white hover:bg-[#b91c1c] shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)] sm:h-11 sm:w-auto sm:px-6 sm:text-sm"
             >
-              <Calendar className="mr-2 h-5 w-5" /> Book Free Site Visit
+              <Calendar className="mr-2 h-5 w-5 sm:h-4 sm:w-4" /> Book Free Site Visit
             </Button>
           </div>
+
 
 
           <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-2 text-[10px] uppercase tracking-[0.2em] text-white/70 sm:mt-8 sm:flex sm:flex-wrap sm:gap-x-6 sm:text-xs sm:tracking-[0.24em]">
