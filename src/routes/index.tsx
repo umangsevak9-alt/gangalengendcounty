@@ -116,10 +116,12 @@ function useBrand() {
 
 
 function Landing() {
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const openBooking = () => setBookingOpen(true);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Toaster position="top-center" richColors />
-      <Hero />
+      <Hero onBook={openBooking} />
       <CmsAmenities />
       <CmsVideo />
       <CmsGallery fallback={[
@@ -135,10 +137,11 @@ function Landing() {
       <CmsLocation />
       <ContactForm />
       <CmsFaqs />
-      <FloatingRail />
-      <MobileActionBar />
-      
+      <FloatingRail onBook={openBooking} />
+      <MobileActionBar onBook={openBooking} />
+
       <MiniFooter />
+      {bookingOpen && <BookingModal onClose={() => setBookingOpen(false)} />}
     </div>
   );
 }
