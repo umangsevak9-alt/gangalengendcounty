@@ -137,7 +137,9 @@ function Landing() {
       <CmsFloorPlans fallbackImage={facadeAsset.url} />
       <CmsSpecifications />
       <CmsLocation />
+      <TestimonialsSection />
       <ContactForm />
+
       <CmsFaqs />
       <FloatingRail onBook={openBooking} />
       <MobileActionBar onBook={openBooking} />
