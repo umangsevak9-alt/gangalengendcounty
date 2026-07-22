@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Calendar,
@@ -109,7 +109,7 @@ function Landing() {
       <CmsFaqs />
       <FloatingRail />
       <MobileActionBar />
-      <Popups />
+      
       <MiniFooter />
     </div>
   );
@@ -128,7 +128,6 @@ function Hero() {
         loading="eager"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-black/95" />
-      <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_20%,rgba(220,38,38,0.18),transparent_70%)]" />
 
       <div className="relative z-10">
         <div className="container-luxe flex items-center justify-between py-4 text-white sm:py-6">
@@ -390,61 +389,8 @@ function MobileActionBar() {
   );
 }
 
-/* -------------------- POPUPS -------------------- */
-const WELCOME_DELAY_MS = 5000; // show welcome popup after 5 seconds
-const EXIT_AFTER_WELCOME_MS = 5000; // show second popup 5 seconds after first closes
+/* -------------------- POPUPS (thank-you only) -------------------- */
 
-function Popups() {
-  const [welcome, setWelcome] = useState(false);
-  const [welcomeClosed, setWelcomeClosed] = useState(false);
-  const [exit, setExit] = useState(false);
-  const [shownExit, setShownExit] = useState(false);
-
-  useEffect(() => {
-    if (sessionStorage.getItem("novaone_welcome")) return;
-    const t = setTimeout(() => {
-      setWelcome(true);
-      sessionStorage.setItem("novaone_welcome", "1");
-    }, WELCOME_DELAY_MS);
-    return () => clearTimeout(t);
-  }, []);
-
-  useEffect(() => {
-    if (!welcomeClosed || shownExit || sessionStorage.getItem("novaone_exit")) return;
-    const t = setTimeout(() => {
-      setExit(true);
-      setShownExit(true);
-      sessionStorage.setItem("novaone_exit", "1");
-    }, EXIT_AFTER_WELCOME_MS);
-    return () => clearTimeout(t);
-  }, [welcomeClosed, shownExit]);
-
-  useEffect(() => {
-    const onLeave = (e: MouseEvent) => {
-      if (e.clientY < 10 && !shownExit && !sessionStorage.getItem("novaone_exit")) {
-        setExit(true);
-        setShownExit(true);
-        sessionStorage.setItem("novaone_exit", "1");
-      }
-    };
-    document.addEventListener("mouseout", onLeave);
-    return () => document.removeEventListener("mouseout", onLeave);
-  }, [shownExit]);
-
-  return (
-    <>
-      {welcome && (
-        <WelcomePopup
-          onClose={() => {
-            setWelcome(false);
-            setWelcomeClosed(true);
-          }}
-        />
-      )}
-      {exit && <ExitPopup onClose={() => setExit(false)} />}
-    </>
-  );
-}
 
 function PopupShell({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
   return (
@@ -462,42 +408,6 @@ function PopupShell({ children, onClose }: { children: React.ReactNode; onClose:
   );
 }
 
-function WelcomePopup({ onClose }: { onClose: () => void }) {
-  return (
-    <PopupShell onClose={onClose}>
-      <div className="h-40 w-full bg-cover bg-center" style={{ backgroundImage: `url(${heroAsset.url})` }}>
-        <div className="h-full w-full bg-gradient-to-b from-black/30 to-black/80 p-6 text-white">
-          <span className="eyebrow text-gold">Welcome to Nova One</span>
-        </div>
-      </div>
-      <div className="p-8 text-center">
-        <h3 className="font-serif text-2xl text-navy">Save ₹5+ Lakhs today</h3>
-        <p className="mt-2 text-sm text-ink-soft">Special pre-launch price. Only for first 100 bookings. Hurry!</p>
-        <p className="mt-2 text-[11px] text-ink-soft/80">*Terms and Conditions Apply</p>
-        <a href="#contact"><Button onClick={onClose} className="mt-6 w-full rounded-full bg-[var(--red-cta)] text-white hover:bg-[#b91c1c]">Book Site Visit</Button></a>
-      </div>
-    </PopupShell>
-  );
-}
-
-function ExitPopup({ onClose }: { onClose: () => void }) {
-  const { whatsappUrl } = useBrand();
-  return (
-
-    <PopupShell onClose={onClose}>
-      <div className="bg-navy p-8 text-center text-white">
-        <span className="eyebrow text-gold">Wait — one minute</span>
-        <h3 className="mt-3 font-serif text-2xl">Take our brochure with you.</h3>
-        <p className="mt-2 text-sm text-white/70">Get full price list, floor plans and photos on WhatsApp in 30 seconds.</p>
-        <a href={whatsappUrl} target="_blank" rel="noreferrer">
-          <Button onClick={onClose} className="mt-6 w-full rounded-full bg-gold text-white hover:bg-[#b91c1c]">
-            Get Brochure on WhatsApp
-          </Button>
-        </a>
-      </div>
-    </PopupShell>
-  );
-}
 
 function ThanksPopup({ onClose }: { onClose: () => void }) {
   return (

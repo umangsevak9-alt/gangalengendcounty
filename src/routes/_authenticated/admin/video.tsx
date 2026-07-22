@@ -34,8 +34,17 @@ type VideoRow = {
   video_url: string | null;
   video_path: string | null;
   poster_path: string | null;
+  aspect_ratio: "16/9" | "4/3" | "1/1" | "9/16" | "21/9";
   is_active: boolean;
 };
+
+const ASPECT_OPTIONS: Array<{ value: VideoRow["aspect_ratio"]; label: string }> = [
+  { value: "16/9", label: "16 : 9 · Widescreen (landscape)" },
+  { value: "21/9", label: "21 : 9 · Cinematic ultra-wide" },
+  { value: "4/3", label: "4 : 3 · Classic" },
+  { value: "1/1", label: "1 : 1 · Square" },
+  { value: "9/16", label: "9 : 16 · Vertical (Reels/Shorts)" },
+];
 
 function Page() {
   const load = useServerFn(getVideoSectionAdmin);
@@ -49,6 +58,7 @@ function Page() {
     video_url: "",
     video_path: null,
     poster_path: null,
+    aspect_ratio: "16/9",
     is_active: true,
   });
 
@@ -62,6 +72,7 @@ function Page() {
         video_url: initial.video_url,
         video_path: initial.video_path,
         poster_path: initial.poster_path,
+        aspect_ratio: ((initial as { aspect_ratio?: string }).aspect_ratio as VideoRow["aspect_ratio"]) ?? "16/9",
         is_active: initial.is_active,
       });
     }
@@ -77,6 +88,7 @@ function Page() {
         video_url: row.video_url,
         video_path: row.video_path,
         poster_path: row.poster_path,
+        aspect_ratio: row.aspect_ratio,
         is_active: row.is_active,
       },
     }),
@@ -118,6 +130,20 @@ function Page() {
               <SelectItem value="upload">Upload MP4 file</SelectItem>
             </SelectContent>
           </Select>
+        </div>
+        <div>
+          <Label>Aspect ratio</Label>
+          <Select value={row.aspect_ratio} onValueChange={(v) => setRow({ ...row, aspect_ratio: v as VideoRow["aspect_ratio"] })}>
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {ASPECT_OPTIONS.map((o) => (
+                <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <p className="text-xs text-[#737373] mt-1">
+            Pick the shape that matches your uploaded video so it displays without black bars.
+          </p>
         </div>
         {row.provider === "upload" ? (
           <div>

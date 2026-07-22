@@ -364,6 +364,7 @@ export type Database = {
       }
       video_section: {
         Row: {
+          aspect_ratio: string
           created_at: string
           id: string
           is_active: boolean
@@ -376,6 +377,7 @@ export type Database = {
           video_url: string | null
         }
         Insert: {
+          aspect_ratio?: string
           created_at?: string
           id?: string
           is_active?: boolean
@@ -388,6 +390,7 @@ export type Database = {
           video_url?: string | null
         }
         Update: {
+          aspect_ratio?: string
           created_at?: string
           id?: string
           is_active?: boolean
