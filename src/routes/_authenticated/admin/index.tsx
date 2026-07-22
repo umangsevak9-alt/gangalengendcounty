@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
   ShieldCheck, PencilLine, LogOut, Home, FileText, Users, Image as ImageIcon,
-  MapPin, HelpCircle, Video, Sparkles, Settings as SettingsIcon,
+  MapPin, HelpCircle, Video, Sparkles, Settings as SettingsIcon, MessageSquareQuote,
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin/")({
@@ -75,7 +75,7 @@ function Dashboard() {
     icon: typeof FileText;
     title: string;
     desc: string;
-    to?: "/admin/amenities" | "/admin/specifications" | "/admin/video" | "/admin/users" | "/admin/gallery" | "/admin/floor-plans" | "/admin/location" | "/admin/faqs" | "/admin/leads" | "/admin/site-settings";
+    to?: "/admin/amenities" | "/admin/specifications" | "/admin/video" | "/admin/users" | "/admin/gallery" | "/admin/floor-plans" | "/admin/location" | "/admin/faqs" | "/admin/leads" | "/admin/site-settings" | "/admin/testimonials";
     adminOnly?: boolean;
     live?: boolean;
   }> = [
@@ -87,6 +87,7 @@ function Dashboard() {
     { icon: ImageIcon, title: "Gallery", desc: "Upload gallery photos, set aspect and order", to: "/admin/gallery", live: true },
     { icon: FileText, title: "Floor Plans", desc: "Configurations, price, area, plan images", to: "/admin/floor-plans", live: true },
     { icon: MapPin, title: "Location", desc: "Map embed, address, landmarks and travel times", to: "/admin/location", live: true },
+    { icon: MessageSquareQuote, title: "Testimonials", desc: "Customer quotes with photo or video upload", to: "/admin/testimonials", live: true },
     { icon: HelpCircle, title: "FAQs", desc: "Questions and answers", to: "/admin/faqs", live: true },
     { icon: Users, title: "Leads", desc: "Contact-form submissions with CSV export", to: "/admin/leads", live: true },
     { icon: ShieldCheck, title: "Users & Roles", desc: "Approve access, grant admin or editor", to: "/admin/users", adminOnly: true, live: true },
