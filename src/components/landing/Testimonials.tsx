@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 
 type Testimonial = {
   name: string;
@@ -46,12 +46,9 @@ export function TestimonialsSection() {
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % count), 5000);
+    const id = setInterval(() => setIndex((i) => (i + 1) % count), 2000);
     return () => clearInterval(id);
   }, [paused, count]);
-
-  const prev = () => setIndex((i) => (i - 1 + count) % count);
-  const next = () => setIndex((i) => (i + 1) % count);
 
   return (
     <section id="testimonials" className="bg-white py-14 md:py-20">
@@ -103,22 +100,6 @@ export function TestimonialsSection() {
             </div>
           </div>
 
-          <button
-            type="button"
-            aria-label="Previous testimonial"
-            onClick={prev}
-            className="absolute left-1 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-white text-navy shadow-lg ring-1 ring-line hover:bg-navy hover:text-white md:-left-5"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            type="button"
-            aria-label="Next testimonial"
-            onClick={next}
-            className="absolute right-1 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-white text-navy shadow-lg ring-1 ring-line hover:bg-navy hover:text-white md:-right-5"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
 
           <div className="mt-6 flex justify-center gap-2">
             {ITEMS.map((_, i) => (
