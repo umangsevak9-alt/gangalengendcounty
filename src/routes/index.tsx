@@ -203,15 +203,16 @@ function Hero({ onBook }: { onBook: () => void }) {
             modern homes — made for Indian families who want the best.
           </p>
 
-          <div className="mt-7 grid grid-cols-1 gap-3 sm:mt-8">
+          <div className="mt-7 flex sm:mt-8">
             <Button
               size="lg"
               onClick={onBook}
-              className="h-14 w-full rounded-full bg-[var(--red-cta)] text-base font-semibold text-white hover:bg-[#b91c1c] shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)]"
+              className="h-14 w-full rounded-full bg-[var(--red-cta)] text-base font-semibold text-white hover:bg-[#b91c1c] shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)] sm:h-11 sm:w-auto sm:px-6 sm:text-sm"
             >
-              <Calendar className="mr-2 h-5 w-5" /> Book Free Site Visit
+              <Calendar className="mr-2 h-5 w-5 sm:h-4 sm:w-4" /> Book Free Site Visit
             </Button>
           </div>
+
 
 
           <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-2 text-[10px] uppercase tracking-[0.2em] text-white/70 sm:mt-8 sm:flex sm:flex-wrap sm:gap-x-6 sm:text-xs sm:tracking-[0.24em]">
