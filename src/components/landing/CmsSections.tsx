@@ -173,22 +173,6 @@ export function SpecificationsSection() {
                 ))}
               </div>
             </div>
-            <button
-              type="button"
-              aria-label="Previous"
-              onClick={() => setIndex((i) => (i - 1 + count) % count)}
-              className="absolute left-2 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-white/95 text-navy shadow-lg ring-1 ring-line hover:bg-navy hover:text-white md:-left-4"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button
-              type="button"
-              aria-label="Next"
-              onClick={() => setIndex((i) => (i + 1) % count)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-white/95 text-navy shadow-lg ring-1 ring-line hover:bg-navy hover:text-white md:-right-4"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
           </div>
 
         )}
