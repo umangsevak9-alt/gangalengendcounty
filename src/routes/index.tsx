@@ -33,6 +33,8 @@ import {
   LocationSection as CmsLocation,
   FaqsSection as CmsFaqs,
 } from "@/components/landing/CmsSections";
+import { TestimonialsSection } from "@/components/landing/Testimonials";
+
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { submitLead, getPublicSiteSettings } from "@/lib/cms.functions";
