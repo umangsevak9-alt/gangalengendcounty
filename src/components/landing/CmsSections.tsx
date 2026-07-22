@@ -99,7 +99,10 @@ export function SpecificationsSection() {
   const [paused, setPaused] = useState(false);
   const [noTransition, setNoTransition] = useState(false);
   const [perView, setPerView] = useState(3);
+  const [startX, setStartX] = useState<number | null>(null);
+  const [dragDx, setDragDx] = useState(0);
   const count = items.length;
+  const dragging = startX !== null;
 
   useEffect(() => {
     const set = () => {
@@ -128,6 +131,17 @@ export function SpecificationsSection() {
     }
   }, [index, count]);
 
+  const onStart = (x: number) => { setStartX(x); setDragDx(0); setPaused(true); };
+  const onMove = (x: number) => { if (startX === null) return; setDragDx(x - startX); };
+  const onEnd = () => {
+    if (startX !== null && count > 0) {
+      const threshold = 50;
+      if (dragDx > threshold) setIndex((i) => (i - 1 + count) % count);
+      else if (dragDx < -threshold) setIndex((i) => (i + 1) % count);
+    }
+    setStartX(null); setDragDx(0); setPaused(false);
+  };
+
   return (
     <section id="specifications" className="bg-white py-14 md:py-20">
       <div className="container-luxe">
@@ -140,18 +154,22 @@ export function SpecificationsSection() {
           <div className="mt-14 text-center text-ink-soft text-sm">Specifications coming soon.</div>
         ) : (
           <div
-            className="relative mt-14"
+            className="relative mt-14 touch-pan-y select-none"
             onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-            onTouchStart={() => setPaused(true)}
-            onTouchEnd={() => setPaused(false)}
+            onMouseLeave={() => { if (dragging) onEnd(); else setPaused(false); }}
+            onMouseDown={(e) => onStart(e.clientX)}
+            onMouseMove={(e) => onMove(e.clientX)}
+            onMouseUp={onEnd}
+            onTouchStart={(e) => onStart(e.touches[0].clientX)}
+            onTouchMove={(e) => onMove(e.touches[0].clientX)}
+            onTouchEnd={onEnd}
           >
             <div className="overflow-hidden">
               <div
                 className="flex gap-6"
                 style={{
-                  transform: `translateX(calc(-${index} * (100% / ${perView})))`,
-                  transition: noTransition ? "none" : "transform 600ms ease",
+                  transform: `translateX(calc(-${index} * (100% / ${perView}) + ${dragDx}px))`,
+                  transition: (noTransition || dragging) ? "none" : "transform 600ms ease",
                 }}
               >
                 {[...items, ...items].map((s, i) => (
@@ -162,7 +180,7 @@ export function SpecificationsSection() {
                   >
                     {s.image_url && (
                       <div className="aspect-[16/10] w-full overflow-hidden bg-[#f0f0f0]">
-                        <img src={s.image_url} alt={s.group_name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <img src={s.image_url} alt={s.group_name} loading="lazy" draggable={false} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                       </div>
                     )}
                     <div className="p-6">
