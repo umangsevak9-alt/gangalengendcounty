@@ -438,3 +438,65 @@ export const upsertSiteSettings = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return inserted;
   });
+
+/* ---------- Testimonials ---------- */
+const testimonialSchema = z.object({
+  id: z.string().uuid().optional(),
+  name: z.string().min(1).max(200),
+  role: z.string().max(200).nullable().optional(),
+  quote: z.string().min(1).max(2000),
+  rating: z.number().int().min(1).max(5).default(5),
+  provider: z.enum(["none", "upload", "youtube", "vimeo"]).default("none"),
+  video_url: z.string().max(1000).nullable().optional(),
+  video_path: z.string().max(500).nullable().optional(),
+  image_path: z.string().max(500).nullable().optional(),
+  sort_order: z.number().int().min(0).max(9999).default(0),
+  is_active: z.boolean().default(true),
+});
+
+export const listTestimonialsAdmin = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertEditor(context);
+    const { data, error } = await context.supabase
+      .from("testimonials").select("*").order("sort_order", { ascending: true });
+    if (error) throw new Error(error.message);
+    return data ?? [];
+  });
+
+export const upsertTestimonial = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => testimonialSchema.parse(d))
+  .handler(async ({ data, context }) => {
+    await assertEditor(context);
+    const row = {
+      name: data.name,
+      role: data.role ?? null,
+      quote: data.quote,
+      rating: data.rating,
+      provider: data.provider,
+      video_url: data.video_url ?? null,
+      video_path: data.video_path ?? null,
+      image_path: data.image_path ?? null,
+      sort_order: data.sort_order,
+      is_active: data.is_active,
+    };
+    if (data.id) {
+      const { error } = await context.supabase.from("testimonials").update(row).eq("id", data.id);
+      if (error) throw new Error(error.message);
+      return { id: data.id };
+    }
+    const { data: inserted, error } = await context.supabase.from("testimonials").insert(row).select("id").single();
+    if (error) throw new Error(error.message);
+    return inserted;
+  });
+
+export const deleteTestimonial = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ data, context }) => {
+    await assertEditor(context);
+    const { error } = await context.supabase.from("testimonials").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
