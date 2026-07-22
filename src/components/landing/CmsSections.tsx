@@ -206,9 +206,9 @@ export function VideoSection() {
         <div className="mt-12 mx-auto max-w-5xl overflow-hidden rounded-2xl bg-black shadow-2xl ring-1 ring-white/10">
           <div className="relative w-full" style={{ aspectRatio: (data.aspect_ratio ?? "16/9").replace("/", " / ") }}>
             {data.provider === "upload" && data.video_signed_url ? (
-              <video src={data.video_signed_url} poster={data.poster_url ?? undefined} controls playsInline className="h-full w-full object-cover" />
+              <video src={data.video_signed_url} poster={data.poster_url ?? undefined} autoPlay muted loop playsInline controls className="h-full w-full object-cover" />
             ) : data.video_url ? (
-              <iframe src={toEmbed(data.video_url, data.provider as "youtube" | "vimeo")} title={data.title}
+              <iframe src={`${toEmbed(data.video_url, data.provider as "youtube" | "vimeo")}${toEmbed(data.video_url, data.provider as "youtube" | "vimeo").includes("?") ? "&" : "?"}autoplay=1&mute=1&muted=1&loop=1&playsinline=1`} title={data.title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
                 className="absolute inset-0 h-full w-full" />
             ) : (
