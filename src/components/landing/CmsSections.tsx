@@ -95,6 +95,39 @@ export function SpecificationsSection() {
   const { data } = useQuery({ queryKey: ["public", "specifications"], queryFn: () => fetchFn(), staleTime: 60_000 });
   const items = data?.items ?? [];
 
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [noTransition, setNoTransition] = useState(false);
+  const [perView, setPerView] = useState(3);
+  const count = items.length;
+
+  useEffect(() => {
+    const set = () => {
+      const w = window.innerWidth;
+      setPerView(w >= 1024 ? 3 : w >= 768 ? 2 : 1);
+    };
+    set();
+    window.addEventListener("resize", set);
+    return () => window.removeEventListener("resize", set);
+  }, []);
+
+  useEffect(() => {
+    if (count === 0 || paused) return;
+    const id = setInterval(() => setIndex((i) => i + 1), 2000);
+    return () => clearInterval(id);
+  }, [count, paused]);
+
+  useEffect(() => {
+    if (count > 0 && index >= count) {
+      const t = setTimeout(() => {
+        setNoTransition(true);
+        setIndex(0);
+        requestAnimationFrame(() => requestAnimationFrame(() => setNoTransition(false)));
+      }, 600);
+      return () => clearTimeout(t);
+    }
+  }, [index, count]);
+
   return (
     <section id="specifications" className="bg-white py-14 md:py-20">
       <div className="container-luxe">
@@ -106,20 +139,38 @@ export function SpecificationsSection() {
         {items.length === 0 ? (
           <div className="mt-14 text-center text-ink-soft text-sm">Specifications coming soon.</div>
         ) : (
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {items.map((s) => (
-              <div key={s.id} className="hover-lift group overflow-hidden rounded-2xl border border-line bg-white">
-                {s.image_url && (
-                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#f0f0f0]">
-                    <img src={s.image_url} alt={s.group_name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div
+            className="mt-14 overflow-hidden"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onTouchStart={() => setPaused(true)}
+            onTouchEnd={() => setPaused(false)}
+          >
+            <div
+              className="flex gap-6"
+              style={{
+                transform: `translateX(calc(-${index} * (100% / ${perView})))`,
+                transition: noTransition ? "none" : "transform 600ms ease",
+              }}
+            >
+              {[...items, ...items].map((s, i) => (
+                <div
+                  key={`${s.id}-${i}`}
+                  className="hover-lift group overflow-hidden rounded-2xl border border-line bg-white shrink-0"
+                  style={{ flex: `0 0 calc((100% - (${perView - 1} * 1.5rem)) / ${perView})` }}
+                >
+                  {s.image_url && (
+                    <div className="aspect-[16/10] w-full overflow-hidden bg-[#f0f0f0]">
+                      <img src={s.image_url} alt={s.group_name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <div className="eyebrow mb-2">{s.group_name}</div>
+                    <p className="text-sm text-ink leading-relaxed">{s.detail}</p>
                   </div>
-                )}
-                <div className="p-6">
-                  <div className="eyebrow mb-2">{s.group_name}</div>
-                  <p className="text-sm text-ink leading-relaxed">{s.detail}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
       </div>
