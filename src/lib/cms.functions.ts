@@ -195,3 +195,29 @@ export const getPublicSiteSettings = createServerFn({ method: "GET" }).handler(a
     .maybeSingle();
   return data ?? null;
 });
+
+/* -------- Testimonials -------- */
+export const getPublicTestimonials = createServerFn({ method: "GET" }).handler(async () => {
+  const supabase = serverPublicClient();
+  const { data, error } = await supabase
+    .from("testimonials")
+    .select("id, name, role, quote, rating, provider, video_url, video_path, image_path, sort_order")
+    .eq("is_active", true)
+    .order("sort_order", { ascending: true });
+  if (error) return { items: [] as Array<{ id: string; name: string; role: string | null; quote: string; rating: number; provider: string; video_url: string | null; video_signed_url: string | null; image_url: string | null; sort_order: number }> };
+  const items = await Promise.all(
+    (data ?? []).map(async (r) => ({
+      id: r.id,
+      name: r.name,
+      role: r.role,
+      quote: r.quote,
+      rating: r.rating,
+      provider: r.provider as string,
+      video_url: r.video_url,
+      video_signed_url: await signPath(supabase, r.video_path),
+      image_url: await signPath(supabase, r.image_path),
+      sort_order: r.sort_order,
+    })),
+  );
+  return { items };
+});
