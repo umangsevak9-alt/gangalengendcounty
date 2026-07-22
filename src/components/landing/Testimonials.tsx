@@ -46,12 +46,9 @@ export function TestimonialsSection() {
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % count), 5000);
+    const id = setInterval(() => setIndex((i) => (i + 1) % count), 2000);
     return () => clearInterval(id);
   }, [paused, count]);
-
-  const prev = () => setIndex((i) => (i - 1 + count) % count);
-  const next = () => setIndex((i) => (i + 1) % count);
 
   return (
     <section id="testimonials" className="bg-white py-14 md:py-20">
