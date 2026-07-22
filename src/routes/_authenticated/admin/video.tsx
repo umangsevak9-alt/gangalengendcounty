@@ -130,6 +130,19 @@ function Page() {
               <SelectItem value="upload">Upload MP4 file</SelectItem>
             </SelectContent>
           </Select>
+        <div>
+          <Label>Aspect ratio</Label>
+          <Select value={row.aspect_ratio} onValueChange={(v) => setRow({ ...row, aspect_ratio: v as VideoRow["aspect_ratio"] })}>
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {ASPECT_OPTIONS.map((o) => (
+                <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <p className="text-xs text-[#737373] mt-1">
+            Pick the shape that matches your uploaded video so it displays without black bars.
+          </p>
         </div>
         {row.provider === "upload" ? (
           <div>
