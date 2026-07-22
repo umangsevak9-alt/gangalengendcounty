@@ -153,7 +153,7 @@ export function VideoSection() {
       <div className="container-luxe">
         <SectionHead eyebrow="Film" title={data.title} subtitle={data.subtitle ?? undefined} dark />
         <div className="mt-12 mx-auto max-w-5xl overflow-hidden rounded-2xl bg-black shadow-2xl ring-1 ring-white/10">
-          <div className="relative aspect-video w-full">
+          <div className="relative w-full" style={{ aspectRatio: (data.aspect_ratio ?? "16/9").replace("/", " / ") }}>
             {data.provider === "upload" && data.video_signed_url ? (
               <video src={data.video_signed_url} poster={data.poster_url ?? undefined} controls playsInline className="h-full w-full object-cover" />
             ) : data.video_url ? (
