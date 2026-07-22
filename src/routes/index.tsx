@@ -109,7 +109,7 @@ function Landing() {
       <CmsFaqs />
       <FloatingRail />
       <MobileActionBar />
-      <Popups />
+      
       <MiniFooter />
     </div>
   );
