@@ -161,25 +161,26 @@ function Hero({ onBook }: { onBook: () => void }) {
       <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-black/95" />
 
       <div className="relative z-10">
-        <div className="container-luxe flex items-center justify-between py-4 text-white sm:py-6">
-          <div className="flex min-w-0 items-center gap-3">
-            <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-gold/70 text-gold font-serif text-base sm:h-10 sm:w-10 sm:text-lg">
+        <div className="container-luxe flex items-center justify-between gap-3 py-4 text-white sm:py-6">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+            <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-gold/70 text-gold font-serif text-sm sm:h-10 sm:w-10 sm:text-lg">
               N
             </div>
             <div className="min-w-0 leading-tight">
-              <div className="eyebrow text-gold truncate">{brand.code}</div>
-              <div className="truncate text-xs font-medium sm:text-sm">{brand.name}</div>
+              <div className="eyebrow text-gold truncate text-[9px] sm:text-[11px]">{brand.code}</div>
+              <div className="truncate text-[11px] font-medium sm:text-sm">{brand.name}</div>
             </div>
           </div>
           <a
             href={callUrl}
             aria-label={`Call ${brand.phone}`}
-            className="inline-flex shrink-0 items-center gap-2 rounded-full border border-gold/60 bg-white/10 px-3 py-2 text-xs font-semibold text-white backdrop-blur transition hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] sm:px-4 sm:text-sm"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gold/60 bg-white/10 px-2.5 py-1.5 text-[11px] font-semibold text-white backdrop-blur transition hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] sm:gap-2 sm:px-4 sm:py-2 sm:text-sm"
           >
-            <PhoneCall className="h-4 w-4 text-gold" />
+            <PhoneCall className="h-3.5 w-3.5 text-gold sm:h-4 sm:w-4" />
             <span className="whitespace-nowrap">{brand.phone}</span>
           </a>
         </div>
+
       </div>
 
       <div className="container-luxe relative z-10 flex min-h-[calc(92svh-72px)] flex-col justify-center py-8 text-white sm:min-h-[calc(80svh-96px)]">
