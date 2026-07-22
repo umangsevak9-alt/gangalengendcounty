@@ -348,43 +348,53 @@ function ContactForm() {
 }
 
 /* -------------------- FLOATING RAIL -------------------- */
-function FloatingRail() {
+function FloatingRail({ onBook }: { onBook: () => void }) {
   const { whatsappUrl, callUrl } = useBrand();
-  const btns = [
-    { href: whatsappUrl, label: "WhatsApp", bg: "#25D366", icon: "W" as const },
+  const btns: Array<{ label: string; bg: string; icon: React.ReactNode; href?: string; onClick?: () => void; external?: boolean }> = [
+    { href: whatsappUrl, label: "WhatsApp", bg: "#25D366", icon: <WhatsAppIcon className="h-5 w-5" />, external: true },
     { href: callUrl, label: "Call", bg: "#16A34A", icon: <Phone className="h-5 w-5" /> },
-    { href: "#contact", label: "Site Visit", bg: "#DC2626", icon: <Calendar className="h-5 w-5" /> },
-    { href: MAPS_URL, label: "Directions", bg: "#0a0a0a", icon: <Navigation className="h-5 w-5" /> },
+    { onClick: onBook, label: "Site Visit", bg: "#DC2626", icon: <Calendar className="h-5 w-5" /> },
+    { href: MAPS_URL, label: "Directions", bg: "#0a0a0a", icon: <Navigation className="h-5 w-5" />, external: true },
   ];
 
   return (
     <div className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 md:flex">
-      {btns.map((b) => (
-        <a
-          key={b.label}
-          href={b.href}
-          target={b.href.startsWith("http") ? "_blank" : undefined}
-          rel="noreferrer"
-          className="group relative grid h-12 w-12 place-items-center rounded-full text-white shadow-lg transition hover:scale-110"
-          style={{ backgroundColor: b.bg }}
-          aria-label={b.label}
-        >
-          {b.label === "WhatsApp" ? (
-            <WhatsAppIcon className="h-5 w-5" />
-          ) : (
-            b.icon
-          )}
+      {btns.map((b) => {
+        const cls = "group relative grid h-12 w-12 place-items-center rounded-full text-white shadow-lg transition hover:scale-110";
+        const tip = (
           <span className="pointer-events-none absolute right-14 whitespace-nowrap rounded-md bg-navy px-3 py-1 text-xs text-white opacity-0 transition group-hover:opacity-100">
             {b.label}
           </span>
-        </a>
-      ))}
+        );
+        if (b.onClick) {
+          return (
+            <button key={b.label} type="button" onClick={b.onClick} className={cls} style={{ backgroundColor: b.bg }} aria-label={b.label}>
+              {b.icon}
+              {tip}
+            </button>
+          );
+        }
+        return (
+          <a
+            key={b.label}
+            href={b.href}
+            target={b.external ? "_blank" : undefined}
+            rel="noreferrer"
+            className={cls}
+            style={{ backgroundColor: b.bg }}
+            aria-label={b.label}
+          >
+            {b.icon}
+            {tip}
+          </a>
+        );
+      })}
     </div>
   );
 }
 
 /* -------------------- MOBILE STICKY ACTION BAR -------------------- */
-function MobileActionBar() {
+function MobileActionBar({ onBook }: { onBook: () => void }) {
   const { whatsappUrl, callUrl } = useBrand();
   return (
 
@@ -396,10 +406,10 @@ function MobileActionBar() {
             <PhoneCall className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">Call</span>
           </a>
-          <a href="#contact" className="flex flex-col items-center justify-center rounded-xl bg-[var(--red-cta)] py-2 text-white shadow-sm active:scale-[0.98]">
+          <button type="button" onClick={onBook} className="flex flex-col items-center justify-center rounded-xl bg-[var(--red-cta)] py-2 text-white shadow-sm active:scale-[0.98]">
             <Calendar className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">Visit</span>
-          </a>
+          </button>
           <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center rounded-xl bg-[#25D366] py-2 text-white shadow-sm active:scale-[0.98]">
             <WhatsAppIcon className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">WhatsApp</span>
@@ -408,6 +418,83 @@ function MobileActionBar() {
 
       </div>
     </>
+  );
+}
+
+/* -------------------- BOOKING MODAL -------------------- */
+function BookingModal({ onClose }: { onClose: () => void }) {
+  const [busy, setBusy] = useState(false);
+  const [showThanks, setShowThanks] = useState(false);
+  const [form, setForm] = useState({
+    name: "", phone: "", email: "", property: "3 BHK", message: "",
+  });
+  const send = useServerFn(submitLead);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name || !form.phone) return toast.error("Please enter your name and phone number.");
+    if (!/^\+?\d[\d\s-]{7,}$/.test(form.phone)) return toast.error("Please enter a valid phone number.");
+    setBusy(true);
+    try {
+      await send({ data: {
+        name: form.name, phone: form.phone, email: form.email,
+        property_interest: form.property, message: form.message, source: "booking_modal",
+      } });
+      setShowThanks(true);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not submit. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  if (showThanks) {
+    return <ThanksPopup onClose={onClose} />;
+  }
+
+  return (
+    <PopupShell onClose={onClose}>
+      <div className="p-6 sm:p-8">
+        <div className="mb-4">
+          <span className="eyebrow">Book Free Visit</span>
+          <h3 className="mt-2 font-serif text-2xl text-navy">Reserve your site visit</h3>
+          <p className="mt-1 text-xs text-ink-soft">Our team will call you within 30 minutes.</p>
+        </div>
+        <form onSubmit={submit} className="space-y-3">
+          <div>
+            <Label htmlFor="bm-name">Full Name</Label>
+            <Input id="bm-name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className="mt-1 h-11 rounded-xl" />
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div>
+              <Label htmlFor="bm-phone">Mobile</Label>
+              <Input id="bm-phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+91" className="mt-1 h-11 rounded-xl" />
+            </div>
+            <div>
+              <Label htmlFor="bm-email">Email</Label>
+              <Input id="bm-email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@example.com" className="mt-1 h-11 rounded-xl" />
+            </div>
+          </div>
+          <div>
+            <Label>Looking for</Label>
+            <Select value={form.property} onValueChange={(v) => setForm({ ...form, property: v })}>
+              <SelectTrigger className="mt-1 h-11 rounded-xl">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="2 BHK">2 BHK</SelectItem>
+                <SelectItem value="3 BHK">3 BHK</SelectItem>
+                <SelectItem value="4 BHK">4 BHK</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <Button type="submit" disabled={busy} className="h-12 w-full rounded-full bg-[var(--red-cta)] text-white hover:bg-[#b91c1c]">
+            {busy ? "Sending…" : "Book Free Site Visit"}
+          </Button>
+          <p className="text-center text-[11px] text-ink-soft">By submitting, you agree to be contacted about Nova One.</p>
+        </form>
+      </div>
+    </PopupShell>
   );
 }
 
