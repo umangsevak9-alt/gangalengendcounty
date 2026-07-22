@@ -408,42 +408,6 @@ function PopupShell({ children, onClose }: { children: React.ReactNode; onClose:
   );
 }
 
-function WelcomePopup({ onClose }: { onClose: () => void }) {
-  return (
-    <PopupShell onClose={onClose}>
-      <div className="h-40 w-full bg-cover bg-center" style={{ backgroundImage: `url(${heroAsset.url})` }}>
-        <div className="h-full w-full bg-gradient-to-b from-black/30 to-black/80 p-6 text-white">
-          <span className="eyebrow text-gold">Welcome to Nova One</span>
-        </div>
-      </div>
-      <div className="p-8 text-center">
-        <h3 className="font-serif text-2xl text-navy">Save ₹5+ Lakhs today</h3>
-        <p className="mt-2 text-sm text-ink-soft">Special pre-launch price. Only for first 100 bookings. Hurry!</p>
-        <p className="mt-2 text-[11px] text-ink-soft/80">*Terms and Conditions Apply</p>
-        <a href="#contact"><Button onClick={onClose} className="mt-6 w-full rounded-full bg-[var(--red-cta)] text-white hover:bg-[#b91c1c]">Book Site Visit</Button></a>
-      </div>
-    </PopupShell>
-  );
-}
-
-function ExitPopup({ onClose }: { onClose: () => void }) {
-  const { whatsappUrl } = useBrand();
-  return (
-
-    <PopupShell onClose={onClose}>
-      <div className="bg-navy p-8 text-center text-white">
-        <span className="eyebrow text-gold">Wait — one minute</span>
-        <h3 className="mt-3 font-serif text-2xl">Take our brochure with you.</h3>
-        <p className="mt-2 text-sm text-white/70">Get full price list, floor plans and photos on WhatsApp in 30 seconds.</p>
-        <a href={whatsappUrl} target="_blank" rel="noreferrer">
-          <Button onClick={onClose} className="mt-6 w-full rounded-full bg-gold text-white hover:bg-[#b91c1c]">
-            Get Brochure on WhatsApp
-          </Button>
-        </a>
-      </div>
-    </PopupShell>
-  );
-}
 
 function ThanksPopup({ onClose }: { onClose: () => void }) {
   return (
