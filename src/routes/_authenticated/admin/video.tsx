@@ -130,6 +130,7 @@ function Page() {
               <SelectItem value="upload">Upload MP4 file</SelectItem>
             </SelectContent>
           </Select>
+        </div>
         <div>
           <Label>Aspect ratio</Label>
           <Select value={row.aspect_ratio} onValueChange={(v) => setRow({ ...row, aspect_ratio: v as VideoRow["aspect_ratio"] })}>
