@@ -389,61 +389,8 @@ function MobileActionBar() {
   );
 }
 
-/* -------------------- POPUPS -------------------- */
-const WELCOME_DELAY_MS = 5000; // show welcome popup after 5 seconds
-const EXIT_AFTER_WELCOME_MS = 5000; // show second popup 5 seconds after first closes
+/* -------------------- POPUPS (thank-you only) -------------------- */
 
-function Popups() {
-  const [welcome, setWelcome] = useState(false);
-  const [welcomeClosed, setWelcomeClosed] = useState(false);
-  const [exit, setExit] = useState(false);
-  const [shownExit, setShownExit] = useState(false);
-
-  useEffect(() => {
-    if (sessionStorage.getItem("novaone_welcome")) return;
-    const t = setTimeout(() => {
-      setWelcome(true);
-      sessionStorage.setItem("novaone_welcome", "1");
-    }, WELCOME_DELAY_MS);
-    return () => clearTimeout(t);
-  }, []);
-
-  useEffect(() => {
-    if (!welcomeClosed || shownExit || sessionStorage.getItem("novaone_exit")) return;
-    const t = setTimeout(() => {
-      setExit(true);
-      setShownExit(true);
-      sessionStorage.setItem("novaone_exit", "1");
-    }, EXIT_AFTER_WELCOME_MS);
-    return () => clearTimeout(t);
-  }, [welcomeClosed, shownExit]);
-
-  useEffect(() => {
-    const onLeave = (e: MouseEvent) => {
-      if (e.clientY < 10 && !shownExit && !sessionStorage.getItem("novaone_exit")) {
-        setExit(true);
-        setShownExit(true);
-        sessionStorage.setItem("novaone_exit", "1");
-      }
-    };
-    document.addEventListener("mouseout", onLeave);
-    return () => document.removeEventListener("mouseout", onLeave);
-  }, [shownExit]);
-
-  return (
-    <>
-      {welcome && (
-        <WelcomePopup
-          onClose={() => {
-            setWelcome(false);
-            setWelcomeClosed(true);
-          }}
-        />
-      )}
-      {exit && <ExitPopup onClose={() => setExit(false)} />}
-    </>
-  );
-}
 
 function PopupShell({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
   return (
