@@ -147,8 +147,8 @@ function Landing() {
 }
 
 /* -------------------- HERO -------------------- */
-function Hero() {
-  const { brand, whatsappUrl, callUrl } = useBrand();
+function Hero({ onBook }: { onBook: () => void }) {
+  const { brand, callUrl } = useBrand();
   return (
     <section className="relative isolate min-h-[92svh] w-full overflow-hidden sm:min-h-[80svh]">
 
@@ -171,24 +171,14 @@ function Hero() {
               <div className="truncate text-xs font-medium sm:text-sm">{brand.name}</div>
             </div>
           </div>
-          <div className="flex shrink-0 items-center gap-2">
-            <a
-              href={callUrl}
-              aria-label="Call now"
-              className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur transition hover:scale-105 hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] md:h-11 md:w-11"
-            >
-              <PhoneCall className="h-4 w-4 md:h-5 md:w-5" />
-            </a>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="WhatsApp"
-              className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/30 bg-[#25D366] text-white backdrop-blur transition hover:scale-105 md:h-11 md:w-11"
-            >
-              <WhatsAppIcon className="h-4 w-4 md:h-5 md:w-5" />
-            </a>
-          </div>
+          <a
+            href={callUrl}
+            aria-label={`Call ${brand.phone}`}
+            className="inline-flex shrink-0 items-center gap-2 rounded-full border border-gold/60 bg-white/10 px-3 py-2 text-xs font-semibold text-white backdrop-blur transition hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] sm:px-4 sm:text-sm"
+          >
+            <PhoneCall className="h-4 w-4 text-gold" />
+            <span className="whitespace-nowrap">{brand.phone}</span>
+          </a>
         </div>
       </div>
 
@@ -213,15 +203,15 @@ function Hero() {
           </p>
 
           <div className="mt-7 grid grid-cols-1 gap-3 sm:mt-8">
-            <a href="#contact" className="w-full">
-              <Button
-                size="lg"
-                className="h-14 w-full rounded-full bg-[var(--red-cta)] text-base font-semibold text-white hover:bg-[#b91c1c] shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)]"
-              >
-                <Calendar className="mr-2 h-5 w-5" /> Book Free Site Visit
-              </Button>
-            </a>
+            <Button
+              size="lg"
+              onClick={onBook}
+              className="h-14 w-full rounded-full bg-[var(--red-cta)] text-base font-semibold text-white hover:bg-[#b91c1c] shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)]"
+            >
+              <Calendar className="mr-2 h-5 w-5" /> Book Free Site Visit
+            </Button>
           </div>
+
 
           <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-2 text-[10px] uppercase tracking-[0.2em] text-white/70 sm:mt-8 sm:flex sm:flex-wrap sm:gap-x-6 sm:text-xs sm:tracking-[0.24em]">
             <span><span className="text-gold font-serif text-base normal-case tracking-normal">25+</span> Acres</span>
