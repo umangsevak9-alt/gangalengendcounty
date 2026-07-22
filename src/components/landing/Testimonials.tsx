@@ -42,13 +42,36 @@ const ITEMS: Testimonial[] = [
 export function TestimonialsSection() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [startX, setStartX] = useState<number | null>(null);
+  const [dragDx, setDragDx] = useState(0);
   const count = ITEMS.length;
+  const dragging = startX !== null;
 
   useEffect(() => {
     if (paused) return;
     const id = setInterval(() => setIndex((i) => (i + 1) % count), 2000);
     return () => clearInterval(id);
   }, [paused, count]);
+
+  const onStart = (x: number) => {
+    setStartX(x);
+    setDragDx(0);
+    setPaused(true);
+  };
+  const onMove = (x: number) => {
+    if (startX === null) return;
+    setDragDx(x - startX);
+  };
+  const onEnd = () => {
+    if (startX !== null) {
+      const threshold = 50;
+      if (dragDx > threshold) setIndex((i) => (i - 1 + count) % count);
+      else if (dragDx < -threshold) setIndex((i) => (i + 1) % count);
+    }
+    setStartX(null);
+    setDragDx(0);
+    setPaused(false);
+  };
 
   return (
     <section id="testimonials" className="bg-white py-14 md:py-20">
@@ -64,16 +87,20 @@ export function TestimonialsSection() {
         </div>
 
         <div
-          className="relative mx-auto mt-12 max-w-3xl"
+          className="relative mx-auto mt-12 max-w-3xl touch-pan-y select-none"
           onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onTouchStart={() => setPaused(true)}
-          onTouchEnd={() => setPaused(false)}
+          onMouseLeave={() => { if (dragging) onEnd(); else setPaused(false); }}
+          onMouseDown={(e) => onStart(e.clientX)}
+          onMouseMove={(e) => onMove(e.clientX)}
+          onMouseUp={onEnd}
+          onTouchStart={(e) => onStart(e.touches[0].clientX)}
+          onTouchMove={(e) => onMove(e.touches[0].clientX)}
+          onTouchEnd={onEnd}
         >
           <div className="overflow-hidden rounded-3xl border border-line bg-[var(--mist)] p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)] md:p-12">
             <div className="flex" style={{
-              transform: `translateX(-${index * 100}%)`,
-              transition: "transform 600ms ease",
+              transform: `translateX(calc(-${index * 100}% + ${dragDx}px))`,
+              transition: dragging ? "none" : "transform 600ms ease",
             }}>
               {ITEMS.map((t) => (
                 <div key={t.name} className="w-full shrink-0 px-1 text-center">
