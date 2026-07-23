@@ -123,6 +123,7 @@ const videoSchema = z.object({
   video_path: z.string().max(500).nullable().optional(),
   poster_path: z.string().max(500).nullable().optional(),
   aspect_ratio: z.enum(["16/9", "4/3", "1/1", "9/16", "21/9"]).default("16/9"),
+  aspect_ratio_mobile: z.enum(["16/9", "4/3", "1/1", "9/16", "21/9"]).default("9/16"),
   is_active: z.boolean().default(true),
 });
 
@@ -143,7 +144,8 @@ export const upsertVideoSection = createServerFn({ method: "POST" })
     const row = {
       title: data.title, subtitle: data.subtitle ?? null, provider: data.provider,
       video_url: data.video_url ?? null, video_path: data.video_path ?? null,
-      poster_path: data.poster_path ?? null, aspect_ratio: data.aspect_ratio, is_active: data.is_active,
+      poster_path: data.poster_path ?? null, aspect_ratio: data.aspect_ratio,
+      aspect_ratio_mobile: data.aspect_ratio_mobile, is_active: data.is_active,
     };
     if (data.id) {
       const { error } = await context.supabase.from("video_section").update(row).eq("id", data.id);
