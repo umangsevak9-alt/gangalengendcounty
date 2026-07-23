@@ -68,18 +68,18 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section id="testimonials" className="bg-white py-14 md:py-20">
+    <section id="testimonials" className="bg-white py-10 md:py-14">
       <div className="container-luxe">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow mb-3">Testimonials</p>
-          <h2 className="font-serif text-3xl leading-tight text-navy md:text-5xl">
+          <p className="eyebrow mb-2">Testimonials</p>
+          <h2 className="font-serif text-2xl leading-tight text-navy md:text-4xl">
             Loved by <span className="text-gold italic">Pune families.</span>
           </h2>
-          <p className="mt-4 text-ink-soft">Honest words from happy home buyers and investors.</p>
+          <p className="mt-3 text-sm text-ink-soft">Honest words from happy home buyers and investors.</p>
         </div>
 
         <div
-          className="relative mx-auto mt-12 max-w-3xl touch-pan-y select-none"
+          className="relative mx-auto mt-8 max-w-2xl touch-pan-y select-none"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => { if (dragging) onEnd(); else setPaused(false); }}
           onMouseDown={(e) => onStart(e.clientX)}
@@ -89,7 +89,7 @@ export function TestimonialsSection() {
           onTouchMove={(e) => onMove(e.touches[0].clientX)}
           onTouchEnd={onEnd}
         >
-          <div className="overflow-hidden rounded-3xl border border-line bg-[var(--mist)] p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)] md:p-10">
+          <div className="overflow-hidden rounded-2xl border border-line bg-[var(--mist)] p-5 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)] md:p-7">
             <div
               className="flex"
               style={{
@@ -101,22 +101,27 @@ export function TestimonialsSection() {
                 const hasVideo =
                   (t.provider === "upload" && t.video_signed_url) ||
                   ((t.provider === "youtube" || t.provider === "vimeo") && t.video_url);
+                const embed = t.video_url ? toEmbed(t.video_url, t.provider) : "";
+                const embedAutoplay = embed ? `${embed}${embed.includes("?") ? "&" : "?"}autoplay=1&mute=1&muted=1&loop=1&playsinline=1` : "";
                 return (
                   <div key={t.id} className="w-full shrink-0 px-1 text-center">
                     {hasVideo && (
-                      <div className="mx-auto mb-6 max-w-lg overflow-hidden rounded-2xl bg-black shadow-lg ring-1 ring-black/10">
+                      <div className="mx-auto mb-4 max-w-md overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-black/10">
                         <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
                           {t.provider === "upload" && t.video_signed_url ? (
                             <video
                               src={t.video_signed_url}
-                              controls
+                              autoPlay
+                              muted
+                              loop
                               playsInline
+                              controls
                               preload="metadata"
                               className="h-full w-full object-cover"
                             />
                           ) : t.video_url ? (
                             <iframe
-                              src={toEmbed(t.video_url, t.provider)}
+                              src={embedAutoplay}
                               title={t.name}
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen
@@ -126,21 +131,21 @@ export function TestimonialsSection() {
                         </div>
                       </div>
                     )}
-                    {!hasVideo && <Quote className="mx-auto h-8 w-8 text-gold" />}
-                    <p className="mt-5 font-serif text-lg leading-relaxed text-navy md:text-xl">
+                    {!hasVideo && <Quote className="mx-auto h-6 w-6 text-gold" />}
+                    <p className="mt-3 font-serif text-base leading-relaxed text-navy md:text-lg">
                       "{t.quote}"
                     </p>
-                    <div className="mt-6 flex items-center justify-center gap-1 text-gold">
+                    <div className="mt-4 flex items-center justify-center gap-1 text-gold">
                       {Array.from({ length: Math.max(0, Math.min(5, t.rating || 5)) }).map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-current" />
+                        <Star key={i} className="h-3.5 w-3.5 fill-current" />
                       ))}
                     </div>
-                    <div className="mt-5 flex items-center justify-center gap-3">
-                      <div className="grid h-11 w-11 place-items-center overflow-hidden rounded-full bg-navy font-serif text-gold">
+                    <div className="mt-3 flex items-center justify-center gap-3">
+                      <div className="grid h-9 w-9 place-items-center overflow-hidden rounded-full bg-navy font-serif text-sm text-gold">
                         {t.image_url ? (
                           <img src={t.image_url} alt={t.name} className="h-full w-full object-cover" />
                         ) : hasVideo ? (
-                          <Play className="h-4 w-4" />
+                          <Play className="h-3.5 w-3.5" />
                         ) : (
                           t.name.charAt(0)
                         )}
