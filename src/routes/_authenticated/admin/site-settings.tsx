@@ -26,12 +26,15 @@ type Settings = {
   brand_name: string; brand_code: string; developer: string; partner: string;
   location: string; rera: string; phone: string; whatsapp: string; email: string;
   whatsapp_message: string;
+  hero_image_path: string | null;
 };
 
 const empty: Settings = {
   brand_name: "", brand_code: "", developer: "", partner: "", location: "",
   rera: "", phone: "", whatsapp: "", email: "", whatsapp_message: "",
+  hero_image_path: null,
 };
+
 
 function Page() {
   const load = useServerFn(getSiteSettingsAdmin);
