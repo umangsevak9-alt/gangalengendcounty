@@ -85,6 +85,19 @@ function Page() {
         </div>
 
         <div className="pt-4 border-t border-[#e5e5e5]">
+          <h2 className="font-serif text-lg text-[#0a0a0a] mb-1">Hero image</h2>
+          <p className="text-[11px] text-[#737373] mb-3">Main photo shown at the top of the homepage. Upload a high-quality landscape image (recommended 1920×1080 or larger). Leave empty to use the default.</p>
+          <MediaUpload
+            value={form.hero_image_path}
+            onChange={(p) => set("hero_image_path", p)}
+            folder="hero"
+            accept="image/*"
+            label="Upload hero image"
+          />
+        </div>
+
+        <div className="pt-4 border-t border-[#e5e5e5]">
+
           <h2 className="font-serif text-lg text-[#0a0a0a] mb-3">Contact</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
