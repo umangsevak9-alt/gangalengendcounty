@@ -109,12 +109,14 @@ function useBrand() {
     whatsappMessage:
       data?.whatsapp_message ||
       "Hi, I am interested in Nova One at Ganga Legend County. Please share details.",
+    heroImage: data?.hero_image_url || heroAsset.url,
   };
 
   const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(brand.whatsappMessage)}`;
   const callUrl = `tel:${brand.phone.replace(/\s+/g, "")}`;
   return { brand, whatsappUrl, callUrl };
 }
+
 
 
 function Landing() {
