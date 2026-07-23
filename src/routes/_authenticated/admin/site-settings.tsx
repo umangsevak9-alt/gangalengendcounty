@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { MediaUpload } from "@/components/admin/MediaUpload";
 import { toast } from "sonner";
 import { ArrowLeft, Save, Loader2 } from "lucide-react";
+
 
 export const Route = createFileRoute("/_authenticated/admin/site-settings")({
   head: () => ({ meta: [{ title: "Site Settings · Admin" }, { name: "robots", content: "noindex,nofollow" }] }),
