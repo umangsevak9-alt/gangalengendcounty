@@ -26,6 +26,7 @@ export const Route = createFileRoute("/_authenticated/admin/video")({
   ),
 });
 
+type AspectRatio = "16/9" | "4/3" | "1/1" | "9/16" | "21/9";
 type VideoRow = {
   id?: string;
   title: string;
@@ -34,11 +35,12 @@ type VideoRow = {
   video_url: string | null;
   video_path: string | null;
   poster_path: string | null;
-  aspect_ratio: "16/9" | "4/3" | "1/1" | "9/16" | "21/9";
+  aspect_ratio: AspectRatio;
+  aspect_ratio_mobile: AspectRatio;
   is_active: boolean;
 };
 
-const ASPECT_OPTIONS: Array<{ value: VideoRow["aspect_ratio"]; label: string }> = [
+const ASPECT_OPTIONS: Array<{ value: AspectRatio; label: string }> = [
   { value: "16/9", label: "16 : 9 · Widescreen (landscape)" },
   { value: "21/9", label: "21 : 9 · Cinematic ultra-wide" },
   { value: "4/3", label: "4 : 3 · Classic" },
@@ -59,11 +61,13 @@ function Page() {
     video_path: null,
     poster_path: null,
     aspect_ratio: "16/9",
+    aspect_ratio_mobile: "9/16",
     is_active: true,
   });
 
   useEffect(() => {
     if (initial) {
+      const i = initial as typeof initial & { aspect_ratio?: string; aspect_ratio_mobile?: string };
       setRow({
         id: initial.id,
         title: initial.title,
@@ -72,7 +76,8 @@ function Page() {
         video_url: initial.video_url,
         video_path: initial.video_path,
         poster_path: initial.poster_path,
-        aspect_ratio: ((initial as { aspect_ratio?: string }).aspect_ratio as VideoRow["aspect_ratio"]) ?? "16/9",
+        aspect_ratio: (i.aspect_ratio as AspectRatio) ?? "16/9",
+        aspect_ratio_mobile: (i.aspect_ratio_mobile as AspectRatio) ?? "9/16",
         is_active: initial.is_active,
       });
     }
@@ -89,6 +94,7 @@ function Page() {
         video_path: row.video_path,
         poster_path: row.poster_path,
         aspect_ratio: row.aspect_ratio,
+        aspect_ratio_mobile: row.aspect_ratio_mobile,
         is_active: row.is_active,
       },
     }),
@@ -132,8 +138,8 @@ function Page() {
           </Select>
         </div>
         <div>
-          <Label>Aspect ratio</Label>
-          <Select value={row.aspect_ratio} onValueChange={(v) => setRow({ ...row, aspect_ratio: v as VideoRow["aspect_ratio"] })}>
+          <Label>Aspect ratio · Desktop</Label>
+          <Select value={row.aspect_ratio} onValueChange={(v) => setRow({ ...row, aspect_ratio: v as AspectRatio })}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
               {ASPECT_OPTIONS.map((o) => (
@@ -142,7 +148,21 @@ function Page() {
             </SelectContent>
           </Select>
           <p className="text-xs text-[#737373] mt-1">
-            Pick the shape that matches your uploaded video so it displays without black bars.
+            Used on tablets and desktops (screens 768px and wider).
+          </p>
+        </div>
+        <div>
+          <Label>Aspect ratio · Mobile</Label>
+          <Select value={row.aspect_ratio_mobile} onValueChange={(v) => setRow({ ...row, aspect_ratio_mobile: v as AspectRatio })}>
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {ASPECT_OPTIONS.map((o) => (
+                <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <p className="text-xs text-[#737373] mt-1">
+            Used on phones — pick 9:16 for vertical Reels/Shorts videos.
           </p>
         </div>
         {row.provider === "upload" ? (

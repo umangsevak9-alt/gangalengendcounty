@@ -1,0 +1,1 @@
+ALTER TABLE public.video_section ADD COLUMN IF NOT EXISTS aspect_ratio_mobile TEXT NOT NULL DEFAULT '9/16';

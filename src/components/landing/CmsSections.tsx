@@ -143,7 +143,7 @@ export function SpecificationsSection() {
   };
 
   return (
-    <section id="specifications" className="bg-white py-14 md:py-20">
+    <section id="specifications" className="bg-white py-10 md:py-14">
       <div className="container-luxe">
         <SectionHead
           eyebrow="Craftsmanship"
@@ -151,10 +151,10 @@ export function SpecificationsSection() {
           subtitle="Every material chosen with intent — from the front door hinge to the sky-garden trellis."
         />
         {items.length === 0 ? (
-          <div className="mt-14 text-center text-ink-soft text-sm">Specifications coming soon.</div>
+          <div className="mt-10 text-center text-ink-soft text-sm">Specifications coming soon.</div>
         ) : (
           <div
-            className="relative mt-14 touch-pan-y select-none"
+            className="relative mt-10 touch-pan-y select-none"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => { if (dragging) onEnd(); else setPaused(false); }}
             onMouseDown={(e) => onStart(e.clientX)}
@@ -166,7 +166,7 @@ export function SpecificationsSection() {
           >
             <div className="overflow-hidden">
               <div
-                className="flex gap-6"
+                className="flex gap-4"
                 style={{
                   transform: `translateX(calc(-${index} * (100% / ${perView}) + ${dragDx}px))`,
                   transition: (noTransition || dragging) ? "none" : "transform 600ms ease",
@@ -175,17 +175,17 @@ export function SpecificationsSection() {
                 {[...items, ...items].map((s, i) => (
                   <div
                     key={`${s.id}-${i}`}
-                    className="hover-lift group overflow-hidden rounded-2xl border border-line bg-white shrink-0"
-                    style={{ flex: `0 0 calc((100% - (${perView - 1} * 1.5rem)) / ${perView})` }}
+                    className="hover-lift group overflow-hidden rounded-xl border border-line bg-white shrink-0"
+                    style={{ flex: `0 0 calc((100% - (${perView - 1} * 1rem)) / ${perView})` }}
                   >
                     {s.image_url && (
                       <div className="aspect-[16/10] w-full overflow-hidden bg-[#f0f0f0]">
                         <img src={s.image_url} alt={s.group_name} loading="lazy" draggable={false} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                       </div>
                     )}
-                    <div className="p-6">
-                      <div className="eyebrow mb-2">{s.group_name}</div>
-                      <p className="text-sm text-ink leading-relaxed">{s.detail}</p>
+                    <div className="p-4">
+                      <div className="eyebrow mb-1.5 text-[0.65rem]">{s.group_name}</div>
+                      <p className="text-xs text-ink leading-relaxed">{s.detail}</p>
                     </div>
                   </div>
                 ))}
@@ -218,14 +218,24 @@ function toEmbed(url: string, provider: "youtube" | "vimeo"): string {
 export function VideoSection() {
   const fetchFn = useServerFn(getPublicVideoSection);
   const { data } = useQuery({ queryKey: ["public", "video"], queryFn: () => fetchFn(), staleTime: 60_000 });
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const on = () => setIsMobile(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
   if (!data) return null;
+  const ratioRaw = isMobile ? (data.aspect_ratio_mobile ?? "9/16") : (data.aspect_ratio ?? "16/9");
+  const ratio = ratioRaw.replace("/", " / ");
 
   return (
-    <section id="video" className="bg-navy py-14 md:py-20 text-white">
+    <section id="video" className="bg-navy py-12 md:py-16 text-white">
       <div className="container-luxe">
         <SectionHead eyebrow="Film" title={data.title} subtitle={data.subtitle ?? undefined} dark />
-        <div className="mt-12 mx-auto max-w-5xl overflow-hidden rounded-2xl bg-black shadow-2xl ring-1 ring-white/10">
-          <div className="relative w-full" style={{ aspectRatio: (data.aspect_ratio ?? "16/9").replace("/", " / ") }}>
+        <div className="mt-10 mx-auto max-w-5xl overflow-hidden rounded-2xl bg-black shadow-2xl ring-1 ring-white/10">
+          <div className="relative w-full" style={{ aspectRatio: ratio }}>
             {data.provider === "upload" && data.video_signed_url ? (
               <video src={data.video_signed_url} poster={data.poster_url ?? undefined} autoPlay muted loop playsInline controls className="h-full w-full object-cover" />
             ) : data.video_url ? (

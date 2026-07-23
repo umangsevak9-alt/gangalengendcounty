@@ -73,12 +73,13 @@ export const getPublicVideoSection = createServerFn({ method: "GET" }).handler(a
   const supabase = serverPublicClient();
   const { data, error } = await supabase
     .from("video_section")
-    .select("id, title, subtitle, provider, video_url, video_path, poster_path, aspect_ratio, is_active")
+    .select("*")
     .eq("is_active", true)
     .order("updated_at", { ascending: false })
     .limit(1)
     .maybeSingle();
   if (error || !data) return null;
+  const d = data as typeof data & { aspect_ratio?: string; aspect_ratio_mobile?: string };
   return {
     id: data.id,
     title: data.title,
@@ -87,7 +88,8 @@ export const getPublicVideoSection = createServerFn({ method: "GET" }).handler(a
     video_url: data.video_url,
     video_signed_url: await signPath(supabase, data.video_path),
     poster_url: await signPath(supabase, data.poster_path),
-    aspect_ratio: (data as { aspect_ratio?: string }).aspect_ratio ?? "16/9",
+    aspect_ratio: d.aspect_ratio ?? "16/9",
+    aspect_ratio_mobile: d.aspect_ratio_mobile ?? "9/16",
   };
 });
 
