@@ -1,0 +1,6 @@
+# Block script execution in uploads (prevents uploaded-file RCE)
+<FilesMatch "\.(php|phtml|phar|pl|py|jsp|asp|sh|cgi)$">
+  Require all denied
+</FilesMatch>
+Options -ExecCGI
+AddType text/plain .php .phtml .phar
