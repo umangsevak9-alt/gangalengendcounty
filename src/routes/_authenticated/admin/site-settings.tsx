@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { MediaUpload } from "@/components/admin/MediaUpload";
 import { toast } from "sonner";
 import { ArrowLeft, Save, Loader2 } from "lucide-react";
+
 
 export const Route = createFileRoute("/_authenticated/admin/site-settings")({
   head: () => ({ meta: [{ title: "Site Settings · Admin" }, { name: "robots", content: "noindex,nofollow" }] }),
@@ -24,12 +26,15 @@ type Settings = {
   brand_name: string; brand_code: string; developer: string; partner: string;
   location: string; rera: string; phone: string; whatsapp: string; email: string;
   whatsapp_message: string;
+  hero_image_path: string | null;
 };
 
 const empty: Settings = {
   brand_name: "", brand_code: "", developer: "", partner: "", location: "",
   rera: "", phone: "", whatsapp: "", email: "", whatsapp_message: "",
+  hero_image_path: null,
 };
+
 
 function Page() {
   const load = useServerFn(getSiteSettingsAdmin);
@@ -80,6 +85,19 @@ function Page() {
         </div>
 
         <div className="pt-4 border-t border-[#e5e5e5]">
+          <h2 className="font-serif text-lg text-[#0a0a0a] mb-1">Hero image</h2>
+          <p className="text-[11px] text-[#737373] mb-3">Main photo shown at the top of the homepage. Upload a high-quality landscape image (recommended 1920×1080 or larger). Leave empty to use the default.</p>
+          <MediaUpload
+            value={form.hero_image_path}
+            onChange={(p) => set("hero_image_path", p)}
+            folder="hero"
+            accept="image/*"
+            label="Upload hero image"
+          />
+        </div>
+
+        <div className="pt-4 border-t border-[#e5e5e5]">
+
           <h2 className="font-serif text-lg text-[#0a0a0a] mb-3">Contact</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>

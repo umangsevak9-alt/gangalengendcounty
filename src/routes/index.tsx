@@ -109,12 +109,14 @@ function useBrand() {
     whatsappMessage:
       data?.whatsapp_message ||
       "Hi, I am interested in Nova One at Ganga Legend County. Please share details.",
+    heroImage: data?.hero_image_url || heroAsset.url,
   };
 
   const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(brand.whatsappMessage)}`;
   const callUrl = `tel:${brand.phone.replace(/\s+/g, "")}`;
   return { brand, whatsappUrl, callUrl };
 }
+
 
 
 function Landing() {
@@ -157,12 +159,13 @@ function Hero({ onBook }: { onBook: () => void }) {
     <section className="relative isolate min-h-[92svh] w-full overflow-hidden sm:min-h-[80svh]">
 
       <img
-        src={heroAsset.url}
+        src={brand.heroImage}
         alt="Nova One premium towers in Pune"
         className="absolute inset-0 h-full w-full object-cover"
         loading="eager"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-black/95" />
+
 
       <div className="relative z-10">
         <div className="container-luxe flex items-center justify-between gap-3 py-4 text-white sm:py-6">
