@@ -408,6 +408,7 @@ const siteSettingsSchema = z.object({
   whatsapp: z.string().max(50).default(""),
   email: z.string().max(200).default(""),
   whatsapp_message: z.string().max(500).default(""),
+  hero_image_path: z.string().max(500).nullable().optional(),
 });
 
 export const getSiteSettingsAdmin = createServerFn({ method: "GET" })
@@ -430,6 +431,7 @@ export const upsertSiteSettings = createServerFn({ method: "POST" })
       partner: data.partner, location: data.location, rera: data.rera,
       phone: data.phone, whatsapp: data.whatsapp, email: data.email,
       whatsapp_message: data.whatsapp_message,
+      hero_image_path: data.hero_image_path ?? null,
     };
     if (data.id) {
       const { error } = await context.supabase.from("site_settings").update(row).eq("id", data.id);
@@ -440,6 +442,7 @@ export const upsertSiteSettings = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return inserted;
   });
+
 
 /* ---------- Testimonials ---------- */
 const testimonialSchema = z.object({
