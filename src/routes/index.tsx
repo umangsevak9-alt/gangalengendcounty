@@ -43,46 +43,52 @@ import facadeAsset from "@/assets/tower-facade.jpeg.asset.json";
 import skylineAsset from "@/assets/tower-skyline.jpeg.asset.json";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Nova One · Ganga Legend County — Premium 2/3/4 BHK Homes in Pune" },
-      {
-        name: "description",
-        content:
-          "Nova One by Goel Ganga — premium 2, 3 & 4 BHK homes in Kharadi, Pune. Four RERA-approved towers, Ileseum Club, pre-launch price. Save ₹5+ Lakhs.",
-      },
-      { name: "keywords", content: "Nova One, Ganga Legend County, Pune real estate, 2 BHK Pune, 3 BHK Pune, 4 BHK Pune, Kharadi flats, Goel Ganga, luxury apartments Pune, pre-launch Pune" },
-      { name: "robots", content: "index, follow, max-image-preview:large" },
-      { property: "og:title", content: "Nova One · Ganga Legend County — Premium Homes in Pune" },
-      { property: "og:description", content: "Four RERA-approved towers in Kharadi, Pune. Pre-launch offer — save ₹5+ Lakhs." },
-      { property: "og:type", content: "website" },
-      { property: "og:image", content: heroAsset.url },
-      { property: "og:url", content: "https://gangalengendcounty.lovable.app/" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: heroAsset.url },
-    ],
-    links: [{ rel: "canonical", href: "https://gangalengendcounty.lovable.app/" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Residence",
-          name: "Nova One · Ganga Legend County",
-          description: "Premium 2, 3 & 4 BHK residences in Kharadi, Pune by Goel Ganga Corporation.",
-          image: heroAsset.url,
-          url: "https://gangalengendcounty.lovable.app/",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "Kharadi",
-            addressRegion: "Pune",
-            addressCountry: "IN",
-          },
-          brand: { "@type": "Organization", name: "Goel Ganga Corporation" },
-        }),
-      },
-    ],
-  }),
+  loader: async () => {
+    return await getPublicSiteSettings();
+  },
+  head: ({ loaderData }) => {
+    const brandName = loaderData?.brand_name || "Nova One · Ganga Legend County";
+    return {
+      meta: [
+        { title: `${brandName} — Premium 2/3/4 BHK Homes in Pune` },
+        {
+          name: "description",
+          content:
+            "Nova One by Goel Ganga — premium 2, 3 & 4 BHK homes in Kharadi, Pune. Four RERA-approved towers, Ileseum Club, pre-launch price. Save ₹5+ Lakhs.",
+        },
+        { name: "keywords", content: "Nova One, Ganga Legend County, Pune real estate, 2 BHK Pune, 3 BHK Pune, 4 BHK Pune, Kharadi flats, Goel Ganga, luxury apartments Pune, pre-launch Pune" },
+        { name: "robots", content: "index, follow, max-image-preview:large" },
+        { property: "og:title", content: `${brandName} — Premium Homes in Pune` },
+        { property: "og:description", content: "Four RERA-approved towers in Kharadi, Pune. Pre-launch offer — save ₹5+ Lakhs." },
+        { property: "og:type", content: "website" },
+        { property: "og:image", content: heroAsset.url },
+        { property: "og:url", content: "https://gangalengendcounty.lovable.app/" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: heroAsset.url },
+      ],
+      links: [{ rel: "canonical", href: "https://gangalengendcounty.lovable.app/" }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Residence",
+            name: brandName,
+            description: "Premium 2, 3 & 4 BHK residences in Kharadi, Pune by Goel Ganga Corporation.",
+            image: heroAsset.url,
+            url: "https://gangalengendcounty.lovable.app/",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Kharadi",
+              addressRegion: "Pune",
+              addressCountry: "IN",
+            },
+            brand: { "@type": "Organization", name: "Goel Ganga Corporation" },
+          }),
+        },
+      ],
+    };
+  },
   component: Landing,
 });
 
