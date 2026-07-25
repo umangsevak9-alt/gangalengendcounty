@@ -81,8 +81,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     });
   },
   head: ({ loaderData }) => {
-    const brandName = loaderData?.brand_name || "Nova One · Ganga Legend County";
-    const siteTitle = `${brandName} — Pre-Launch, Pune`;
+    const brandName = loaderData?.brand_name || "Ganga Legend County";
+    const tagline = loaderData?.brand_code || "Nova One";
+    const siteTitle = `${tagline} — Pre-Launch, Pune`;
     return {
       meta: [
         { charSet: "utf-8" },

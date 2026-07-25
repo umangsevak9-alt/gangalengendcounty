@@ -47,10 +47,11 @@ export const Route = createFileRoute("/")({
     return await getPublicSiteSettings();
   },
   head: ({ loaderData }) => {
-    const brandName = loaderData?.brand_name || "Nova One · Ganga Legend County";
+    const brandName = loaderData?.brand_name || "Ganga Legend County";
+    const tagline = loaderData?.brand_code || "Nova One";
     return {
       meta: [
-        { title: `${brandName} — Premium 2/3/4 BHK Homes in Pune` },
+        { title: `${tagline} — Premium 2/3/4 BHK Homes in Pune` },
         {
           name: "description",
           content:
