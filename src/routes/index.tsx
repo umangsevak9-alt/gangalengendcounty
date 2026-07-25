@@ -170,9 +170,6 @@ function Hero({ onBook }: { onBook: () => void }) {
       <div className="relative z-10">
         <div className="container-luxe flex items-center justify-between gap-3 py-4 text-white sm:py-6">
           <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-            <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-gold/70 text-gold font-serif text-sm sm:h-10 sm:w-10 sm:text-lg">
-              N
-            </div>
             <div className="min-w-0 leading-tight">
               <div className="eyebrow text-gold truncate text-[9px] sm:text-[11px]">{brand.code}</div>
               <div className="truncate text-[11px] font-medium sm:text-sm">{brand.name}</div>
