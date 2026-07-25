@@ -59,7 +59,7 @@ export const Route = createFileRoute("/")({
         },
         { name: "keywords", content: "Nova One, Ganga Legend County, Pune real estate, 2 BHK Pune, 3 BHK Pune, 4 BHK Pune, Kharadi flats, Goel Ganga, luxury apartments Pune, pre-launch Pune" },
         { name: "robots", content: "index, follow, max-image-preview:large" },
-        { property: "og:title", content: `${brandName} — Premium Homes in Pune` },
+        { property: "og:title", content: `${tagline} — Premium Homes in Pune` },
         { property: "og:description", content: "Four RERA-approved towers in Kharadi, Pune. Pre-launch offer — save ₹5+ Lakhs." },
         { property: "og:type", content: "website" },
         { property: "og:image", content: heroAsset.url },
