@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { getPublicSiteSettings } from "@/lib/cms.functions";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -73,43 +74,51 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nova One · Ganga Legend County — Pre-Launch, Pune" },
-      {
-        name: "description",
-        content:
-          "Four philosophically-inspired luxury towers in Pune. Pre-launch pricing, priority selection and Ileseum Club membership.",
-      },
-      { name: "author", content: "Goel Ganga Corporation" },
-      { property: "og:title", content: "Nova One · Ganga Legend County — Pre-Launch, Pune" },
-      {
-        property: "og:description",
-        content:
-          "Four philosophically-inspired luxury towers in Pune. Pre-launch pricing, priority selection and Ileseum Club membership.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Ganga Legend County" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Nova One · Ganga Legend County — Pre-Launch, Pune" },
-      { name: "twitter:description", content: "Four philosophically-inspired luxury towers in Pune. Pre-launch pricing, priority selection and Ileseum Club membership." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8af43bc9-7da0-47e4-9fff-01014f113199/id-preview-e7d65b0e--61800a5b-9928-4e39-b11e-f36d5faea19a.lovable.app-1784388675254.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8af43bc9-7da0-47e4-9fff-01014f113199/id-preview-e7d65b0e--61800a5b-9928-4e39-b11e-f36d5faea19a.lovable.app-1784388675254.png" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap",
-      },
-
-    ],
-  }),
+  loader: async ({ context }) => {
+    return await context.queryClient.ensureQueryData({
+      queryKey: ["public", "site-settings", "root"],
+      queryFn: () => getPublicSiteSettings(),
+    });
+  },
+  head: ({ loaderData }) => {
+    const brandName = loaderData?.brand_name || "Nova One · Ganga Legend County";
+    const siteTitle = `${brandName} — Pre-Launch, Pune`;
+    return {
+      meta: [
+        { charSet: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { title: siteTitle },
+        {
+          name: "description",
+          content:
+            "Four philosophically-inspired luxury towers in Pune. Pre-launch pricing, priority selection and Ileseum Club membership.",
+        },
+        { name: "author", content: "Goel Ganga Corporation" },
+        { property: "og:title", content: siteTitle },
+        {
+          property: "og:description",
+          content:
+            "Four philosophically-inspired luxury towers in Pune. Pre-launch pricing, priority selection and Ileseum Club membership.",
+        },
+        { property: "og:type", content: "website" },
+        { property: "og:site_name", content: brandName },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: siteTitle },
+        { name: "twitter:description", content: "Four philosophically-inspired luxury towers in Pune. Pre-launch pricing, priority selection and Ileseum Club membership." },
+        { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8af43bc9-7da0-47e4-9fff-01014f113199/id-preview-e7d65b0e--61800a5b-9928-4e39-b11e-f36d5faea19a.lovable.app-1784388675254.png" },
+        { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8af43bc9-7da0-47e4-9fff-01014f113199/id-preview-e7d65b0e--61800a5b-9928-4e39-b11e-f36d5faea19a.lovable.app-1784388675254.png" },
+      ],
+      links: [
+        { rel: "stylesheet", href: appCss },
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap",
+        },
+      ],
+    };
+  },
 
   shellComponent: RootShell,
   component: RootComponent,
