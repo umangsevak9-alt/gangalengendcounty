@@ -211,7 +211,7 @@ function Hero({ onBook }: { onBook: () => void }) {
             <Button
               size="lg"
               onClick={onBook}
-              className="h-14 w-full rounded-full bg-[#4ade80] text-base font-semibold text-[#052e16] hover:bg-[#22c55e] shadow-[0_10px_30px_-10px_rgba(74,222,128,0.7)] sm:h-11 sm:w-auto sm:px-6 sm:text-sm"
+              className="h-14 w-full rounded-full bg-[#166534] text-base font-semibold text-white hover:bg-[#14532d] shadow-[0_10px_30px_-10px_rgba(22,101,52,0.7)] sm:h-11 sm:w-auto sm:px-6 sm:text-sm"
             >
               <Calendar className="mr-2 h-5 w-5 sm:h-4 sm:w-4" /> Book Free Site Visit
             </Button>
