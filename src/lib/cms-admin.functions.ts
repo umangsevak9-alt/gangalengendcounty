@@ -409,6 +409,7 @@ const siteSettingsSchema = z.object({
   email: z.string().max(200).default(""),
   whatsapp_message: z.string().max(500).default(""),
   hero_image_path: z.string().max(500).nullable().optional(),
+  logo_path: z.string().max(500).nullable().optional(),
 });
 
 export const getSiteSettingsAdmin = createServerFn({ method: "GET" })
@@ -432,6 +433,7 @@ export const upsertSiteSettings = createServerFn({ method: "POST" })
       phone: data.phone, whatsapp: data.whatsapp, email: data.email,
       whatsapp_message: data.whatsapp_message,
       hero_image_path: data.hero_image_path ?? null,
+      logo_path: data.logo_path ?? null,
     };
     if (data.id) {
       const { error } = await context.supabase.from("site_settings").update(row).eq("id", data.id);

@@ -191,15 +191,16 @@ export const getPublicSiteSettings = createServerFn({ method: "GET" }).handler(a
   const supabase = serverPublicClient();
   const { data } = await supabase
     .from("site_settings")
-    .select("brand_name, brand_code, developer, partner, location, rera, phone, whatsapp, email, whatsapp_message, hero_image_path")
+    .select("brand_name, brand_code, developer, partner, location, rera, phone, whatsapp, email, whatsapp_message, hero_image_path, logo_path")
     .order("updated_at", { ascending: false })
     .limit(1)
     .maybeSingle();
   if (!data) return null;
-  const d = data as typeof data & { hero_image_path?: string | null };
+  const d = data as typeof data & { hero_image_path?: string | null; logo_path?: string | null };
   return {
     ...data,
     hero_image_url: await signPath(supabase, d.hero_image_path ?? null),
+    logo_url: await signPath(supabase, d.logo_path ?? null),
   };
 });
 

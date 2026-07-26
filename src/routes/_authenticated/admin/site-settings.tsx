@@ -27,12 +27,14 @@ type Settings = {
   location: string; rera: string; phone: string; whatsapp: string; email: string;
   whatsapp_message: string;
   hero_image_path: string | null;
+  logo_path: string | null;
 };
 
 const empty: Settings = {
   brand_name: "", brand_code: "", developer: "", partner: "", location: "",
   rera: "", phone: "", whatsapp: "", email: "", whatsapp_message: "",
   hero_image_path: null,
+  logo_path: null,
 };
 
 
@@ -85,7 +87,21 @@ function Page() {
         </div>
 
         <div className="pt-4 border-t border-[#e5e5e5]">
+
+          <h2 className="font-serif text-lg text-[#0a0a0a] mb-1">Logo</h2>
+          <p className="text-[11px] text-[#737373] mb-3">Shown at the top-left corner of the website. Upload a landscape (wide) logo — PNG with transparent background works best, recommended around 600×160.</p>
+          <MediaUpload
+            value={form.logo_path}
+            onChange={(p) => set("logo_path", p)}
+            folder="logo"
+            accept="image/*"
+            label="Upload logo"
+          />
+        </div>
+
+        <div className="pt-4 border-t border-[#e5e5e5]">
           <h2 className="font-serif text-lg text-[#0a0a0a] mb-1">Hero image</h2>
+
           <p className="text-[11px] text-[#737373] mb-3">Main photo shown at the top of the homepage. Upload a high-quality landscape image (recommended 1920×1080 or larger). Leave empty to use the default.</p>
           <MediaUpload
             value={form.hero_image_path}

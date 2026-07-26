@@ -117,6 +117,7 @@ function useBrand() {
       data?.whatsapp_message ||
       "Hi, I am interested in Nova One at Ganga Legend County. Please share details.",
     heroImage: data?.hero_image_url || heroAsset.url,
+    logo: data?.logo_url || null,
   };
 
   const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(brand.whatsappMessage)}`;
@@ -177,10 +178,19 @@ function Hero({ onBook }: { onBook: () => void }) {
       <div className="relative z-10">
         <div className="container-luxe flex items-center justify-between gap-3 py-4 text-white sm:py-6">
           <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-            <div className="min-w-0 leading-tight">
-              <div className="eyebrow text-gold truncate text-[9px] sm:text-[11px]">{brand.code}</div>
-              <div className="truncate text-[11px] font-medium sm:text-sm">{brand.name}</div>
-            </div>
+            {brand.logo ? (
+              <img
+                src={brand.logo}
+                alt={`${brand.name} logo`}
+                className="h-9 w-auto max-w-[150px] object-contain object-left sm:h-12 sm:max-w-[220px]"
+                loading="eager"
+              />
+            ) : (
+              <div className="min-w-0 leading-tight">
+                <div className="eyebrow text-gold truncate text-[9px] sm:text-[11px]">{brand.code}</div>
+                <div className="truncate text-[11px] font-medium sm:text-sm">{brand.name}</div>
+              </div>
+            )}
           </div>
           <a
             href={callUrl}

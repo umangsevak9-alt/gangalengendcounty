@@ -273,6 +273,7 @@ export type Database = {
           hero_image_path: string | null
           id: string
           location: string
+          logo_path: string | null
           partner: string
           phone: string
           rera: string
@@ -289,6 +290,7 @@ export type Database = {
           hero_image_path?: string | null
           id?: string
           location?: string
+          logo_path?: string | null
           partner?: string
           phone?: string
           rera?: string
@@ -305,6 +307,7 @@ export type Database = {
           hero_image_path?: string | null
           id?: string
           location?: string
+          logo_path?: string | null
           partner?: string
           phone?: string
           rera?: string
