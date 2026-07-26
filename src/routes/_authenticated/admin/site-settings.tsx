@@ -27,12 +27,14 @@ type Settings = {
   location: string; rera: string; phone: string; whatsapp: string; email: string;
   whatsapp_message: string;
   hero_image_path: string | null;
+  logo_path: string | null;
 };
 
 const empty: Settings = {
   brand_name: "", brand_code: "", developer: "", partner: "", location: "",
   rera: "", phone: "", whatsapp: "", email: "", whatsapp_message: "",
   hero_image_path: null,
+  logo_path: null,
 };
 
 
