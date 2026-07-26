@@ -87,7 +87,7 @@ function Page() {
         </div>
 
         <div className="pt-4 border-t border-[#e5e5e5]">
-        <div className="pt-4 border-t border-[#e5e5e5]">
+
           <h2 className="font-serif text-lg text-[#0a0a0a] mb-1">Logo</h2>
           <p className="text-[11px] text-[#737373] mb-3">Shown at the top-left corner of the website. Upload a landscape (wide) logo — PNG with transparent background works best, recommended around 600×160.</p>
           <MediaUpload
