@@ -185,7 +185,7 @@ function Hero({ onBook }: { onBook: () => void }) {
           <a
             href={callUrl}
             aria-label={`Call ${brand.phone}`}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gold/60 bg-white/10 px-2.5 py-1.5 text-[11px] font-semibold text-white backdrop-blur transition hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] sm:gap-2 sm:px-4 sm:py-2 sm:text-sm"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gold/60 bg-white/10 px-2.5 py-1.5 text-[12px] font-semibold text-white backdrop-blur transition hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] sm:gap-2 sm:px-4 sm:py-2 sm:text-base"
           >
             <PhoneCall className="h-3.5 w-3.5 text-gold sm:h-4 sm:w-4" />
             <span className="whitespace-nowrap">{brand.phone}</span>
@@ -198,7 +198,7 @@ function Hero({ onBook }: { onBook: () => void }) {
         <div className="max-w-3xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/5 px-3 py-1.5 backdrop-blur sm:px-4">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
-            <span className="text-[10px] uppercase tracking-[0.28em] text-gold sm:text-[11px] sm:tracking-[0.3em]">
+            <span className="hero-glow text-[10px] uppercase tracking-[0.28em] text-gold sm:text-[11px] sm:tracking-[0.3em]">
               Pre-Launch · Pune
             </span>
           </div>
@@ -298,7 +298,7 @@ function ContactForm() {
                   </div>
                   <div>
                     <div className="font-medium text-navy">{c.label}</div>
-                    <div className="text-xs text-ink-soft">{c.sub}</div>
+                    <div className="text-xs text-ink-soft">{c.sub.replace("Kharadi", "Bavdhan")}</div>
                   </div>
                 </div>
               ))}
