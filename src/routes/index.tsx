@@ -196,9 +196,9 @@ function Hero({ onBook }: { onBook: () => void }) {
 
       <div className="container-luxe relative z-10 flex min-h-[calc(92svh-72px)] flex-col justify-center py-8 text-white sm:min-h-[calc(80svh-96px)]">
         <div className="max-w-3xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/5 px-3 py-1.5 backdrop-blur sm:px-4">
+          <div className="hero-glow mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/5 px-3 py-1.5 backdrop-blur sm:px-4">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
-            <span className="hero-glow text-[10px] uppercase tracking-[0.28em] text-gold sm:text-[11px] sm:tracking-[0.3em]">
+            <span className="text-[10px] uppercase tracking-[0.28em] text-gold sm:text-[11px] sm:tracking-[0.3em]">
               Pre-Launch · Pune
             </span>
           </div>
