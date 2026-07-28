@@ -1,6 +1,13 @@
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /auth
 
-Sitemap: https://gangalengendcounty.lovable.app/sitemap.xml
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://elite24.co/sitemap.xml
