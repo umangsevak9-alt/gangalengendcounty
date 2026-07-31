@@ -494,7 +494,7 @@ function MobileActionBar({ onBook }: { onBook: () => void }) {
 /* -------------------- BOOKING MODAL -------------------- */
 function BookingModal({ onClose }: { onClose: () => void }) {
   const [busy, setBusy] = useState(false);
-  const [showThanks, setShowThanks] = useState(false);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "", phone: "", email: "", property: "3 BHK", message: "",
   });
@@ -510,7 +510,8 @@ function BookingModal({ onClose }: { onClose: () => void }) {
         name: form.name, phone: form.phone, email: form.email,
         property_interest: form.property, message: form.message, source: "booking_modal",
       } });
-      setShowThanks(true);
+      onClose();
+      navigate({ to: "/thank-you" });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not submit. Please try again.");
     } finally {
@@ -518,9 +519,7 @@ function BookingModal({ onClose }: { onClose: () => void }) {
     }
   };
 
-  if (showThanks) {
-    return <ThanksPopup onClose={onClose} />;
-  }
+
 
   return (
     <PopupShell onClose={onClose}>
