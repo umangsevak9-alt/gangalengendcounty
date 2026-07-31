@@ -7,7 +7,7 @@ import {
   Phone,
   PhoneCall,
   Play,
-  Star,
+  
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
