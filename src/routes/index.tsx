@@ -125,6 +125,25 @@ function useBrand() {
   return { brand, whatsappUrl, callUrl };
 }
 
+/* -------------------- GTM TRACKING -------------------- */
+type DataLayerWindow = Window & { dataLayer?: Array<Record<string, unknown>> };
+
+function trackEvent(event: string, params: Record<string, unknown> = {}) {
+  if (typeof window === "undefined") return;
+  const w = window as DataLayerWindow;
+  w.dataLayer = w.dataLayer || [];
+  w.dataLayer.push({ event, ...params });
+}
+
+function trackCall(location: string, phone: string) {
+  trackEvent("call_click", { click_location: location, phone_number: phone, contact_method: "phone" });
+  trackEvent("generate_lead", { lead_type: "call", click_location: location });
+}
+
+function trackWhatsApp(location: string) {
+  trackEvent("whatsapp_click", { click_location: location, contact_method: "whatsapp" });
+}
+
 
 
 function Landing() {
@@ -194,6 +213,7 @@ function Hero({ onBook }: { onBook: () => void }) {
           </div>
           <a
             href={callUrl}
+            onClick={() => trackCall("header", brand.phone)}
             aria-label={`Call ${brand.phone}`}
             className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gold/60 bg-white/10 px-2.5 py-1.5 text-[12px] font-semibold text-white backdrop-blur transition hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] sm:gap-2 sm:px-4 sm:py-2 sm:text-base"
           >
@@ -253,7 +273,7 @@ function Hero({ onBook }: { onBook: () => void }) {
 
 /* -------------------- CONTACT FORM -------------------- */
 function ContactForm() {
-  const { brand } = useBrand();
+  const { brand, callUrl, whatsappUrl } = useBrand();
   const [busy, setBusy] = useState(false);
 
   const [showThanks, setShowThanks] = useState(false);
@@ -297,9 +317,37 @@ function ContactForm() {
               minutes with full price list, floor plans and site visit time.
             </p>
             <div className="mt-8 space-y-4">
+              <a
+                href={callUrl}
+                onClick={() => trackCall("contact_section", brand.phone)}
+                aria-label={`Call ${brand.phone}`}
+                className="flex items-center gap-4 transition hover:opacity-80"
+              >
+                <div className="grid h-11 w-11 place-items-center rounded-full bg-navy text-gold">
+                  <PhoneCall className="h-4 w-4" />
+                </div>
+                <div>
+                  <div className="font-medium text-navy">{brand.phone}</div>
+                  <div className="text-xs text-ink-soft">Talk to our sales team</div>
+                </div>
+              </a>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackWhatsApp("contact_section")}
+                className="flex items-center gap-4 transition hover:opacity-80"
+              >
+                <div className="grid h-11 w-11 place-items-center rounded-full bg-navy text-gold">
+                  <WhatsAppIcon className="h-4 w-4" />
+                </div>
+                <div>
+                  <div className="font-medium text-navy">WhatsApp us</div>
+                  <div className="text-xs text-ink-soft">Instant reply on chat</div>
+                </div>
+              </a>
               {[
-                { icon: PhoneCall, label: brand.phone, sub: "Talk to our sales team" },
-                { icon: MapPin, label: brand.location, sub: "Site office — Kharadi, Pune" },
+                { icon: MapPin, label: brand.location, sub: "Site office — Bavdhan, Pune" },
                 { icon: Calendar, label: "10 AM to 7 PM · All days", sub: "Site visit timings" },
               ].map((c) => (
                 <div key={c.label} className="flex items-center gap-4">
@@ -308,7 +356,7 @@ function ContactForm() {
                   </div>
                   <div>
                     <div className="font-medium text-navy">{c.label}</div>
-                    <div className="text-xs text-ink-soft">{c.sub.replace("Kharadi", "Bavdhan")}</div>
+                    <div className="text-xs text-ink-soft">{c.sub}</div>
                   </div>
                 </div>
               ))}
@@ -372,12 +420,12 @@ function ContactForm() {
 
 /* -------------------- FLOATING RAIL -------------------- */
 function FloatingRail({ onBook }: { onBook: () => void }) {
-  const { whatsappUrl, callUrl } = useBrand();
-  const btns: Array<{ label: string; bg: string; icon: React.ReactNode; href?: string; onClick?: () => void; external?: boolean }> = [
-    { href: whatsappUrl, label: "WhatsApp", bg: "#25D366", icon: <WhatsAppIcon className="h-5 w-5" />, external: true },
-    { href: callUrl, label: "Call", bg: "#16A34A", icon: <Phone className="h-5 w-5" /> },
+  const { brand, whatsappUrl, callUrl } = useBrand();
+  const btns: Array<{ label: string; bg: string; icon: React.ReactNode; href?: string; onClick?: () => void; external?: boolean; track?: () => void }> = [
+    { href: whatsappUrl, label: "WhatsApp", bg: "#25D366", icon: <WhatsAppIcon className="h-5 w-5" />, external: true, track: () => trackWhatsApp("floating_rail") },
+    { href: callUrl, label: "Call", bg: "#16A34A", icon: <Phone className="h-5 w-5" />, track: () => trackCall("floating_rail", brand.phone) },
     { onClick: onBook, label: "Site Visit", bg: "#DC2626", icon: <Calendar className="h-5 w-5" /> },
-    { href: MAPS_URL, label: "Directions", bg: "#0a0a0a", icon: <Navigation className="h-5 w-5" />, external: true },
+    { href: MAPS_URL, label: "Directions", bg: "#0a0a0a", icon: <Navigation className="h-5 w-5" />, external: true, track: () => trackEvent("directions_click", { click_location: "floating_rail" }) },
   ];
 
   return (
@@ -401,6 +449,7 @@ function FloatingRail({ onBook }: { onBook: () => void }) {
           <a
             key={b.label}
             href={b.href}
+            onClick={b.track}
             target={b.external ? "_blank" : undefined}
             rel="noreferrer"
             className={cls}
@@ -418,14 +467,14 @@ function FloatingRail({ onBook }: { onBook: () => void }) {
 
 /* -------------------- MOBILE STICKY ACTION BAR -------------------- */
 function MobileActionBar({ onBook }: { onBook: () => void }) {
-  const { whatsappUrl, callUrl } = useBrand();
+  const { brand, whatsappUrl, callUrl } = useBrand();
   return (
 
     <>
       <div className="h-16 md:hidden" aria-hidden />
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 backdrop-blur md:hidden">
         <div className="grid grid-cols-3 gap-2 px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
-          <a href={callUrl} className="flex flex-col items-center justify-center rounded-xl bg-green-600 py-2 text-white shadow-sm active:scale-[0.98]">
+          <a href={callUrl} onClick={() => trackCall("mobile_bar", brand.phone)} className="flex flex-col items-center justify-center rounded-xl bg-green-600 py-2 text-white shadow-sm active:scale-[0.98]">
             <PhoneCall className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">Call</span>
           </a>
@@ -433,7 +482,7 @@ function MobileActionBar({ onBook }: { onBook: () => void }) {
             <Calendar className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">Visit</span>
           </button>
-          <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center rounded-xl bg-[#25D366] py-2 text-white shadow-sm active:scale-[0.98]">
+          <a href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => trackWhatsApp("mobile_bar")} className="flex flex-col items-center justify-center rounded-xl bg-[#25D366] py-2 text-white shadow-sm active:scale-[0.98]">
             <WhatsAppIcon className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">WhatsApp</span>
           </a>
