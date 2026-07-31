@@ -317,9 +317,37 @@ function ContactForm() {
               minutes with full price list, floor plans and site visit time.
             </p>
             <div className="mt-8 space-y-4">
+              <a
+                href={callUrl}
+                onClick={() => trackCall("contact_section", brand.phone)}
+                aria-label={`Call ${brand.phone}`}
+                className="flex items-center gap-4 transition hover:opacity-80"
+              >
+                <div className="grid h-11 w-11 place-items-center rounded-full bg-navy text-gold">
+                  <PhoneCall className="h-4 w-4" />
+                </div>
+                <div>
+                  <div className="font-medium text-navy">{brand.phone}</div>
+                  <div className="text-xs text-ink-soft">Talk to our sales team</div>
+                </div>
+              </a>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackWhatsApp("contact_section")}
+                className="flex items-center gap-4 transition hover:opacity-80"
+              >
+                <div className="grid h-11 w-11 place-items-center rounded-full bg-navy text-gold">
+                  <WhatsAppIcon className="h-4 w-4" />
+                </div>
+                <div>
+                  <div className="font-medium text-navy">WhatsApp us</div>
+                  <div className="text-xs text-ink-soft">Instant reply on chat</div>
+                </div>
+              </a>
               {[
-                { icon: PhoneCall, label: brand.phone, sub: "Talk to our sales team" },
-                { icon: MapPin, label: brand.location, sub: "Site office — Kharadi, Pune" },
+                { icon: MapPin, label: brand.location, sub: "Site office — Bavdhan, Pune" },
                 { icon: Calendar, label: "10 AM to 7 PM · All days", sub: "Site visit timings" },
               ].map((c) => (
                 <div key={c.label} className="flex items-center gap-4">
@@ -328,7 +356,7 @@ function ContactForm() {
                   </div>
                   <div>
                     <div className="font-medium text-navy">{c.label}</div>
-                    <div className="text-xs text-ink-soft">{c.sub.replace("Kharadi", "Bavdhan")}</div>
+                    <div className="text-xs text-ink-soft">{c.sub}</div>
                   </div>
                 </div>
               ))}
