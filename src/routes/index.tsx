@@ -420,12 +420,12 @@ function ContactForm() {
 
 /* -------------------- FLOATING RAIL -------------------- */
 function FloatingRail({ onBook }: { onBook: () => void }) {
-  const { whatsappUrl, callUrl } = useBrand();
-  const btns: Array<{ label: string; bg: string; icon: React.ReactNode; href?: string; onClick?: () => void; external?: boolean }> = [
-    { href: whatsappUrl, label: "WhatsApp", bg: "#25D366", icon: <WhatsAppIcon className="h-5 w-5" />, external: true },
-    { href: callUrl, label: "Call", bg: "#16A34A", icon: <Phone className="h-5 w-5" /> },
+  const { brand, whatsappUrl, callUrl } = useBrand();
+  const btns: Array<{ label: string; bg: string; icon: React.ReactNode; href?: string; onClick?: () => void; external?: boolean; track?: () => void }> = [
+    { href: whatsappUrl, label: "WhatsApp", bg: "#25D366", icon: <WhatsAppIcon className="h-5 w-5" />, external: true, track: () => trackWhatsApp("floating_rail") },
+    { href: callUrl, label: "Call", bg: "#16A34A", icon: <Phone className="h-5 w-5" />, track: () => trackCall("floating_rail", brand.phone) },
     { onClick: onBook, label: "Site Visit", bg: "#DC2626", icon: <Calendar className="h-5 w-5" /> },
-    { href: MAPS_URL, label: "Directions", bg: "#0a0a0a", icon: <Navigation className="h-5 w-5" />, external: true },
+    { href: MAPS_URL, label: "Directions", bg: "#0a0a0a", icon: <Navigation className="h-5 w-5" />, external: true, track: () => trackEvent("directions_click", { click_location: "floating_rail" }) },
   ];
 
   return (
