@@ -586,24 +586,6 @@ function PopupShell({ children, onClose }: { children: React.ReactNode; onClose:
   );
 }
 
-
-function ThanksPopup({ onClose }: { onClose: () => void }) {
-  return (
-    <PopupShell onClose={onClose}>
-      <div className="p-10 text-center">
-        <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-navy text-gold">
-          <Star className="h-7 w-7 fill-current" />
-        </div>
-        <h3 className="mt-6 font-serif text-2xl text-navy">Thank you!</h3>
-        <p className="mt-2 text-sm text-ink-soft">Our sales team will call you within 30 minutes.</p>
-        <Button onClick={onClose} className="mt-6 w-full rounded-full bg-navy text-white hover:bg-navy-deep">
-          Continue Browsing
-        </Button>
-      </div>
-    </PopupShell>
-  );
-}
-
 function MiniFooter() {
   const { brand } = useBrand();
   return (
