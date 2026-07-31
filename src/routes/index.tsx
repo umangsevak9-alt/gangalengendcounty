@@ -275,8 +275,8 @@ function Hero({ onBook }: { onBook: () => void }) {
 function ContactForm() {
   const { brand, callUrl, whatsappUrl } = useBrand();
   const [busy, setBusy] = useState(false);
+  const navigate = useNavigate();
 
-  const [showThanks, setShowThanks] = useState(false);
   const [form, setForm] = useState({
     name: "", phone: "", email: "", property: "3 BHK", message: "",
   });
@@ -292,8 +292,8 @@ function ContactForm() {
         name: form.name, phone: form.phone, email: form.email,
         property_interest: form.property, message: form.message, source: "contact_form",
       } });
-      setShowThanks(true);
       setForm({ name: "", phone: "", email: "", property: "3 BHK", message: "" });
+      navigate({ to: "/thank-you" });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not submit. Please try again.");
     } finally {
