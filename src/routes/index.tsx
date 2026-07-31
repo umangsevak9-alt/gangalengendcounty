@@ -412,8 +412,6 @@ function ContactForm() {
           </form>
         </div>
       </div>
-
-      {showThanks && <ThanksPopup onClose={() => setShowThanks(false)} />}
     </section>
   );
 }
