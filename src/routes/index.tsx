@@ -467,14 +467,14 @@ function FloatingRail({ onBook }: { onBook: () => void }) {
 
 /* -------------------- MOBILE STICKY ACTION BAR -------------------- */
 function MobileActionBar({ onBook }: { onBook: () => void }) {
-  const { whatsappUrl, callUrl } = useBrand();
+  const { brand, whatsappUrl, callUrl } = useBrand();
   return (
 
     <>
       <div className="h-16 md:hidden" aria-hidden />
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 backdrop-blur md:hidden">
         <div className="grid grid-cols-3 gap-2 px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
-          <a href={callUrl} className="flex flex-col items-center justify-center rounded-xl bg-green-600 py-2 text-white shadow-sm active:scale-[0.98]">
+          <a href={callUrl} onClick={() => trackCall("mobile_bar", brand.phone)} className="flex flex-col items-center justify-center rounded-xl bg-green-600 py-2 text-white shadow-sm active:scale-[0.98]">
             <PhoneCall className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">Call</span>
           </a>
@@ -482,7 +482,7 @@ function MobileActionBar({ onBook }: { onBook: () => void }) {
             <Calendar className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">Visit</span>
           </button>
-          <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center rounded-xl bg-[#25D366] py-2 text-white shadow-sm active:scale-[0.98]">
+          <a href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => trackWhatsApp("mobile_bar")} className="flex flex-col items-center justify-center rounded-xl bg-[#25D366] py-2 text-white shadow-sm active:scale-[0.98]">
             <WhatsAppIcon className="h-4 w-4" />
             <span className="mt-0.5 text-[11px] font-medium">WhatsApp</span>
           </a>
