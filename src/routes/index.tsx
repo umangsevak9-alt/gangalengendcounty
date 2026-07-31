@@ -273,7 +273,7 @@ function Hero({ onBook }: { onBook: () => void }) {
 
 /* -------------------- CONTACT FORM -------------------- */
 function ContactForm() {
-  const { brand } = useBrand();
+  const { brand, callUrl, whatsappUrl } = useBrand();
   const [busy, setBusy] = useState(false);
 
   const [showThanks, setShowThanks] = useState(false);
