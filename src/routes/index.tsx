@@ -213,6 +213,7 @@ function Hero({ onBook }: { onBook: () => void }) {
           </div>
           <a
             href={callUrl}
+            onClick={() => trackCall("header", brand.phone)}
             aria-label={`Call ${brand.phone}`}
             className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gold/60 bg-white/10 px-2.5 py-1.5 text-[12px] font-semibold text-white backdrop-blur transition hover:bg-[var(--red-cta)] hover:border-[var(--red-cta)] sm:gap-2 sm:px-4 sm:py-2 sm:text-base"
           >
