@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   Calendar,
   MapPin,
@@ -7,7 +7,7 @@ import {
   Phone,
   PhoneCall,
   Play,
-  Star,
+  
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -275,8 +275,8 @@ function Hero({ onBook }: { onBook: () => void }) {
 function ContactForm() {
   const { brand, callUrl, whatsappUrl } = useBrand();
   const [busy, setBusy] = useState(false);
+  const navigate = useNavigate();
 
-  const [showThanks, setShowThanks] = useState(false);
   const [form, setForm] = useState({
     name: "", phone: "", email: "", property: "3 BHK", message: "",
   });
@@ -292,8 +292,8 @@ function ContactForm() {
         name: form.name, phone: form.phone, email: form.email,
         property_interest: form.property, message: form.message, source: "contact_form",
       } });
-      setShowThanks(true);
       setForm({ name: "", phone: "", email: "", property: "3 BHK", message: "" });
+      navigate({ to: "/thank-you" });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not submit. Please try again.");
     } finally {
@@ -412,8 +412,6 @@ function ContactForm() {
           </form>
         </div>
       </div>
-
-      {showThanks && <ThanksPopup onClose={() => setShowThanks(false)} />}
     </section>
   );
 }
@@ -496,7 +494,7 @@ function MobileActionBar({ onBook }: { onBook: () => void }) {
 /* -------------------- BOOKING MODAL -------------------- */
 function BookingModal({ onClose }: { onClose: () => void }) {
   const [busy, setBusy] = useState(false);
-  const [showThanks, setShowThanks] = useState(false);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "", phone: "", email: "", property: "3 BHK", message: "",
   });
@@ -512,7 +510,8 @@ function BookingModal({ onClose }: { onClose: () => void }) {
         name: form.name, phone: form.phone, email: form.email,
         property_interest: form.property, message: form.message, source: "booking_modal",
       } });
-      setShowThanks(true);
+      onClose();
+      navigate({ to: "/thank-you" });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not submit. Please try again.");
     } finally {
@@ -520,9 +519,7 @@ function BookingModal({ onClose }: { onClose: () => void }) {
     }
   };
 
-  if (showThanks) {
-    return <ThanksPopup onClose={onClose} />;
-  }
+
 
   return (
     <PopupShell onClose={onClose}>
@@ -586,24 +583,6 @@ function PopupShell({ children, onClose }: { children: React.ReactNode; onClose:
         {children}
       </div>
     </div>
-  );
-}
-
-
-function ThanksPopup({ onClose }: { onClose: () => void }) {
-  return (
-    <PopupShell onClose={onClose}>
-      <div className="p-10 text-center">
-        <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-navy text-gold">
-          <Star className="h-7 w-7 fill-current" />
-        </div>
-        <h3 className="mt-6 font-serif text-2xl text-navy">Thank you!</h3>
-        <p className="mt-2 text-sm text-ink-soft">Our sales team will call you within 30 minutes.</p>
-        <Button onClick={onClose} className="mt-6 w-full rounded-full bg-navy text-white hover:bg-navy-deep">
-          Continue Browsing
-        </Button>
-      </div>
-    </PopupShell>
   );
 }
 
