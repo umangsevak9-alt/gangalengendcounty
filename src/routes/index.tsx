@@ -449,6 +449,7 @@ function FloatingRail({ onBook }: { onBook: () => void }) {
           <a
             key={b.label}
             href={b.href}
+            onClick={b.track}
             target={b.external ? "_blank" : undefined}
             rel="noreferrer"
             className={cls}
