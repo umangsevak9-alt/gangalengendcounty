@@ -125,6 +125,25 @@ function useBrand() {
   return { brand, whatsappUrl, callUrl };
 }
 
+/* -------------------- GTM TRACKING -------------------- */
+type DataLayerWindow = Window & { dataLayer?: Array<Record<string, unknown>> };
+
+function trackEvent(event: string, params: Record<string, unknown> = {}) {
+  if (typeof window === "undefined") return;
+  const w = window as DataLayerWindow;
+  w.dataLayer = w.dataLayer || [];
+  w.dataLayer.push({ event, ...params });
+}
+
+function trackCall(location: string, phone: string) {
+  trackEvent("call_click", { click_location: location, phone_number: phone, contact_method: "phone" });
+  trackEvent("generate_lead", { lead_type: "call", click_location: location });
+}
+
+function trackWhatsApp(location: string) {
+  trackEvent("whatsapp_click", { click_location: location, contact_method: "whatsapp" });
+}
+
 
 
 function Landing() {
