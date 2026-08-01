@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   Calendar,
   MapPin,
@@ -144,6 +144,12 @@ function trackWhatsApp(location: string) {
   trackEvent("whatsapp_click", { click_location: location, contact_method: "whatsapp" });
 }
 
+/** Full page load so GTM Page View / Ads conversion tags fire on /thank-you */
+function goToThankYou(source: string) {
+  trackEvent("generate_lead", { lead_type: "form", form_source: source });
+  if (typeof window !== "undefined") window.location.assign("/thank-you");
+}
+
 
 
 function Landing() {
@@ -275,7 +281,6 @@ function Hero({ onBook }: { onBook: () => void }) {
 function ContactForm() {
   const { brand, callUrl, whatsappUrl } = useBrand();
   const [busy, setBusy] = useState(false);
-  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     name: "", phone: "", email: "", property: "3 BHK", message: "",
@@ -293,7 +298,7 @@ function ContactForm() {
         property_interest: form.property, message: form.message, source: "contact_form",
       } });
       setForm({ name: "", phone: "", email: "", property: "3 BHK", message: "" });
-      navigate({ to: "/thank-you" });
+      goToThankYou("contact_form");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not submit. Please try again.");
     } finally {
@@ -494,7 +499,6 @@ function MobileActionBar({ onBook }: { onBook: () => void }) {
 /* -------------------- BOOKING MODAL -------------------- */
 function BookingModal({ onClose }: { onClose: () => void }) {
   const [busy, setBusy] = useState(false);
-  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "", phone: "", email: "", property: "3 BHK", message: "",
   });
@@ -511,7 +515,7 @@ function BookingModal({ onClose }: { onClose: () => void }) {
         property_interest: form.property, message: form.message, source: "booking_modal",
       } });
       onClose();
-      navigate({ to: "/thank-you" });
+      goToThankYou("booking_modal");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not submit. Please try again.");
     } finally {
