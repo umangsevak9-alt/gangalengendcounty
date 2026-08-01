@@ -48,9 +48,12 @@ function ThankYouPage() {
   });
   const phone = settings?.phone || site.brand.phone;
   const brandName = settings?.brand_name || site.brand.name;
+  const conversionPushed = useRef(false);
 
   useEffect(() => {
+    if (conversionPushed.current) return;
     pushDataLayer("conversion", { page_type: "thank_you", brand_name: brandName });
+    conversionPushed.current = true;
   }, [brandName]);
 
   return (
