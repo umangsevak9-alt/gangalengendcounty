@@ -299,7 +299,7 @@ function ContactForm() {
         property_interest: form.property, message: form.message, source: "contact_form",
       } });
       setForm({ name: "", phone: "", email: "", property: "3 BHK", message: "" });
-      navigate({ to: "/thank-you" });
+      goToThankYou("contact_form");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not submit. Please try again.");
     } finally {
