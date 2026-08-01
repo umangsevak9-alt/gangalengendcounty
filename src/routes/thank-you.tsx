@@ -1,9 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CheckCircle2, PhoneCall } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { getPublicSiteSettings } from "@/lib/cms.functions";
 import { site } from "@/content/site";
+
+declare global {
+  interface Window {
+    dataLayer?: Array<Record<string, unknown>>;
+  }
+}
+
+function pushDataLayer(event: string, payload?: Record<string, unknown>) {
+  if (typeof window === "undefined") return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event, ...payload });
+}
+
 
 export const Route = createFileRoute("/thank-you")({
   head: () => ({
