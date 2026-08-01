@@ -281,7 +281,6 @@ function Hero({ onBook }: { onBook: () => void }) {
 function ContactForm() {
   const { brand, callUrl, whatsappUrl } = useBrand();
   const [busy, setBusy] = useState(false);
-  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     name: "", phone: "", email: "", property: "3 BHK", message: "",
@@ -500,7 +499,6 @@ function MobileActionBar({ onBook }: { onBook: () => void }) {
 /* -------------------- BOOKING MODAL -------------------- */
 function BookingModal({ onClose }: { onClose: () => void }) {
   const [busy, setBusy] = useState(false);
-  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "", phone: "", email: "", property: "3 BHK", message: "",
   });
