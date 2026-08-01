@@ -517,7 +517,7 @@ function BookingModal({ onClose }: { onClose: () => void }) {
         property_interest: form.property, message: form.message, source: "booking_modal",
       } });
       onClose();
-      navigate({ to: "/thank-you" });
+      goToThankYou("booking_modal");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not submit. Please try again.");
     } finally {
