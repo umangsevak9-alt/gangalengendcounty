@@ -144,6 +144,12 @@ function trackWhatsApp(location: string) {
   trackEvent("whatsapp_click", { click_location: location, contact_method: "whatsapp" });
 }
 
+/** Full page load so GTM Page View / Ads conversion tags fire on /thank-you */
+function goToThankYou(source: string) {
+  trackEvent("generate_lead", { lead_type: "form", form_source: source });
+  if (typeof window !== "undefined") window.location.assign("/thank-you");
+}
+
 
 
 function Landing() {
