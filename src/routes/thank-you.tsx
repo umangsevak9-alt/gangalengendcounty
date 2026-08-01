@@ -1,9 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CheckCircle2, PhoneCall } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { getPublicSiteSettings } from "@/lib/cms.functions";
 import { site } from "@/content/site";
+
+declare global {
+  interface Window {
+    dataLayer?: Array<Record<string, unknown>>;
+  }
+}
+
+function pushDataLayer(event: string, payload?: Record<string, unknown>) {
+  if (typeof window === "undefined") return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event, ...payload });
+}
+
 
 export const Route = createFileRoute("/thank-you")({
   head: () => ({
@@ -34,6 +48,13 @@ function ThankYouPage() {
   });
   const phone = settings?.phone || site.brand.phone;
   const brandName = settings?.brand_name || site.brand.name;
+  const conversionPushed = useRef(false);
+
+  useEffect(() => {
+    if (conversionPushed.current) return;
+    pushDataLayer("conversion", { page_type: "thank_you", brand_name: brandName });
+    conversionPushed.current = true;
+  }, [brandName]);
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-[var(--mist)] px-4 py-16">
@@ -49,7 +70,11 @@ function ThankYouPage() {
         </p>
 
         <div className="mt-8 space-y-3">
-          <a href={`tel:${phone.replace(/\s/g, "")}`} className="block">
+          <a
+            href={`tel:${phone.replace(/\s/g, "")}`}
+            className="block"
+            onClick={() => pushDataLayer("call_click", { location: "thank_you_page" })}
+          >
             <Button className="h-12 w-full rounded-full bg-[#166534] text-white hover:bg-[#14532d]">
               <PhoneCall className="mr-2 h-4 w-4" /> Call Us Now
             </Button>
