@@ -49,6 +49,10 @@ function ThankYouPage() {
   const phone = settings?.phone || site.brand.phone;
   const brandName = settings?.brand_name || site.brand.name;
 
+  useEffect(() => {
+    pushDataLayer("conversion", { page_type: "thank_you", brand_name: brandName });
+  }, [brandName]);
+
   return (
     <main className="flex min-h-screen items-center justify-center bg-[var(--mist)] px-4 py-16">
       <div className="w-full max-w-lg rounded-3xl bg-white p-8 text-center shadow-xl sm:p-12">
@@ -63,7 +67,11 @@ function ThankYouPage() {
         </p>
 
         <div className="mt-8 space-y-3">
-          <a href={`tel:${phone.replace(/\s/g, "")}`} className="block">
+          <a
+            href={`tel:${phone.replace(/\s/g, "")}`}
+            className="block"
+            onClick={() => pushDataLayer("call_click", { location: "thank_you_page" })}
+          >
             <Button className="h-12 w-full rounded-full bg-[#166534] text-white hover:bg-[#14532d]">
               <PhoneCall className="mr-2 h-4 w-4" /> Call Us Now
             </Button>
